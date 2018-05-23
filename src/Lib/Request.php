@@ -108,6 +108,7 @@ class Request
 
     // sanitize request params
     $query = $endpoint . '?' . http_build_query($argsCopy, '', '&');
+    $query = str_replace('%5B0%5D', '[]', $query);
 
     $argsCopy['signature'] = hash_hmac('sha256', $query, $this->apiSecret);
 
