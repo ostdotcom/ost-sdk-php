@@ -1,0 +1,23 @@
+{
+  "name": "@ostdotcom/ost-sdk-php",
+  "description": "The official OST PHP SDK",
+  "type": "library",
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.5.0",
+    "guzzlehttp/guzzle": "~6.0",
+    "phpdocumentor/phpdocumentor": "2.*"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Lib\\": "src/Lib/",
+      "OST\\": "src/Services/",
+      "": "src/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true
+  }
+}
