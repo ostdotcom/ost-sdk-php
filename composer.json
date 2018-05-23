@@ -1,14 +1,20 @@
 {
   "name": "@ostdotcom/ost-sdk-php",
+  "version": "0.0.1",
+  "homepage": "https://kit.ost.com/",
   "description": "The official OST PHP SDK",
+  "keywords": ["ost","simpletoken","sdk","php"],
   "type": "library",
-  "minimum-stability": "dev",
+  "license": "MIT",
+  "support": {
+    "forum": "https://help.ost.com/",
+    "issues": "https://github.com/OpenSTFoundation/ost-sdk-php/issues"
+  },
   "require": {
     "php": ">=5.5.0",
     "guzzlehttp/guzzle": "~6.0"
   },
   "require-dev": {
-    "phpdocumentor/phpdocumentor": "2.*"
   },
   "autoload": {
     "psr-4": {
