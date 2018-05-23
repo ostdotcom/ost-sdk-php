@@ -81,13 +81,11 @@ class Request
     return $promise->then(
       // $onFulfilled
       function ($response) {
-        echo 'The promise was fulfilled.';
         $jsonObject = $this->parseResponse($response);
         return $jsonObject;
       },
       // $onRejected
       function ($reason){
-        echo "The promise was rejected with {$reason}";
         return $this->customGenericErrorResponse('g_1');
       }
     );
@@ -120,13 +118,11 @@ class Request
     return $promise->then(
     // $onFulfilled
       function ($response) {
-        echo 'The promise was fulfilled.';
         $jsonObject = $this->parseResponse($response);
         return $jsonObject;
       },
       // $onRejected
       function ($reason){
-        echo "The promise was rejected with {$reason}";
         return $this->customGenericErrorResponse('p_1');
       }
     );
