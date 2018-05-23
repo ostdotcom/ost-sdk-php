@@ -1,10 +1,10 @@
 <?php
 /**
- * contains OSTSdk class
+ * OSTSdk class
  */
 
 /**
- * Class which provides access to services
+ * Class which provides access to OST KIT services
  */
 class OSTSdk
 {

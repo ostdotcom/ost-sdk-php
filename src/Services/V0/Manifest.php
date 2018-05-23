@@ -19,10 +19,6 @@ class Manifest
   public
     $transactionKind;
 
-  /** @var object object which would fire HTTP requests */
-  private
-    $requestObj;
-
   /**
    * Constructor
    *
@@ -38,11 +34,11 @@ class Manifest
   public function __construct($params)
   {
 
-    $this->requestObj = new \Lib\Request($params);
+    $requestObj = new \Lib\Request($params);
 
     // Define services available in V0
-    $this->user = new User($this->requestObj);
-    $this->transactionKind = new TransactionKind($this->requestObj);
+    $this->user = new User($requestObj);
+    $this->transactionKind = new TransactionKind($requestObj);
 
   }
 

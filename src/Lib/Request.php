@@ -1,6 +1,6 @@
 <?php
 /**
- * contains Request class
+ * Request class
  */
 
 namespace Lib;
@@ -49,12 +49,13 @@ class Request
     $this->apiSecret = $params['apiSecret'];
 
     // append a trailing / to apiEndpoint (if required)
+    // NOTE: As Guzzle remove "v1" from base url if ending slash is not present
     $apiBaseUrl = $params['apiBaseUrl'];
     if ($apiBaseUrl[strlen($apiBaseUrl) - 1] != '/') {
       $apiBaseUrl = $apiBaseUrl . '/';
     }
 
-    $this->baseUrl = $apiBaseUrl; //preg_replace('/\/$/', '', $params['apiBaseUrl']);
+    $this->baseUrl = $apiBaseUrl;
 
   }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * contains User class
+ * User class
  */
 
 namespace OST\V0;
@@ -27,8 +27,6 @@ class User extends \OST\Base
    *
    * @param array $params params for creating a user
    *
-   * @throws \Exception
-   *
    * @return object
    *
    */
@@ -40,8 +38,6 @@ class User extends \OST\Base
    * Edit a User
    *
    * @param array $params params for editing a user
-   *
-   * @throws \Exception
    *
    * @return object
    *
@@ -55,8 +51,6 @@ class User extends \OST\Base
    *
    * @param array $params params for fetching users list
    *
-   * @throws \Exception
-   *
    * @return object
    *
    */
@@ -69,8 +63,6 @@ class User extends \OST\Base
    *
    * @param array $params params for dropping tokens to user(s)
    *
-   * @throws \Exception
-   *
    * @return object
    *
    */
@@ -82,8 +74,6 @@ class User extends \OST\Base
    * Get Airdrop Status
    *
    * @param array $params params for getting airdrop status
-   *
-   * @throws \Exception
    *
    * @return object
    *

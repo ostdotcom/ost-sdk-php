@@ -1,12 +1,12 @@
 <?php
 /**
- * contains Users class
+ * Users class
  */
 
 namespace OST\V1;
 
 /**
- * Class encapsulating methods to interact with V0 API's for Users module
+ * Class encapsulating methods to interact with V1 API's for Users module
  */
 class Users extends \OST\Base
 {
@@ -26,8 +26,6 @@ class Users extends \OST\Base
    * Create a User
    *
    * @param array $params params for creating a user
-   *
-   * @throws \Exception
    *
    * @return object
    *
@@ -54,8 +52,6 @@ class Users extends \OST\Base
    * List Users
    *
    * @param array $params params for fetching users list
-   *
-   * @throws \Exception
    *
    * @return object
    *

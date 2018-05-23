@@ -1,6 +1,6 @@
 <?php
 /**
- * contains Manifest class
+ * Manifest class
  */
 namespace OST\V1;
 
@@ -34,10 +34,6 @@ class Manifest
   public
     $transfers;
 
-  /** @var object object which would fire HTTP requests */
-  private
-    $requestObj;
-
   /**
    * Constructor
    *
@@ -53,15 +49,15 @@ class Manifest
   public function __construct($params)
   {
 
-    $this->requestObj = new \Lib\Request($params);
+    $requestObj = new \Lib\Request($params);
 
     // Define services available in V1
-    $this->users = new Users($this->requestObj);
-    $this->actions = new Actions($this->requestObj);
-    $this->airdrops = new Airdrops($this->requestObj);
-    $this->token = new Token($this->requestObj);
-    $this->transactions = new Transactions($this->requestObj);
-    $this->transfers = new Transfers($this->requestObj);
+    $this->users = new Users($requestObj);
+    $this->actions = new Actions($requestObj);
+    $this->airdrops = new Airdrops($requestObj);
+    $this->token = new Token($requestObj);
+    $this->transactions = new Transactions($requestObj);
+    $this->transfers = new Transfers($requestObj);
 
   }
 

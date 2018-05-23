@@ -1,12 +1,12 @@
 <?php
 /**
- * contains Token class
+ * Token class
  */
 
 namespace OST\V1;
 
 /**
- * Class encapsulating methods to interact with V0 API's for Token module
+ * Class encapsulating methods to interact with V1 API's for Token module
  */
 class Token extends \OST\Base
 {
@@ -26,8 +26,6 @@ class Token extends \OST\Base
    * Get token details
    *
    * @param array $params params for fetching details of a token
-   *
-   * @throws \Exception
    *
    * @return object
    *

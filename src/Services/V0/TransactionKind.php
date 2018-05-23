@@ -1,6 +1,6 @@
 <?php
 /**
- * contains TransactionKind class
+ * TransactionKind class
  */
 
 namespace OST\V0;
@@ -23,11 +23,9 @@ class TransactionKind extends \OST\Base
   }
 
   /**
-   * Create a Action
+   * Create an Action
    *
    * @param array $params params for creating an action
-   *
-   * @throws \Exception
    *
    * @return object
    *
@@ -37,11 +35,9 @@ class TransactionKind extends \OST\Base
   }
 
   /**
-   * Edit a Action
+   * Edit an Action
    *
    * @param array $params params for editing an action
-   *
-   * @throws \Exception
    *
    * @return object
    *
@@ -55,8 +51,6 @@ class TransactionKind extends \OST\Base
    *
    * @param array $params params for fetching list of actions
    *
-   * @throws \Exception
-   *
    * @return object
    *
    */
@@ -69,8 +63,6 @@ class TransactionKind extends \OST\Base
    *
    * @param array $params params for creating a user
    *
-   * @throws \Exception
-   *
    * @return object
    *
    */
@@ -82,8 +74,6 @@ class TransactionKind extends \OST\Base
    * Get Airdrop Status
    *
    * @param array $params params for creating a user
-   *
-   * @throws \Exception
    *
    * @return object
    *

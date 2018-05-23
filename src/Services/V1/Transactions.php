@@ -1,12 +1,12 @@
 <?php
 /**
- * contains Transactions class
+ * Transactions class
  */
 
 namespace OST\V1;
 
 /**
- * Class encapsulating methods to interact with V0 API's for Transactions module
+ * Class encapsulating methods to interact with V1 API's for Transactions module
  */
 class Transactions extends \OST\Base
 {
@@ -27,8 +27,6 @@ class Transactions extends \OST\Base
    *
    * @param array $params params for executing a Transaction
    *
-   * @throws \Exception
-   *
    * @return object
    *
    */
@@ -40,8 +38,6 @@ class Transactions extends \OST\Base
    * List Transactions
    *
    * @param array $params params for fetching Transactions list
-   *
-   * @throws \Exception
    *
    * @return object
    *

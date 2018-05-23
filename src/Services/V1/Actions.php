@@ -1,12 +1,12 @@
 <?php
 /**
- * contains Actions class
+ * Actions class
  */
 
 namespace OST\V1;
 
 /**
- * Class encapsulating methods to interact with V0 API's for Actions module
+ * Class encapsulating methods to interact with V1 API's for Actions module
  */
 class Actions extends \OST\Base
 {
@@ -26,8 +26,6 @@ class Actions extends \OST\Base
    * Create a action
    *
    * @param array $params params for creating an action
-   *
-   * @throws \Exception
    *
    * @return object
    *
@@ -55,8 +53,6 @@ class Actions extends \OST\Base
    *
    * @param array $params params for fetching actions list
    *
-   * @throws \Exception
-   *
    * @return object
    *
    */
@@ -67,7 +63,7 @@ class Actions extends \OST\Base
   /**
    * Get action details
    *
-   * @param array $params params for fetching details of a action
+   * @param array $params params for fetching details of an action
    *
    * @throws \Exception
    *

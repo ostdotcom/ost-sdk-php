@@ -1,12 +1,12 @@
 <?php
 /**
- * contains Transfers class
+ * Transfers class
  */
 
 namespace OST\V1;
 
 /**
- * Class encapsulating methods to interact with V0 API's for Transfers module
+ * Class encapsulating methods to interact with V1 API's for Transfers module
  */
 class Transfers extends \OST\Base
 {
@@ -27,8 +27,6 @@ class Transfers extends \OST\Base
    *
    * @param array $params params for executing a transfer
    *
-   * @throws \Exception
-   *
    * @return object
    *
    */
@@ -40,8 +38,6 @@ class Transfers extends \OST\Base
    * List transfers
    *
    * @param array $params params for fetching transfers list
-   *
-   * @throws \Exception
    *
    * @return object
    *

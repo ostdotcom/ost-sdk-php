@@ -1,12 +1,12 @@
 <?php
 /**
- * contains Airdrops class
+ * Airdrops class
  */
 
 namespace OST\V1;
 
 /**
- * Class encapsulating methods to interact with V0 API's for Airdrops module
+ * Class encapsulating methods to interact with V1 API's for Airdrops module
  */
 class Airdrops extends \OST\Base
 {
@@ -27,8 +27,6 @@ class Airdrops extends \OST\Base
    *
    * @param array $params params for executing an airdrop
    *
-   * @throws \Exception
-   *
    * @return object
    *
    */
@@ -41,8 +39,6 @@ class Airdrops extends \OST\Base
    *
    * @param array $params params for fetching airdrops list
    *
-   * @throws \Exception
-   *
    * @return object
    *
    */
@@ -53,7 +49,7 @@ class Airdrops extends \OST\Base
   /**
    * Get airdrop details
    *
-   * @param array $params params for fetching details of a airdrop
+   * @param array $params params for fetching details of an airdrop
    *
    * @throws \Exception
    *

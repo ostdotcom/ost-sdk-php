@@ -10,7 +10,7 @@ To use this SDK, developers will need to:
 
 ## Documentation
 
-[https://dev.ost.com/](https://dev.ost.com/)
+[https://dev.ost.com/](https://dev.ost.com/docs/0.9.1/simpletoken.html)
 
 ## Installation
 

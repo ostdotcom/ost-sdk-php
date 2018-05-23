@@ -5,10 +5,10 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.5.0",
-    "guzzlehttp/guzzle": "~6.0",
-    "phpdocumentor/phpdocumentor": "2.*"
+    "guzzlehttp/guzzle": "~6.0"
   },
   "require-dev": {
+    "phpdocumentor/phpdocumentor": "2.*"
   },
   "autoload": {
     "psr-4": {
