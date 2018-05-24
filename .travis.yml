@@ -3,7 +3,8 @@ language: php
 sudo: required
 branches:
   only:
-  - sdk
+  - master
+  - develop
 notifications:
   email:
     recipients:
