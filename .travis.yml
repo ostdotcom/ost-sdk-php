@@ -12,14 +12,10 @@ notifications:
     on_failure: always
 php:
   - 5.5
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
 before_install:
 install:
 before_script:
   - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-4.8.36.phar
 script:
-  - ./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/OSTSdkTest.php
+  - vendor/bin/phpunit --bootstrap vendor/autoload.php tests/OSTSdkTest.php
 after_script:
