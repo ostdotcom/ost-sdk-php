@@ -17,5 +17,5 @@ install:
 before_script:
   - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-4.8.36.phar
 script:
-  - vendor/bin/phpunit --bootstrap vendor/autoload.php tests/OSTSdkTest.php
+  - phpunit --bootstrap vendor/autoload.php tests/OSTSdkTest.php
 after_script:
