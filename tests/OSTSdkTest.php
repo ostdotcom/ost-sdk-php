@@ -113,9 +113,9 @@ final class OSTSdkTest extends TestCase
   private function instantiateOSTSdkForV0Api()
   {
     $sdkInitParams = array();
-    $sdkInitParams['apiKey'] = $_ENV['OST_KIT_API_KEY'];
-    $sdkInitParams['apiSecret'] = $_ENV['OST_KIT_API_SECRET'];
-    $sdkInitParams['apiBaseUrl'] = $_ENV['OST_KIT_API_ENDPOINT'];
+    $sdkInitParams['apiKey'] = getenv('OST_KIT_API_KEY');
+    $sdkInitParams['apiSecret'] = getenv('OST_KIT_API_SECRET');
+    $sdkInitParams['apiBaseUrl'] = getenv('OST_KIT_API_ENDPOINT');
     return new OSTSdk($sdkInitParams);
   }
 
@@ -128,9 +128,9 @@ final class OSTSdkTest extends TestCase
   private function instantiateOSTSdkForV1Api()
   {
     $sdkInitParams = array();
-    $sdkInitParams['apiKey'] = $_ENV['OST_KIT_API_KEY'];
-    $sdkInitParams['apiSecret'] = $_ENV['OST_KIT_API_SECRET'];
-    $sdkInitParams['apiBaseUrl'] = $_ENV['OST_KIT_API_V1_ENDPOINT'];
+    $sdkInitParams['apiKey'] = getenv('OST_KIT_API_KEY');
+    $sdkInitParams['apiSecret'] = getenv('OST_KIT_API_SECRET');
+    $sdkInitParams['apiBaseUrl'] = getenv('OST_KIT_API_V1_ENDPOINT');
     return new OSTSdk($sdkInitParams);
   }
 
