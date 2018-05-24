@@ -14,18 +14,24 @@ To use this SDK, developers will need to:
 
 ## Installation
 
-Install OST PHP SDK
+Install Composer:
 
 ```bash
-> 
+> curl -sS https://getcomposer.org/installer | php
+```
+
+Install the latest stable version of the SDK:
+
+```bash
+> php composer.phar require ostdotcom/ost-sdk-php
 ```
 
 ## Example Usage
 
-Require the SDK:
+Require the Composer autoloader:
 
 ```php
-OSTSDK = {};
+> require 'vendor/autoload.php';
 ```
 
 Initialize the SDK object:
@@ -33,9 +39,9 @@ Initialize the SDK object:
 ```php
 
 $params = array();
-$params['apiKey']=<api_key>;
-$params['apiSecret']=<api_secret>;
-$params['apiBaseUrl']=<api_base_url>;
+$params['apiKey']='API_KEY';
+$params['apiSecret']='API_SECRET';
+$params['apiBaseUrl']='https://playgroundapi.ost.com/';
 
 $ostObj = new OSTSDK($params);
 
