@@ -30,7 +30,7 @@ class OSTSdk
     // Extract API major version
     $apiEndpointVersion = preg_split('/\//', $params['apiBaseUrl'])[3];
 
-    if (is_null($apiEndpointVersion)) {
+    if (is_null($apiEndpointVersion) || $apiEndpointVersion == '') {
       $this->services = new \OST\V0\Manifest($params);
     } elseif (strtolower($apiEndpointVersion) == 'v1') {
       $this->services = new \OST\V1\Manifest($params);
