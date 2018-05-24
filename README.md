@@ -72,6 +72,15 @@ $response = $userService->edit($editUserParams)->wait();
 var_dump($response);
 ```
 
+Get a user:
+
+```php
+$getUserParams = array();
+$getUserParams['id'] = '7ac1da33-b1d2-4f03-b39c-fbac0f1e2b92';
+$response = $userService->get($getUserParams)->wait();
+var_dump($response);
+```
+
 Get a list of users and other data:
 
 ```php
