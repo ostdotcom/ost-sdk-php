@@ -31,7 +31,7 @@ Install the latest stable version of the SDK:
 Require the Composer autoloader:
 
 ```php
-> require 'vendor/autoload.php';
+require 'vendor/autoload.php';
 ```
 
 Initialize the SDK object:
