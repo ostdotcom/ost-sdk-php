@@ -239,6 +239,11 @@ class Request
     // create copy of input array to not modify it
     $argsCopy = $arguments;
 
+    foreach ($argsCopy as $key => $value) {
+      $value = urlencode($value);
+      $argsCopy[$key] = $value;
+    }
+
     // append basic params
     $argsCopy['api_key'] = $this->apiKey;
     $argsCopy['request_timestamp'] = time();
