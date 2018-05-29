@@ -43,7 +43,7 @@ class Base
   protected function getId($params)
   {
     if (\Lib\Validate::isPresent($params['id'])) {
-      return $params['id'];
+      return urlencode($params['id']);
     } else {
       throw new \Exception('id missing in request params');
     }

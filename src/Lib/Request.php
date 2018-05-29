@@ -229,9 +229,9 @@ class Request
   /**
    * copy over the passed input args and process
    *
-   * @param object $arguments json object
+   * @param array $arguments json object
    *
-   * @return object
+   * @return array
    *
    */
   private function copyAndSanitizeArgs($arguments) {
