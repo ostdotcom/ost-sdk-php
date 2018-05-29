@@ -229,20 +229,15 @@ class Request
   /**
    * copy over the passed input args and process
    *
-   * @param object $arguments json object
+   * @param array $arguments json object
    *
-   * @return object
+   * @return array
    *
    */
   private function copyAndSanitizeArgs($arguments) {
 
     // create copy of input array to not modify it
     $argsCopy = $arguments;
-
-    foreach ($argsCopy as $key => $value) {
-      $value = urlencode($value);
-      $argsCopy[$key] = $value;
-    }
 
     // append basic params
     $argsCopy['api_key'] = $this->apiKey;
