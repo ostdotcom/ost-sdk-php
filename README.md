@@ -39,11 +39,11 @@ Initialize the SDK object:
 ```php
 
 $params = array();
-$params['apiKey']='API_KEY';
-$params['apiSecret']='API_SECRET';
+$params['apiKey']=API_KEY;
+$params['apiSecret']=API_SECRET;
 $params['apiBaseUrl']='https://sandboxapi.ost.com/v1/';
 
-$ostObj = new OSTSDK($params);
+$ostObj = new OSTSdk($params);
 
 ```
 
@@ -69,6 +69,15 @@ $editUserParams = array();
 $editUserParams['name'] = 'Bob';
 $editUserParams['id'] = '867a5ea0-d8c1-4137-9be1-39c4549969ed';
 $response = $userService->edit($editUserParams)->wait();
+var_dump($response);
+```
+
+Get a user:
+
+```php
+$getUserParams = array();
+$getUserParams['id'] = '7ac1da33-b1d2-4f03-b39c-fbac0f1e2b92';
+$response = $userService->get($getUserParams)->wait();
 var_dump($response);
 ```
 
@@ -170,21 +179,8 @@ $response = $actionService->get($getActionParams)->wait();
 var_dump($response);
 ```
 
-### Token Module 
 
-```php
-$tokenService = $ostObj->services->token;
-```
-
-Get Token Detail:
-
-```php
-$getParams = array();
-$response = $tokenService->get($getParams)->wait();
-var_dump($response);
-```
-
-### Transaction Module 
+### Transactions Module 
 
 ```php
 $transactionService = $ostObj->services->transactions;
@@ -221,7 +217,21 @@ $response = $transactionService->execute($executeParams)->wait();
 var_dump($response);
 ```
 
-### Transfer Module 
+### Token Module 
+
+```php
+$tokenService = $ostObj->services->token;
+```
+
+Get Token Detail:
+
+```php
+$getParams = array();
+$response = $tokenService->get($getParams)->wait();
+var_dump($response);
+```
+
+### Transfers Module 
 
 ```php
 $transferService = $ostObj->services->transfers;

@@ -39,11 +39,11 @@ Initialize the SDK object:
 ```php
 
 $params = array();
-$params['apiKey']='API_KEY';
-$params['apiSecret']='API_SECRET';
+$params['apiKey']=API_KEY;
+$params['apiSecret']=API_SECRET;
 $params['apiBaseUrl']='https://playgroundapi.ost.com/';
 
-$ostObj = new OSTSDK($params);
+$ostObj = new OSTSdk($params);
 
 ```
 
