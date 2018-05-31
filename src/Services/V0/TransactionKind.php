@@ -5,19 +5,20 @@
 
 namespace OST\V0;
 
+use Lib\Request;
+
 /**
  * Class encapsulating methods to interact with V0 API's for TransactionKind module
  */
 class TransactionKind extends \OST\Base
 {
 
-  /**
-   * Constructor
-   *
-   * @param object $requestObj request object which would fire API calls
-   *
-   */
-  public function __construct($requestObj)
+    /**
+     * Constructor
+     *
+     * @param Request $requestObj request object which would fire API calls
+     */
+  public function __construct(Request $requestObj)
   {
     parent::__construct($requestObj, '/transaction-types');
   }

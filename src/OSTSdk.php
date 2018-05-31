@@ -24,7 +24,7 @@ class OSTSdk
    *
    * @throws \Exception
    */
-  public function __construct($params)
+  public function __construct(array $params)
   {
     // Extract API major version
     $apiEndpointVersion = explode('/', $params['apiBaseUrl']);
