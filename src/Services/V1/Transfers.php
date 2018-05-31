@@ -5,6 +5,8 @@
 
 namespace OST\V1;
 
+use Lib\Request;
+
 /**
  * Class encapsulating methods to interact with V1 API's for Transfers module
  */
@@ -14,10 +16,10 @@ class Transfers extends \OST\Base
   /**
    * Constructor
    *
-   * @param object $requestObj request object which would fire API calls
+   * @param Request $requestObj request object which would fire API calls
    *
    */
-  public function __construct($requestObj)
+  public function __construct(Request $requestObj)
   {
     parent::__construct($requestObj, '/transfers');
   }
@@ -30,7 +32,7 @@ class Transfers extends \OST\Base
    * @return object
    *
    */
-  public function execute($params = array()) {
+  public function execute(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/', $params);
   }
 

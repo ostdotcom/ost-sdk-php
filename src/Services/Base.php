@@ -4,6 +4,8 @@
  */
 namespace OST;
 
+use Lib\Request;
+
 /**
  * Base Class
  */
@@ -18,14 +20,13 @@ class Base
   protected
     $urlPrefix;
 
-  /**
-   * Constructor
-   *
-   * @param object $requestObj request object which would fire API calls
-   * @param string $urlPrefix  string which would be prepended to all urls for a given module
-   *
-   */
-  public function __construct($requestObj, $urlPrefix)
+    /**
+     * Constructor
+     *
+     * @param Request $requestObj request object which would fire API calls
+     * @param string $urlPrefix string which would be prepended to all urls for a given module
+     */
+  public function __construct(Request $requestObj, $urlPrefix)
   {
     $this->requestObj = $requestObj;
     $this->urlPrefix = $urlPrefix;
@@ -40,7 +41,7 @@ class Base
    *
    * @return string
    */
-  protected function getId($params)
+  protected function getId(array $params)
   {
     if (\Lib\Validate::isPresent($params['id'])) {
       return urlencode($params['id']);

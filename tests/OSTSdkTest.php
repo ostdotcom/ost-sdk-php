@@ -4,6 +4,14 @@ use PHPUnit\Framework\TestCase;
 
 final class OSTSdkTest extends TestCase
 {
+    protected function setUp()
+    {
+        if(getenv('BUILD_ENV') !== 'TRAVIS') {
+            $dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
+            $dotenv->load();
+        }
+        parent::setUp();
+    }
   /**
    *
    * Check if SDK object created to interact with V0 API's is valid

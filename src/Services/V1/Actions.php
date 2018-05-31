@@ -5,6 +5,8 @@
 
 namespace OST\V1;
 
+use Lib\Request;
+
 /**
  * Class encapsulating methods to interact with V1 API's for Actions module
  */
@@ -14,10 +16,10 @@ class Actions extends \OST\Base
   /**
    * Constructor
    *
-   * @param object $requestObj request object which would fire API calls
+   * @param Request $requestObj request object which would fire API calls
    *
    */
-  public function __construct($requestObj)
+  public function __construct(Request $requestObj)
   {
     parent::__construct($requestObj, '/actions');
   }
@@ -30,7 +32,7 @@ class Actions extends \OST\Base
    * @return object
    *
    */
-  public function create($params = array()) {
+  public function create(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/', $params);
   }
 
@@ -44,7 +46,7 @@ class Actions extends \OST\Base
    * @return object
    *
    */
-  public function edit($params = array()) {
+  public function edit(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/' . $this->getId($params) . '/', $params);
   }
 
@@ -56,7 +58,7 @@ class Actions extends \OST\Base
    * @return object
    *
    */
-  public function getList($params = array()) {
+  public function getList(array $params = array()) {
     return $this->requestObj->get($this->urlPrefix . '/', $params);
   }
 
@@ -70,7 +72,7 @@ class Actions extends \OST\Base
    * @return object
    *
    */
-  public function get($params = array()) {
+  public function get(array $params = array()) {
     return $this->requestObj->get($this->urlPrefix . '/' . $this->getId($params) . '/', $params);
   }
 

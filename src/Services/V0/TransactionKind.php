@@ -5,19 +5,20 @@
 
 namespace OST\V0;
 
+use Lib\Request;
+
 /**
  * Class encapsulating methods to interact with V0 API's for TransactionKind module
  */
 class TransactionKind extends \OST\Base
 {
 
-  /**
-   * Constructor
-   *
-   * @param object $requestObj request object which would fire API calls
-   *
-   */
-  public function __construct($requestObj)
+    /**
+     * Constructor
+     *
+     * @param Request $requestObj request object which would fire API calls
+     */
+  public function __construct(Request $requestObj)
   {
     parent::__construct($requestObj, '/transaction-types');
   }
@@ -30,7 +31,7 @@ class TransactionKind extends \OST\Base
    * @return object
    *
    */
-  public function create($params = array()) {
+  public function create(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/create', $params);
   }
 
@@ -42,7 +43,7 @@ class TransactionKind extends \OST\Base
    * @return object
    *
    */
-  public function edit($params = array()) {
+  public function edit(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/edit', $params);
   }
 
@@ -54,7 +55,7 @@ class TransactionKind extends \OST\Base
    * @return object
    *
    */
-  public function getList($params = array()) {
+  public function getList(array $params = array()) {
     return $this->requestObj->get($this->urlPrefix . '/list', $params);
   }
 
@@ -66,7 +67,7 @@ class TransactionKind extends \OST\Base
    * @return object
    *
    */
-  public function execute($params = array()) {
+  public function execute(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/execute', $params);
   }
 
@@ -78,7 +79,7 @@ class TransactionKind extends \OST\Base
    * @return object
    *
    */
-  public function getStatus($params = array()) {
+  public function getStatus(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/status', $params);
   }
 
