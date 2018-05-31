@@ -6,8 +6,10 @@ final class OSTSdkTest extends TestCase
 {
     protected function setUp()
     {
-        $dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
-        $dotenv->load();
+        if(getenv('BUILD_ENV') !== 'TRAVIS') {
+            $dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
+            $dotenv->load();
+        }
         parent::setUp();
     }
   /**
