@@ -16,7 +16,7 @@ class Airdrops extends \OST\Base
   /**
    * Constructor
    *
-   * @param object $requestObj request object which would fire API calls
+   * @param Request $requestObj request object which would fire API calls
    *
    */
   public function __construct(Request $requestObj)
