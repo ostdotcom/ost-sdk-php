@@ -31,7 +31,7 @@ class Manifest
    * @throws \Exception
    *
    */
-  public function __construct($params)
+  public function __construct(array $params)
   {
 
     $requestObj = new \Lib\Request($params);

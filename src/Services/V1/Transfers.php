@@ -30,7 +30,7 @@ class Transfers extends \OST\Base
    * @return object
    *
    */
-  public function execute($params = array()) {
+  public function execute(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/', $params);
   }
 
