@@ -30,7 +30,7 @@ class Token extends \OST\Base
    * @return object
    *
    */
-  public function get($params = array()) {
+  public function get(array $params = array()) {
     return $this->requestObj->get($this->urlPrefix . '/', $params);
   }
 

@@ -21,7 +21,7 @@ class Validate
   public static function isPresent($params)
   {
 
-    return isset($params) && !empty($params);
+    return $params !== null && !empty($params);
 
   }
 

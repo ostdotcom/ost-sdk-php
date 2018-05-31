@@ -30,7 +30,7 @@ class Transactions extends \OST\Base
    * @return object
    *
    */
-  public function execute($params = array()) {
+  public function execute(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/', $params);
   }
 
@@ -42,7 +42,7 @@ class Transactions extends \OST\Base
    * @return object
    *
    */
-  public function getList($params = array()) {
+  public function getList(array $params = array()) {
     return $this->requestObj->get($this->urlPrefix . '/', $params);
   }
 
@@ -56,7 +56,7 @@ class Transactions extends \OST\Base
    * @return object
    *
    */
-  public function get($params = array()) {
+  public function get(array $params = array()) {
     return $this->requestObj->get($this->urlPrefix . '/' . $this->getId($params) . '/', $params);
   }
 

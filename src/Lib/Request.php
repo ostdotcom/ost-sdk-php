@@ -6,6 +6,7 @@
 namespace Lib;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Promise\Promise;
 
 /**
  * Class encapsulating logic to fire HTTP GET & POST Requests
@@ -34,7 +35,7 @@ class Request
    * @throws \Exception
    *
    */
-  public function __construct($params)
+  public function __construct(array $params)
   {
 
     if (!Validate::isPresent($params['apiKey']) ||
@@ -51,8 +52,8 @@ class Request
     // append a trailing / to apiEndpoint (if required)
     // NOTE: As Guzzle remove "v1" from base url if ending slash is not present
     $apiBaseUrl = $params['apiBaseUrl'];
-    if ($apiBaseUrl[strlen($apiBaseUrl) - 1] != '/') {
-      $apiBaseUrl = $apiBaseUrl . '/';
+    if ($apiBaseUrl[strlen($apiBaseUrl) - 1] !== '/') {
+      $apiBaseUrl .= '/';
     }
 
     $this->baseUrl = $apiBaseUrl;
@@ -76,16 +77,16 @@ class Request
     $urlPath = $endpoint . '?' . http_build_query($argsCopy, '', '&');
     $urlPath = $urlPath . '&signature=' . hash_hmac('sha256', $urlPath, $this->apiSecret);
 
+    /** @var Promise $promise */
     $promise = $this->getRequestClient()->getAsync(substr($urlPath,1), $this->getCommonRequestParams());
 
     return $promise->then(
       // $onFulfilled
       function ($response) {
-        $jsonObject = $this->parseResponse($response);
-        return $jsonObject;
+        return  $this->parseResponse($response);
       },
       // $onRejected
-      function ($reason){
+      function (){
         return $this->customGenericErrorResponse('g_1');
       }
     );
@@ -101,7 +102,7 @@ class Request
    * @return object
    *
    */
-  public function post($endpoint, $arguments = array()) {
+  public function post($endpoint, array $arguments = array()) {
 
     $argsCopy = $this->copyAndSanitizeArgs($arguments);
 
@@ -113,16 +114,17 @@ class Request
 
     $postParams = $this->getCommonRequestParams();
     $postParams['body'] = http_build_query($argsCopy, '', '&');
+
+    /** @var Promise $promise */
     $promise = $this->getRequestClient()->postAsync(substr($endpoint, 1), $postParams);
 
     return $promise->then(
     // $onFulfilled
       function ($response) {
-        $jsonObject = $this->parseResponse($response);
-        return $jsonObject;
+        return $this->parseResponse($response);
       },
       // $onRejected
-      function ($reason){
+      function (){
         return $this->customGenericErrorResponse('p_1');
       }
     );
@@ -137,14 +139,15 @@ class Request
    * @return object
    *
    */
-  private function parseResponse($response) {
-    $jsonObject = $this->parseJsonString($response->getBody());
-    if ($this->isInternalResponse($jsonObject)) {
-      return $jsonObject;
-    } else {
-      return $this->customErrorResponse($response->getStatusCode());
+    private function parseResponse($response)
+    {
+        $jsonObject = $this->parseJsonString($response->getBody());
+        if ($this->isInternalResponse($jsonObject)) {
+            return $jsonObject;
+        }
+
+        return $this->customErrorResponse($response->getStatusCode());
     }
-  }
 
   /**
    * Generic Something Went Wrong Response
@@ -156,8 +159,7 @@ class Request
    */
   private function customGenericErrorResponse($internal_id) {
     $strResponse = "{\"success\": false, \"err\": {\"code\": \"SOMETHING_WENT_WRONG\", \"internal_id\": \"SDK({$internal_id})\", \"msg\": \"\", \"error_data\":[]}}";
-    $jsonObject = $this->parseJsonString($strResponse);
-    return $jsonObject;
+    return $this->parseJsonString($strResponse);
   }
 
   /**
@@ -190,9 +192,7 @@ class Request
         $strResponse = '{"success": false, "err": {"code": "SOMETHING_WENT_WRONG", "internal_id": "SDK(SOMETHING_WENT_WRONG)", "msg": "", "error_data":[]}}';
     }
 
-    $jsonObject = $this->parseJsonString($strResponse);
-
-    return $jsonObject;
+      return $this->parseJsonString($strResponse);
 
   }
 

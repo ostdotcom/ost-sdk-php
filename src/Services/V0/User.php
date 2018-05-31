@@ -30,7 +30,7 @@ class User extends \OST\Base
    * @return object
    *
    */
-  public function create($params = array()) {
+  public function create(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/create', $params);
   }
 
@@ -42,7 +42,7 @@ class User extends \OST\Base
    * @return object
    *
    */
-  public function edit($params = array()) {
+  public function edit(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/edit', $params);
   }
 
@@ -54,7 +54,7 @@ class User extends \OST\Base
    * @return object
    *
    */
-  public function getList($params = array()) {
+  public function getList(array $params = array()) {
     return $this->requestObj->get($this->urlPrefix . '/list', $params);
   }
 
@@ -66,7 +66,7 @@ class User extends \OST\Base
    * @return object
    *
    */
-  public function airdropTokens($params = array()) {
+  public function airdropTokens(array $params = array()) {
     return $this->requestObj->post($this->urlPrefix . '/airdrop/drop', $params);
   }
 
@@ -78,7 +78,7 @@ class User extends \OST\Base
    * @return object
    *
    */
-  public function getAirdropStatus($params = array()) {
+  public function getAirdropStatus(array $params = array()) {
     return $this->requestObj->get($this->urlPrefix . '/airdrop/status', $params);
   }
 

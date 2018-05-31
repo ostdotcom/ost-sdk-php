@@ -40,7 +40,7 @@ class Base
    *
    * @return string
    */
-  protected function getId($params)
+  protected function getId(array $params)
   {
     if (\Lib\Validate::isPresent($params['id'])) {
       return urlencode($params['id']);
