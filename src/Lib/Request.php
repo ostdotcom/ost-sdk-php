@@ -69,7 +69,7 @@ class Request
    * @return object
    *
    */
-  public function get($endpoint, $arguments = array()) {
+  public function get($endpoint, array $arguments = array()) {
 
     $argsCopy = $this->copyAndSanitizeArgs($arguments);
 
@@ -234,7 +234,7 @@ class Request
    * @return array
    *
    */
-  private function copyAndSanitizeArgs($arguments) {
+  private function copyAndSanitizeArgs(array $arguments) {
 
     // create copy of input array to not modify it
     $argsCopy = $arguments;
