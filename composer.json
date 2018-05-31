@@ -11,10 +11,10 @@
   },
   "require": {
     "php": ">=5.5.0",
-    "guzzlehttp/guzzle": "~6.0",
-    "vlucas/phpdotenv": "v2.4.0"
+    "guzzlehttp/guzzle": "~6.0"
   },
   "require-dev": {
+    "vlucas/phpdotenv": "v2.4.0",
     "phpunit/phpunit": "^4"
   },
   "autoload": {
