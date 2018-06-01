@@ -31,6 +31,7 @@ abstract class Base
 
     /**
      * @return string
+     * @throws RuntimeException
      */
     protected function getPrefix()
     {
