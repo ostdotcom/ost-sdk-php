@@ -8,7 +8,7 @@ namespace OST\V1;
 /**
  * Class encapsulating methods to interact with V1 API's for Airdrops module
  */
-class Airdrops extends \OST\Base
+class Airdrops extends Base
 {
     const PREFIX = '/airdrops';
 

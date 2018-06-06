@@ -26,10 +26,10 @@ class OSTSdk
     public function __construct(array $params)
     {
         // Extract API major version
-        $apiEndpointVersion = explode('/', $params['apiBaseUrl']);
-        if (empty($apiEndpointVersion[3])) {
+        $apiEndpointVersion = explode('/', $params['apiBaseUrl'])[3];
+        if (empty($apiEndpointVersion)) {
             $this->services = new \OST\V0\Manifest($params);
-        } elseif (!empty($apiEndpointVersion[3]) && strtolower($apiEndpointVersion[3]) === 'v1') {
+        } elseif (!empty($apiEndpointVersion) && strtolower($apiEndpointVersion) === 'v1') {
             $this->services = new \OST\V1\Manifest($params);
         } else {
             throw new \Exception('Api endpoint is invalid');
