@@ -5,6 +5,8 @@
 
 namespace OST\V1;
 
+use OST\Base;
+
 /**
  * Class encapsulating methods to interact with V1 API's for Airdrops module
  */
