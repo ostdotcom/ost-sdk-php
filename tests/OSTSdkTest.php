@@ -5,6 +5,14 @@ use PHPUnit\Framework\TestCase;
 
 final class OSTSdkTest extends TestCase
 {
+  /**
+   *
+   * override setUp() to load environment variables from .env.example file for non TRAVIS environment
+   *
+   * @test
+   *
+   * @throws Exception
+   */
     protected function setUp()
     {
         if (getenv('BUILD_ENV') !== 'TRAVIS') {
@@ -73,7 +81,6 @@ final class OSTSdkTest extends TestCase
     public function canFirePostRequestForV0()
     {
         $ostObj = $this->instantiateOSTSdkForV0Api();
-        /** @var User $userService */
         $userService = $ostObj->services->user;
         $createUserParams = array();
         $createUserParams['name'] = 'Test';
