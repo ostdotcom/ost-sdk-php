@@ -265,3 +265,31 @@ $executeParams['amount'] = '1';
 $response = $transferService->execute($executeParams)->wait();
 var_dump($response);
 ```
+
+### Balance Module 
+
+```php
+$balanceService = $ostObj->services->balances;
+```
+Get User balance:
+
+```php
+$getParams = array();
+$response = $balanceService->get($getParams)->wait();
+var_dump($response);
+```
+
+### Ledger Module
+
+```php
+$ledgerService = $ostObj->services->ledger;
+```
+
+Get User Ledger:
+
+```php
+$getParams = array();
+$response = $ledgerService->get($getParams)->wait();
+var_dump($response);
+```
+

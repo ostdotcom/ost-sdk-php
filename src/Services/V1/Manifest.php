@@ -30,28 +30,39 @@ class Manifest
     /** @var Transfers object which has methods to fire API's belonging to Transfers module */
     public $transfers;
 
-    /**
-     * Constructor
-     *
-     * @param array $params Array containing the necessary params {
-     * @type string $apiKey API Key.
-     * @type string $apiSecret API Secret.
-     * @type string $baseUrl Base API URL.
-     * }
-     *
-     * @throws \Exception
-     *
-     */
-    public function __construct($params)
-    {
-        $requestObj = new Request($params);
+    /** @var Balances object which has methods to fire API's belonging to Balances module */
+    public $balances;
 
-        // Define services available in V1
-        $this->users = new Users($requestObj);
-        $this->actions = new Actions($requestObj);
-        $this->airdrops = new Airdrops($requestObj);
-        $this->token = new Token($requestObj);
-        $this->transactions = new Transactions($requestObj);
-        $this->transfers = new Transfers($requestObj);
-    }
+    /** @var Ledger object which has methods to fire API's belonging to Ledger module */
+    public $ledger;
+
+  /**
+   * Constructor
+   *
+   * @param array $params Array containing the necessary params {
+   *      @type string $apiKey API Key.
+   *      @type string $apiSecret API Secret.
+   *      @type string $baseUrl Base API URL.
+   * }
+   *
+   * @throws \Exception
+   *
+   */
+  public function __construct($params)
+  {
+
+    $requestObj = new Request($params);
+
+    // Define services available in V1
+    $this->users = new Users($requestObj);
+    $this->actions = new Actions($requestObj);
+    $this->airdrops = new Airdrops($requestObj);
+    $this->token = new Token($requestObj);
+    $this->transactions = new Transactions($requestObj);
+    $this->transfers = new Transfers($requestObj);
+    $this->balances = new Balances($requestObj);
+    $this->ledger = new Ledger($requestObj);
+
+  }
+
 }
