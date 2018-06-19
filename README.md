@@ -275,6 +275,7 @@ Get User balance:
 
 ```php
 $getParams = array();
+$getParams['id'] = 'ad03a99e-e7c4-4f5a-9fab-ef9a3e422621';
 $response = $balanceService->get($getParams)->wait();
 var_dump($response);
 ```
