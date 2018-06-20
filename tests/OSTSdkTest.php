@@ -9,8 +9,6 @@ final class OSTSdkTest extends TestCase
    *
    * override setUp() to load environment variables from .env.example file for non TRAVIS environment
    *
-   * @test
-   *
    * @throws Exception
    */
     protected function setUp()
