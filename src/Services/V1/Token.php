@@ -12,7 +12,7 @@ use OST\Base;
  */
 class Token extends Base
 {
-    const TOKEN = '/token';
+    const PREFIX = '/token';
 
     /**
      * Get token details

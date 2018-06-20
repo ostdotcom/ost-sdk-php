@@ -82,7 +82,7 @@ class Request
                 return $this->parseResponse($response);
             },
             // $onRejected
-            function () {
+            function ($reason) {
                 return $this->customGenericErrorResponse('g_1');
             }
         );
@@ -120,7 +120,7 @@ class Request
                 return $this->parseResponse($response);
             },
             // $onRejected
-            function () {
+            function ($reason) {
                 return $this->customGenericErrorResponse('p_1');
             }
         );
