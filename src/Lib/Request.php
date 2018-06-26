@@ -137,17 +137,6 @@ class Request
         $apiBaseUrl .= '/';
       }
 
-      $buffer =  explode('/', $apiBaseUrl);
-
-      //if $apiBaseUrl had a patch version ex. 'v1.0.0', we would need to remove it to ex. 'v1.0'
-      $versionStr = $buffer[sizeof($buffer)-2];
-      $dotCount = substr_count($versionStr, '.');
-      if ($dotCount == 2) {
-        $pattern = '/^(.+)(\.\d{1,3})(\/{0,1})$/';
-        $replacement = '${1}${3}';
-        $apiBaseUrl = preg_replace($pattern, $replacement, $apiBaseUrl);
-      }
-
       return $apiBaseUrl;
 
     }
