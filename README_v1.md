@@ -41,7 +41,7 @@ Initialize the SDK object:
 $params = array();
 $params['apiKey']=API_KEY;
 $params['apiSecret']=API_SECRET;
-$params['apiBaseUrl']='https://sandboxapi.ost.com/v1.1/';
+$params['apiBaseUrl']='https://sandboxapi.ost.com/v1/';
 
 $ostObj = new OSTSdk($params);
 
@@ -265,33 +265,3 @@ $executeParams['amount'] = '1';
 $response = $transferService->execute($executeParams)->wait();
 var_dump($response);
 ```
-
-### Balance Module 
-
-```php
-$balanceService = $ostObj->services->balances;
-```
-Get User balance:
-
-```php
-$getParams = array();
-$getParams['id'] = 'ad03a99e-e7c4-4f5a-9fab-ef9a3e422621';
-$response = $balanceService->get($getParams)->wait();
-var_dump($response);
-```
-
-### Ledger Module
-
-```php
-$ledgerService = $ostObj->services->ledger;
-```
-
-Get User Ledger:
-
-```php
-$getParams = array();
-$getParams['id'] = 'ad03a99e-e7c4-4f5a-9fab-ef9a3e422621';
-$response = $ledgerService->get($getParams)->wait();
-var_dump($response);
-```
-
