@@ -3,7 +3,7 @@
  * Manifest class
  */
 
-namespace OST\V1Dot1;
+namespace OST\V1_1;
 
 use Lib\Request;
 
