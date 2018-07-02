@@ -34,7 +34,7 @@ class OSTSdk
     } elseif (strtolower($apiEndpointVersion) == 'v1') {
       $this->services = new \OST\V1\Manifest($params);
     } elseif (strtolower($apiEndpointVersion) == 'v1.1') {
-      $this->services = new \OST\V1Dot1\Manifest($params);
+      $this->services = new \OST\V1_1\Manifest($params);
     } else {
       throw new \Exception('Api endpoint is invalid');
     }
