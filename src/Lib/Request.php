@@ -45,14 +45,7 @@ class Request
         $this->apiKey = $params['apiKey'];
         $this->apiSecret = $params['apiSecret'];
 
-        // append a trailing / to apiEndpoint (if required)
-        // NOTE: As Guzzle remove "v1" from base url if ending slash is not present
-        $apiBaseUrl = $params['apiBaseUrl'];
-        if ($apiBaseUrl[strlen($apiBaseUrl) - 1] !== '/') {
-            $apiBaseUrl .= '/';
-        }
-
-        $this->baseUrl = $apiBaseUrl;
+        $this->baseUrl = $this->sanitizeApiBaseUrl($params['apiBaseUrl']);
 
     }
 
@@ -124,6 +117,28 @@ class Request
                 return $this->customGenericErrorResponse('p_1');
             }
         );
+    }
+
+
+    /**
+     * sanitize API Base URL
+     *
+     * @param string $apiBaseUrl api base url
+     *
+     * @return string
+     *
+     */
+    private function sanitizeApiBaseUrl($apiBaseUrl)
+    {
+
+      // append a trailing / to apiEndpoint (if required)
+      // NOTE: As Guzzle remove "v1" from base url if ending slash is not present
+      if ($apiBaseUrl[strlen($apiBaseUrl) - 1] !== '/') {
+        $apiBaseUrl .= '/';
+      }
+
+      return $apiBaseUrl;
+
     }
 
     /**

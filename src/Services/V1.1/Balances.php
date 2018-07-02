@@ -3,12 +3,12 @@
  * Balances class
  */
 
-namespace OST\V1;
+namespace OST\V1Dot1;
 
 use OST\Base;
 
 /**
- * Class encapsulating methods to interact with V1 API's for Balances module
+ * Class encapsulating methods to interact with V1.1 API's for Balances module
  */
 class Balances extends Base
 {
