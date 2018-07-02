@@ -1,3 +1,7 @@
+[OST PHP SDK v1.1.1](https://github.com/OpenSTFoundation/ost-sdk-php/tree/v1.1.1) July 2 2018
+---
+* Bug fix for V1.1 API
+
 [OST PHP SDK v1.1.0](https://github.com/OpenSTFoundation/ost-sdk-php/tree/v1.1.0) July 2 2018
 ---
 
