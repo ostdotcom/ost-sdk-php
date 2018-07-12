@@ -25,7 +25,7 @@ class Balances extends Base
    * @return object
    *
    */
-  public function get($params = array()) {
+  public function get(array $params = array()) {
     return $this->requestObj->get($this->getPrefix() . '/' . $this->getId($params) . '/', $params);
   }
 
