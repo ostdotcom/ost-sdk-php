@@ -3,9 +3,16 @@
  * Manifest class
  */
 
-namespace OST\V1;
+namespace OST\V1_1;
 
 use Lib\Request;
+
+use OST\V1\Users;
+use OST\V1\Actions;
+use OST\V1\Airdrops;
+use OST\V1\Token;
+use OST\V1\Transactions;
+use OST\V1\Transfers;
 
 /**
  * Class providing public vars to interact with V1 API's for different modules
@@ -29,6 +36,12 @@ class Manifest
 
     /** @var Transfers object which has methods to fire API's belonging to Transfers module */
     public $transfers;
+
+    /** @var Balances object which has methods to fire API's belonging to Balances module */
+    public $balances;
+
+    /** @var Ledger object which has methods to fire API's belonging to Ledger module */
+    public $ledger;
 
   /**
    * Constructor
@@ -54,6 +67,10 @@ class Manifest
     $this->token = new Token($requestObj);
     $this->transactions = new Transactions($requestObj);
     $this->transfers = new Transfers($requestObj);
+
+    // Define services available in V1.1
+    $this->balances = new Balances($requestObj);
+    $this->ledger = new Ledger($requestObj);
 
   }
 
