@@ -5,6 +5,7 @@
 
 namespace OST;
 
+use InvalidArgumentException;
 use Lib\Request;
 use Lib\Validate;
 use RuntimeException;
@@ -14,6 +15,7 @@ use RuntimeException;
  */
 abstract class Base
 {
+    const MISSING_ID = 'id missing in request params';
     const PREFIX = '';
 
     /** @var Request request object which would fire API calls */
@@ -47,7 +49,7 @@ abstract class Base
      *
      * @param array $params request object which would fire API calls
      *
-     * @throws \Exception
+     * @throws InvalidArgumentException
      *
      * @return string
      */
@@ -57,6 +59,6 @@ abstract class Base
             return urlencode($params['id']);
         }
 
-        throw new \Exception('id missing in request params');
+        throw new InvalidArgumentException(static::MISSING_ID);
     }
 }
