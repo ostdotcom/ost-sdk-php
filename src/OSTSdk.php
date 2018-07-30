@@ -25,18 +25,23 @@ class OSTSdk
    */
   public function __construct(array $params)
   {
-    // Extract API version
-    $apiEndpointVersion = explode('/', $params['apiBaseUrl'])[3];
+    if (isset($params) && isset($params['apiBaseUrl'])) {
+      // Extract API version
+      $explodedParams = explode('/', $params['apiBaseUrl']);
+      $apiEndpointVersion = count($explodedParams) > 3 ? $explodedParams[3] : '';
 
-    # Provide access to version specific API endpoints
-    if (null === $apiEndpointVersion || $apiEndpointVersion === '') {
-      $this->services = new \OST\V0\Manifest($params);
-    } elseif (strtolower($apiEndpointVersion) === 'v1') {
-      $this->services = new \OST\V1\Manifest($params);
-    } elseif (strtolower($apiEndpointVersion) === 'v1.1') {
-      $this->services = new \OST\V1_1\Manifest($params);
+      # Provide access to version specific API endpoints
+      if (null === $apiEndpointVersion || $apiEndpointVersion === '') {
+        $this->services = new \OST\V0\Manifest($params);
+      } elseif (strtolower($apiEndpointVersion) === 'v1') {
+        $this->services = new \OST\V1\Manifest($params);
+      } elseif (strtolower($apiEndpointVersion) === 'v1.1') {
+        $this->services = new \OST\V1_1\Manifest($params);
+      } else {
+        throw new \Exception('Api endpoint is invalid');
+      }
     } else {
-      throw new \Exception('Api endpoint is invalid');
+        throw new \Exception('API base URL is missing. Did you forget to include it in the OSTSdk params?');
     }
 
   }
