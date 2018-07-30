@@ -31,11 +31,11 @@ class OSTSdk
       $apiEndpointVersion = count($explodedParams) > 3 ? $explodedParams[3] : '';
 
       # Provide access to version specific API endpoints
-      if (is_null($apiEndpointVersion) || $apiEndpointVersion == '') {
+      if (null === $apiEndpointVersion || $apiEndpointVersion === '') {
         $this->services = new \OST\V0\Manifest($params);
-      } elseif (strtolower($apiEndpointVersion) == 'v1') {
+      } elseif (strtolower($apiEndpointVersion) === 'v1') {
         $this->services = new \OST\V1\Manifest($params);
-      } elseif (strtolower($apiEndpointVersion) == 'v1.1') {
+      } elseif (strtolower($apiEndpointVersion) === 'v1.1') {
         $this->services = new \OST\V1_1\Manifest($params);
       } else {
         throw new \Exception('Api endpoint is invalid');
