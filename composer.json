@@ -24,6 +24,11 @@
       "": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Lib\\": "tests/Lib/"
+    }
+  },
   "config": {
     "optimize-autoloader": true
   }

@@ -169,8 +169,7 @@ class Request
      */
     private function customGenericErrorResponse($internal_id)
     {
-        $strResponse = "{\"success\": false, \"err\": {\"code\": \"SOMETHING_WENT_WRONG\", \"internal_id\": \"SDK({$internal_id})\", \"msg\": \"\", \"error_data\":[]}}";
-        return $this->parseJsonString($strResponse);
+        return $this->parseJsonString(json_encode(new CustomErrorResponse(-1, $internal_id)));
     }
 
     /**
@@ -183,28 +182,7 @@ class Request
      */
     private function customErrorResponse($statusCode)
     {
-        switch ($statusCode) {
-            case 400:
-                $strResponse = '{"success": false, "err": {"code": "BAD_REQUEST", "internal_id": "SDK(BAD_REQUEST)", "msg": "", "error_data":[]}}';
-                break;
-            case 429:
-                $strResponse = '{"success": false, "err": {"code": "TOO_MANY_REQUESTS", "internal_id": "SDK(TOO_MANY_REQUESTS)", "msg": "", "error_data":[]}}';
-                break;
-            case 502:
-                $strResponse = '{"success": false, "err": {"code": "BAD_GATEWAY", "internal_id": "SDK(BAD_GATEWAY)", "msg": "", "error_data":[]}}';
-                break;
-            case 503:
-                $strResponse = '{"success": false, "err": {"code": "SERVICE_UNAVAILABLE", "internal_id": "SDK(SERVICE_UNAVAILABLE)", "msg": "", "error_data":[]}}';
-                break;
-            case 504:
-                $strResponse = '{"success": false, "err": {"code": "GATEWAY_TIMEOUT", "internal_id": "SDK(GATEWAY_TIMEOUT)", "msg": "", "error_data":[]}}';
-                break;
-            default:
-                $strResponse = '{"success": false, "err": {"code": "SOMETHING_WENT_WRONG", "internal_id": "SDK(SOMETHING_WENT_WRONG)", "msg": "", "error_data":[]}}';
-        }
-
-        return $this->parseJsonString($strResponse);
-
+        return $this->parseJsonString(json_encode(new CustomErrorResponse($statusCode)));
     }
 
     /**
@@ -217,9 +195,8 @@ class Request
      */
     private function parseJsonString($strResponse)
     {
-        try {
-            $jsonObject = json_decode($strResponse, true);
-        } catch (\Exception $e) {
+        $jsonObject = json_decode($strResponse, true);
+        if ($jsonObject === null && json_last_error() !== JSON_ERROR_NONE) {
             $jsonObject = $this->customGenericErrorResponse('pjs_1');
         }
         return $jsonObject;
