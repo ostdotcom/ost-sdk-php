@@ -52,7 +52,7 @@ $ostObj = new OSTSdk($params);
 ### Token Module 
 
 ```php
-$tokenService = $ostObj->services->token;
+$tokenService = $ostObj->services->tokens;
 ```
 
 Get Token Detail:

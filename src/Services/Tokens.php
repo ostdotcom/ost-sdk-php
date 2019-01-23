@@ -1,6 +1,6 @@
 <?php
 /**
- * Token class
+ * Tokens class
  */
 
 namespace OST;
@@ -8,9 +8,9 @@ namespace OST;
 use OST\Base;
 
 /**
- * Class encapsulating methods to interact with API's for Token module
+ * Class encapsulating methods to interact with API's for Tokens module
  */
-class Token extends Base
+class Tokens extends Base
 {
     const PREFIX = '/tokens';
 

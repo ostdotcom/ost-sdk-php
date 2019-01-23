@@ -7,15 +7,13 @@ namespace OST;
 
 use Lib\Request;
 
-use OST\Token;
-
 /**
  * Class providing public vars to interact with API's for different modules
  */
 class Manifest
 {
-    /** @var Token object which has methods to fire API's belonging to Token module */
-    public $token;
+    /** @var Tokens object which has methods to fire API's belonging to Tokens module */
+    public $tokens;
 
   /**
    * Constructor
@@ -34,7 +32,7 @@ class Manifest
 
     $requestObj = new Request($params);
 
-    $this->token = new Token($requestObj);
+    $this->tokens = new Tokens($requestObj);
 
   }
 
