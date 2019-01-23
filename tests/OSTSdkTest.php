@@ -65,7 +65,7 @@ final class OSTSdkTest extends TestCase
         $sdkInitParams = array();
         $sdkInitParams['apiKey'] = getenv('OST_KIT_API_KEY');
         $sdkInitParams['apiSecret'] = getenv('OST_KIT_API_SECRET');
-        $sdkInitParams['apiBaseUrl'] = getenv('OST_KIT_API_V1_ENDPOINT');
+        $sdkInitParams['apiBaseUrl'] = getenv('OST_KIT_SANDBOX_API_ENDPOINT');
         return new OSTSdk($sdkInitParams);
     }
 
