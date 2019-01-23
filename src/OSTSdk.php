@@ -28,16 +28,19 @@ class OSTSdk
 
     if (!isset($params)) {
       $message = 'Params missing. Did you forget to set params?';
-      throwException($message);
+      $this->throwException($message);
     } elseif (!isset($params['apiKey'])) {
       $message = 'Params missing. Did you forget to set apiKey in params?';
-      throwException($message);
+      $this->throwException($message);
     } elseif (!isset($params['apiBaseUrl'])) {
       $message = 'Params missing. Did you forget to set apiBaseUrl in params?';
-      throwException($message);
+      $this->throwException($message);
     } elseif (!isset($params['apiSecret'])) {
       $message = 'Params missing. Did you forget to set apiSecret in params?';
-      throwException($message);
+      $this->throwException($message);
+    } elseif (!$this->validateApiBaseUrl($params['apiBaseUrl'])) {
+      $message = 'Invalid Api Base Url. It should match regex: ' . $this->apiBaseUrlRegex();
+      $this->throwException($message);
     } else {
       $this->services = new \OST\Manifest($params);
     }
@@ -45,15 +48,37 @@ class OSTSdk
   }
 
   /**
-   * Class constructor.
+   * Throw exception
    *
    * @param string $message
    *
    * @throws \Exception
    */
-  function throwException(string $message) {
+  private function throwException($message) {
     throw new Exception($message);
   }
 
+  /**
+   * Validate API Base URL
+   *
+   * @param string $apiBaseUrl
+   *
+   * @return boolean
+   */
+  private function validateApiBaseUrl($apiBaseUrl) {
+    $matchResponse = preg_match($this->apiBaseUrlRegex(), $apiBaseUrl);
+    return $matchResponse == 1;
+  }
+
+  /**
+   * Validate API Base URL
+   *
+   * @param string $apiBaseUrl
+   *
+   * @return string
+   */
+  private function apiBaseUrlRegex() {
+    return "/^.*(testnet|mainnet)\/v2\/?$/";
+  }
 
 }
