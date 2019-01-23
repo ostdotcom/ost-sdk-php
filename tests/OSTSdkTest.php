@@ -1,6 +1,6 @@
 <?php
 
-use OST\V0\User;
+use OST\User;
 use PHPUnit\Framework\TestCase;
 
 final class OSTSdkTest extends TestCase
@@ -22,79 +22,13 @@ final class OSTSdkTest extends TestCase
 
     /**
      *
-     * Check if SDK object created to interact with V0 API's is valid
+     * Check if SDK object can fire a GET request
      *
      * @test
      *
      * @throws Exception
      */
-    public function canCreateInstanceOfOSTSdkForV0Api()
-    {
-        $this->assertInstanceOf(
-            OSTSdk::class,
-            $this->instantiateOSTSdkForV0Api()
-        );
-    }
-
-    /**
-     *
-     * Check if SDK object created to interact with V1 API's is valid
-     *
-     * @test
-     *
-     * @throws Exception
-     */
-    public function canCreateInstanceOfOSTSdkForV1Api()
-    {
-        $this->assertInstanceOf(
-            OSTSdk::class,
-            $this->instantiateOSTSdkForV1Api()
-        );
-    }
-
-    /**
-     *
-     * Check if SDK object can fire a GET request for V0 API's
-     *
-     * @test
-     *
-     * @throws Exception
-     */
-    public function canFireGetRequestForV0()
-    {
-        $ostObj = $this->instantiateOSTSdkForV0Api();
-        $userService = $ostObj->services->user;
-        $response = $userService->getList()->wait();
-        $this->isSuccessResponse($response);
-    }
-
-    /**
-     *
-     * Check if SDK object can fire a POST request for V0 API's
-     *
-     * @test
-     *
-     * @throws Exception
-     */
-    public function canFirePostRequestForV0()
-    {
-        $ostObj = $this->instantiateOSTSdkForV0Api();
-        $userService = $ostObj->services->user;
-        $createUserParams = array();
-        $createUserParams['name'] = 'Test';
-        $response = $userService->create($createUserParams)->wait();
-        $this->isSuccessResponse($response);
-    }
-
-    /**
-     *
-     * Check if SDK object can fire a GET request for V1 API's
-     *
-     * @test
-     *
-     * @throws Exception
-     */
-    public function canFireGetRequestForV1()
+    public function canFireGetRequest()
     {
         $ostObj = $this->instantiateOSTSdkForV1Api();
         $userService = $ostObj->services->users;
@@ -104,15 +38,15 @@ final class OSTSdkTest extends TestCase
 
     /**
      *
-     * Check if SDK object can fire a POST request for V1 API's
+     * Check if SDK object can fire a POST request
      *
      * @test
      *
      * @throws Exception
      */
-    public function canFirePostRequestForV1()
+    public function canFirePostRequest()
     {
-        $ostObj = $this->instantiateOSTSdkForV1Api();
+        $ostObj = $this->instantiateOSTSdk();
         $userService = $ostObj->services->users;
         $createUserParams = array();
         $createUserParams['name'] = 'Test';
@@ -122,26 +56,11 @@ final class OSTSdkTest extends TestCase
 
     /**
      *
-     * Instantiate OSTSdk to interact with V0 API's
+     * Instantiate OSTSdk to interact with API's
      *
      * @throws Exception
      */
-    private function instantiateOSTSdkForV0Api()
-    {
-        $sdkInitParams = array();
-        $sdkInitParams['apiKey'] = getenv('OST_KIT_API_KEY');
-        $sdkInitParams['apiSecret'] = getenv('OST_KIT_API_SECRET');
-        $sdkInitParams['apiBaseUrl'] = getenv('OST_KIT_API_ENDPOINT');
-        return new OSTSdk($sdkInitParams);
-    }
-
-    /**
-     *
-     * Instantiate OSTSdk to interact with V1 API's
-     *
-     * @throws Exception
-     */
-    private function instantiateOSTSdkForV1Api()
+    private function instantiateOSTSdk()
     {
         $sdkInitParams = array();
         $sdkInitParams['apiKey'] = getenv('OST_KIT_API_KEY');

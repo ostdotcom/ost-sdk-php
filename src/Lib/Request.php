@@ -64,6 +64,7 @@ class Request
 
         // build Path to hit by appending query params and signature
         $urlPath = $endpoint . '?' . http_build_query($argsCopy, '', '&');
+
         $urlPath = $urlPath . '&signature=' . hash_hmac('sha256', $urlPath, $this->apiSecret);
 
         /** @var Promise $promise */
@@ -72,11 +73,12 @@ class Request
         return $promise->then(
         // $onFulfilled
             function ($response) {
-                return $this->parseResponse($response);
+              return $this->parseResponse($response);
             },
             // $onRejected
             function ($reason) {
-                return $this->customGenericErrorResponse('g_1');
+              var_dump($reason);
+              return $this->customGenericErrorResponse('g_1');
             }
         );
 
@@ -132,7 +134,7 @@ class Request
     {
 
       // append a trailing / to apiEndpoint (if required)
-      // NOTE: As Guzzle remove "v1" from base url if ending slash is not present
+      // NOTE: As Guzzle remove "v2" from base url if ending slash is not present
       if ($apiBaseUrl[strlen($apiBaseUrl) - 1] !== '/') {
         $apiBaseUrl .= '/';
       }
@@ -231,6 +233,7 @@ class Request
 
         // append basic params
         $argsCopy['api_key'] = $this->apiKey;
+        $argsCopy['signature_kind'] = 'OST1-HMAC-SHA256';
         $argsCopy['request_timestamp'] = time();
 
         // sort by key name

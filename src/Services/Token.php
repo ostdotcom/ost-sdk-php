@@ -3,12 +3,12 @@
  * Token class
  */
 
-namespace OST\V1;
+namespace OST;
 
 use OST\Base;
 
 /**
- * Class encapsulating methods to interact with V1 API's for Token module
+ * Class encapsulating methods to interact with API's for Token module
  */
 class Token extends Base
 {
@@ -24,6 +24,6 @@ class Token extends Base
      */
     public function get(array $params = array())
     {
-        return $this->requestObj->get($this->getPrefix() . '/', $params);
+        return $this->requestObj->get($this->getPrefix() . '/details', $params);
     }
 }
