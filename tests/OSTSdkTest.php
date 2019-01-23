@@ -30,29 +30,30 @@ final class OSTSdkTest extends TestCase
      */
     public function canFireGetRequest()
     {
-        $ostObj = $this->instantiateOSTSdkForV1Api();
-        $userService = $ostObj->services->users;
-        $response = $userService->getList()->wait();
+        $ostObj = $this->instantiateOSTSdk();
+        $tokensService = $ostObj->services->tokens;
+        $response = $tokensService->get()->wait();
+        var_dump($response);
         $this->isSuccessResponse($response);
     }
 
-    /**
-     *
-     * Check if SDK object can fire a POST request
-     *
-     * @test
-     *
-     * @throws Exception
-     */
-    public function canFirePostRequest()
-    {
-        $ostObj = $this->instantiateOSTSdk();
-        $userService = $ostObj->services->users;
-        $createUserParams = array();
-        $createUserParams['name'] = 'Test';
-        $response = $userService->create($createUserParams)->wait();
-        $this->isSuccessResponse($response);
-    }
+//    /**
+//     *
+//     * Check if SDK object can fire a POST request
+//     *
+//     * @test
+//     *
+//     * @throws Exception
+//     */
+//    public function canFirePostRequest()
+//    {
+//        $ostObj = $this->instantiateOSTSdk();
+//        $userService = $ostObj->services->users;
+//        $createUserParams = array();
+//        $createUserParams['name'] = 'Test';
+//        $response = $userService->create($createUserParams)->wait();
+//        $this->isSuccessResponse($response);
+//    }
 
     /**
      *
