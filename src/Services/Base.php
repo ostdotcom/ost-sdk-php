@@ -16,7 +16,9 @@ use RuntimeException;
 abstract class Base
 {
     const MISSING_ID = 'id missing in request params';
+    const MISSING_USER_ID = 'user id missing in request params';
     const PREFIX = '';
+    const SUFFIX = '';
 
     /** @var Request request object which would fire API calls */
     protected $requestObj;
@@ -45,6 +47,19 @@ abstract class Base
     }
 
     /**
+     * @return string
+     * @throws RuntimeException
+     */
+    protected function getSuffix()
+    {
+      if (empty(static::SUFFIX)) {
+        throw new RuntimeException('Suffix must be defined in class: ' . get_class($this));
+      }
+
+      return static::SUFFIX;
+    }
+
+    /**
      * getId from params array
      *
      * @param array $params request object which would fire API calls
@@ -61,4 +76,23 @@ abstract class Base
 
         throw new InvalidArgumentException(static::MISSING_ID);
     }
+
+    /**
+     * getUserId from params array
+     *
+     * @param array $params request object which would fire API calls
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return string
+     */
+    protected function getUserId(array $params)
+    {
+      if (Validate::isPresent($params['user_id'])) {
+        return urlencode($params['user_id']);
+      }
+
+      throw new InvalidArgumentException(static::MISSING_USER_ID);
+    }
+
 }

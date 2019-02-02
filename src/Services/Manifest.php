@@ -11,9 +11,19 @@ use Lib\Request;
  * Class providing public vars to interact with API's for different modules
  */
 class Manifest
+
 {
-    /** @var Tokens object which has methods to fire API's belonging to Tokens module */
+    /** @var Tokens object which has methods to fire API's belonging to Token module */
     public $tokens;
+
+    /** @var Users object which has methods to fire API's belonging to User module */
+    public $users;
+
+    /** @var Devices object which has methods to fire API's belonging to Device module */
+    public $devices;
+
+    /** @var DeviceManagers object which has methods to fire API's belonging to DeviceManager module */
+    public $deviceManagers;
 
   /**
    * Constructor
@@ -33,6 +43,12 @@ class Manifest
     $requestObj = new Request($params);
 
     $this->tokens = new Tokens($requestObj);
+
+    $this->users = new Users($requestObj);
+
+    $this->devices = new Devices($requestObj);
+
+    $this->deviceManagers = new DeviceManagers($requestObj);
 
   }
 

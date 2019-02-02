@@ -49,7 +49,7 @@ $ostObj = new OSTSdk($params);
 
 ```
 
-### Token Module 
+### Tokens Module 
 
 ```php
 $tokenService = $ostObj->services->tokens;
@@ -59,7 +59,59 @@ Get Token Detail:
 
 ```php
 $getParams = array();
-$getParams['client_id'] = 1;
 $response = $tokenService->get($getParams)->wait();
 var_dump($response);
 ```
+
+### Users Module 
+
+```php
+$userService = $ostObj->services->users;
+```
+
+Create User:
+
+```php
+$createParams = array();
+$response = $userService->create($createParams)->wait();
+var_dump($response);
+```
+
+Get User Detail:
+
+```php
+$getParams = array();
+$getParams['id'] = 'fc533111-5ff3-4d92-a8b0-4b161a0a841d';
+$response = $userService->get($getParams)->wait();
+var_dump($response);
+```
+
+Get User List:
+
+```php
+$getParams = array();
+$response = $userService->getList($getParams)->wait();
+var_dump($response);
+```
+
+### Devices Module 
+
+```php
+$deviceService = $ostObj->services->devices;
+```
+
+### Device Manager Module 
+
+```php
+$deviceManagerService = $ostObj->services->deviceManagers;
+```
+
+Get User's Device Manager Details:
+
+```php
+$getParams = array();
+$getParams['user_id'] = '';
+$response = $deviceManagerService->get($getParams)->wait();
+var_dump($response);
+```
+
