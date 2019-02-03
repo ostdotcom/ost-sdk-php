@@ -81,7 +81,7 @@ Get User Detail:
 
 ```php
 $getParams = array();
-$getParams['id'] = 'fc533111-5ff3-4d92-a8b0-4b161a0a841d';
+$getParams['id'] = '932f775c-43fd-48a4-aa3e-35c1a1732763';
 $response = $userService->get($getParams)->wait();
 var_dump($response);
 ```
@@ -98,6 +98,24 @@ var_dump($response);
 
 ```php
 $deviceService = $ostObj->services->devices;
+```
+
+
+Create a device for User:
+
+```php
+$createParams = array();
+$response = $deviceService->create($createParams)->wait();
+var_dump($response);
+```
+
+Get User Device(s) List:
+
+```php
+$getParams = array();
+$getParams['address'] = '';
+$response = $deviceService->getList($getParams)->wait();
+var_dump($response);
 ```
 
 ### Device Manager Module 
