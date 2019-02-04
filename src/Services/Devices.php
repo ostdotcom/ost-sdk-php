@@ -39,7 +39,7 @@ class Devices extends Base
    */
   public function getList(array $params = array())
   {
-    return $this->requestObj->get($this->getPrefix() . $this->getUserId($params) . $this->getSuffix() . '/', $params);
+    return $this->requestObj->get($this->getPrefix() . '/' . $this->getUserId($params) . $this->getSuffix() . '/', $params);
   }
 
 }
