@@ -25,6 +25,9 @@ class Manifest
     /** @var DeviceManagers object which has methods to fire API's belonging to DeviceManager module */
     public $deviceManagers;
 
+    /** @var TokenHolders object which has methods to fire API's belonging to TokenHolder module */
+    public $tokenHolders;
+
   /**
    * Constructor
    *
@@ -49,6 +52,8 @@ class Manifest
     $this->devices = new Devices($requestObj);
 
     $this->deviceManagers = new DeviceManagers($requestObj);
+
+    $this->tokenHolders = new TokenHolders($requestObj);
 
   }
 
