@@ -126,6 +126,24 @@ $response = $deviceService->getList($getParams)->wait();
 var_dump($response);
 ```
 
+### Session Module
+
+```php
+$sessionService = $ostObj->services->sessions;
+```
+
+Get User Session(s) List:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'e50e252c-318f-44a5-b586-9a9ea1c41c15';
+//$getParams['limit'] = 1;
+//$getParams['pagination_identifier'] = 'eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InVpZCI6eyJTIjoiZDE5NGFhNzUtYWNkNS00ZjQwLWIzZmItZTczYTdjZjdjMGQ5In0sIndhIjp7IlMiOiIweDU4YjQxMDY0NzQ4OWI4ODYzNTliNThmZTIyMjYwZWIxOTYwN2IwZjYifX19';
+//$getParams['address'] = '0x5906ae461eb6283cf15b0257d3206e74d83a6bd4,0xab248ef66ee49f80e75266595aa160c8c1abdd5a';
+$response = $sessionService->getList($getParams)->wait();
+var_dump($response);
+```
+
 ### Device Manager Module 
 
 ```php
