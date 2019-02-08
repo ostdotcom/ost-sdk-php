@@ -107,7 +107,7 @@ Create a device for User:
 $createParams = array();
 $createParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
 $createParams['address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
-$createParams['personal_sign_address'] = '0x5F860598383868e8E8Ee0ffC5ADD92369Db37455';
+$createParams['api_signer_address'] = '0x5F860598383868e8E8Ee0ffC5ADD92369Db37455';
 $createParams['device_uuid'] = '593a967f-87bd-49a6-976c-52edf46c4df4';
 $createParams['device_name'] = 'Iphone S';
 $response = $deviceService->create($createParams)->wait();
