@@ -31,6 +31,9 @@ class Manifest
     /** @var TokenHolders object which has methods to fire API's belonging to TokenHolder module */
     public $tokenHolders;
 
+    /** @var PricePoints object which has methods to fire API's belonging to PricePoints module */
+    public $pricePoints;
+
   /**
    * Constructor
    *
@@ -59,6 +62,8 @@ class Manifest
     $this->deviceManagers = new DeviceManagers($requestObj);
 
     $this->tokenHolders = new TokenHolders($requestObj);
+
+    $this->pricePoints = new PricePoints($requestObj);
 
   }
 

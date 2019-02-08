@@ -60,7 +60,7 @@ Get Token Detail:
 ```php
 $getParams = array();
 $response = $tokenService->get($getParams)->wait();
-var_dump($response);
+echo json_encode($response);
 ```
 
 ### Users Module 
@@ -74,7 +74,7 @@ Create User:
 ```php
 $createParams = array();
 $response = $userService->create($createParams)->wait();
-var_dump($response);
+echo json_encode($response);
 ```
 
 Get User Detail:
@@ -83,7 +83,7 @@ Get User Detail:
 $getParams = array();
 $getParams['id'] = '91263ebd-6b2d-4001-b732-4024430ca758';
 $response = $userService->get($getParams)->wait();
-var_dump($response);
+echo json_encode($response);
 ```
 
 Get User List:
@@ -91,7 +91,7 @@ Get User List:
 ```php
 $getParams = array();
 $response = $userService->getList($getParams)->wait();
-var_dump($response);
+echo json_encode($response);
 ```
 
 ### Devices Module 
@@ -111,7 +111,7 @@ $createParams['personal_sign_address'] = '0x5F860598383868e8E8Ee0ffC5ADD92369Db3
 $createParams['device_uuid'] = '593a967f-87bd-49a6-976c-52edf46c4df4';
 $createParams['device_name'] = 'Iphone S';
 $response = $deviceService->create($createParams)->wait();
-var_dump($response);
+echo json_encode($response);
 ```
 
 Get User Device(s) List:
@@ -123,7 +123,7 @@ $getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
 //$getParams['pagination_identifier'] = 'eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InVpZCI6eyJTIjoiZDE5NGFhNzUtYWNkNS00ZjQwLWIzZmItZTczYTdjZjdjMGQ5In0sIndhIjp7IlMiOiIweDU4YjQxMDY0NzQ4OWI4ODYzNTliNThmZTIyMjYwZWIxOTYwN2IwZjYifX19';
 //$getParams['address'] = '0x5906ae461eb6283cf15b0257d3206e74d83a6bd4,0xab248ef66ee49f80e75266595aa160c8c1abdd5a';
 $response = $deviceService->getList($getParams)->wait();
-var_dump($response);
+echo json_encode($response);
 ```
 
 ### Session Module
@@ -156,7 +156,7 @@ Get User's Device Manager Details:
 $getParams = array();
 $getParams['user_id'] = '1617ce62-c269-4203-bb1c-76cb778d7093';
 $response = $deviceManagerService->get($getParams)->wait();
-var_dump($response);
+echo json_encode($response);
 ```
 
 ### Token Holder Module 
@@ -171,7 +171,7 @@ Create Token Holder:
 $createParams = array();
 $createParams['user_id'] = '91263ebd-6b2d-4001-b732-4024430ca758';
 $response = $tokenHolderService->create($createParams)->wait();
-var_dump($response);
+echo json_encode($response);
 ```
 
 Get User's Token Holder Details:
@@ -180,6 +180,20 @@ Get User's Token Holder Details:
 $getParams = array();
 $getParams['user_id'] = '91263ebd-6b2d-4001-b732-4024430ca758';
 $response = $tokenHolderService->get($getParams)->wait();
-var_dump($response);
+echo json_encode($response);
+```
+
+### Price Points Module 
+
+```php
+$pricePointsService = $ostObj->services->pricePoints;
+```
+
+Get 
+
+```php
+$getParams = array();
+$response = $pricePointsService->get($getParams)->wait();
+echo json_encode($response);
 ```
 
