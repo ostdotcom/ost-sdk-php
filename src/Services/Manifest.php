@@ -28,8 +28,8 @@ class Manifest
     /** @var DeviceManagers object which has methods to fire API's belonging to DeviceManager module */
     public $deviceManagers;
 
-    /** @var TokenHolders object which has methods to fire API's belonging to TokenHolder module */
-    public $tokenHolders;
+    /** @var Chains object which has methods to fire API's belonging to Chains module */
+    public $chains;
 
     /** @var PricePoints object which has methods to fire API's belonging to PricePoints module */
     public $pricePoints;
@@ -61,9 +61,9 @@ class Manifest
 
     $this->deviceManagers = new DeviceManagers($requestObj);
 
-    $this->tokenHolders = new TokenHolders($requestObj);
-
     $this->pricePoints = new PricePoints($requestObj);
+
+    $this->chains = new Chains($requestObj);
 
   }
 

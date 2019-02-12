@@ -183,3 +183,18 @@ $response = $pricePointsService->get($getParams)->wait();
 echo json_encode($response);
 ```
 
+### Chains Module 
+
+```php
+$chainsService = $ostObj->services->chains;
+```
+
+Get 
+
+```php
+$getParams = array();
+$getParams['chain_id'] = '2000';
+$response = $chainsService->get($getParams)->wait();
+echo json_encode($response);
+```
+

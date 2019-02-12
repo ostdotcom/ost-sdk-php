@@ -95,4 +95,22 @@ abstract class Base
       throw new InvalidArgumentException(static::MISSING_USER_ID);
     }
 
+     /**
+     * getChainId from params array
+     *
+     * @param array $params request object which would fire API calls
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return string
+     */
+    protected function getChainId(array $params)
+    {
+        if (Validate::isPresent($params['chain_id'])) {
+            return urlencode($params['chain_id']);
+        }
+
+        throw new InvalidArgumentException(static::MISSING_ID);
+    }
+
 }
