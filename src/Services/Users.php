@@ -14,6 +14,7 @@ class Users extends Base
 {
 
     const PREFIX = '/users';
+    const SUFFIX = '/activate-user';
 
     /**
      * Create a User
@@ -54,6 +55,19 @@ class Users extends Base
     public function get(array $params = array())
     {
       return $this->requestObj->get($this->getPrefix() . '/' . $this->getId($params) . '/', $params);
+    }
+
+    /**
+     * Activate user by deploying it's token holder.
+     *
+     * @param array $params params for creating a token holder
+     *
+     * @return object
+     *
+     */
+    public function activateUser(array $params = array())
+    {
+      return $this->requestObj->post($this->getPrefix() . '/' . $this->getUserId($params) . $this->getSuffix() . '/', $params);
     }
 
 }

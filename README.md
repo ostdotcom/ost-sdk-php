@@ -94,6 +94,16 @@ $response = $userService->getList($getParams)->wait();
 echo json_encode($response);
 ```
 
+Activate User:
+
+```php
+$createParams = array();
+$createParams['user_id'] = '91263ebd-6b2d-4001-b732-4024430ca758';
+$response = $userService->activateUser($createParams)->wait();
+echo json_encode($response);
+```
+
+
 ### Devices Module 
 
 ```php
@@ -156,30 +166,6 @@ Get User's Device Manager Details:
 $getParams = array();
 $getParams['user_id'] = '1617ce62-c269-4203-bb1c-76cb778d7093';
 $response = $deviceManagerService->get($getParams)->wait();
-echo json_encode($response);
-```
-
-### Token Holder Module 
-
-```php
-$tokenHolderService = $ostObj->services->tokenHolders;
-```
-
-Create Token Holder:
-
-```php
-$createParams = array();
-$createParams['user_id'] = '91263ebd-6b2d-4001-b732-4024430ca758';
-$response = $tokenHolderService->create($createParams)->wait();
-echo json_encode($response);
-```
-
-Get User's Token Holder Details:
-
-```php
-$getParams = array();
-$getParams['user_id'] = '91263ebd-6b2d-4001-b732-4024430ca758';
-$response = $tokenHolderService->get($getParams)->wait();
 echo json_encode($response);
 ```
 
