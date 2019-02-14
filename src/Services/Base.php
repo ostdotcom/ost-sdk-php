@@ -95,7 +95,7 @@ abstract class Base
       throw new InvalidArgumentException(static::MISSING_USER_ID);
     }
 
-     /**
+    /**
      * getChainId from params array
      *
      * @param array $params request object which would fire API calls
@@ -108,6 +108,24 @@ abstract class Base
     {
         if (Validate::isPresent($params['chain_id'])) {
             return urlencode($params['chain_id']);
+        }
+
+        throw new InvalidArgumentException(static::MISSING_ID);
+    }
+
+    /**
+     * getDeviceAddress from params array
+     *
+     * @param array $params request object which would fire API calls
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return string
+     */
+    protected function getDeviceAddress(array $params)
+    {
+        if (Validate::isPresent($params['device_address'])) {
+            return urlencode($params['device_address']);
         }
 
         throw new InvalidArgumentException(static::MISSING_ID);

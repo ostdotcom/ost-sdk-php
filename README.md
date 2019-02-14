@@ -136,6 +136,16 @@ $response = $deviceService->getList($getParams)->wait();
 echo json_encode($response);
 ```
 
+Get User Device:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$getParams['device_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
+$response = $deviceService->getDevice($getParams)->wait();
+echo json_encode($response);
+```
+
 ### Session Module
 
 ```php

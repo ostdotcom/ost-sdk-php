@@ -42,4 +42,17 @@ class Devices extends Base
     return $this->requestObj->get($this->getPrefix() . '/' . $this->getUserId($params) . $this->getSuffix() . '/', $params);
   }
 
+  /**
+   * Get device of a user
+   *
+   * @param array $params params for fetching device
+   *
+   * @return object
+   *
+   */
+  public function getDevice(array $params = array())
+  {
+    return $this->requestObj->get($this->getPrefix() . '/' . $this->getUserId($params) . $this->getSuffix() . '/' . $this->getDeviceAddress($params) . '/', $params);
+  }
+
 }
