@@ -94,22 +94,11 @@ $response = $userService->getList($getParams)->wait();
 echo json_encode($response);
 ```
 
-Activate User:
-
-```php
-$createParams = array();
-$createParams['user_id'] = '91263ebd-6b2d-4001-b732-4024430ca758';
-$response = $userService->activateUser($createParams)->wait();
-echo json_encode($response);
-```
-
-
 ### Devices Module 
 
 ```php
 $deviceService = $ostObj->services->devices;
 ```
-
 
 Create a device for User:
 
