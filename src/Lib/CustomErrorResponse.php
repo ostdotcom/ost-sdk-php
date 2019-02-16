@@ -53,6 +53,10 @@ class CustomErrorResponse implements JsonSerializable
       return $this->getDefaultErrorMessage();
     }
 
+    if (($this->internalId == "connect_exception") && !empty($this->statusCode)) {
+      return $this->getTimeoutErrorMessage();
+    }
+
     if (!empty($this->internalId) && empty($customErrorMessages[$this->statusCode])) {
       return $this->customGenericErrorMessage();
     }
@@ -124,6 +128,19 @@ class CustomErrorResponse implements JsonSerializable
   /**
    * @return array
    */
+  private function getTimeoutErrorMessage()
+  {
+    return $this->decorateErrorMessage([
+        'code' => 'REQUEST_TIMEOUT',
+        'internal_id' => 'SDK(REQUEST_TIMEOUT)',
+        'msg' => '',
+        'error_data' => []
+    ]);
+  }
+
+  /**
+   * @return array
+   */
   private function getServiceUnavailableErrorMessage()
   {
     return $this->decorateErrorMessage([
@@ -147,6 +164,9 @@ class CustomErrorResponse implements JsonSerializable
     ]);
   }
 
+  /**
+   * @return array
+   */
   private function customGenericErrorMessage()
   {
     return $this->decorateErrorMessage([
