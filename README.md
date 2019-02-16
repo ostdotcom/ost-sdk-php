@@ -126,7 +126,7 @@ $getParams = array();
 $getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
 //$getParams['limit'] = 1;
 //$getParams['pagination_identifier'] = 'eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InVpZCI6eyJTIjoiZDE5NGFhNzUtYWNkNS00ZjQwLWIzZmItZTczYTdjZjdjMGQ5In0sIndhIjp7IlMiOiIweDU4YjQxMDY0NzQ4OWI4ODYzNTliNThmZTIyMjYwZWIxOTYwN2IwZjYifX19';
-//$getParams['address'] = '0x5906ae461eb6283cf15b0257d3206e74d83a6bd4,0xab248ef66ee49f80e75266595aa160c8c1abdd5a';
+//$getParams['address'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
 $response = $deviceService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```

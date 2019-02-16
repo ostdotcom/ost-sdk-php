@@ -17,6 +17,8 @@ abstract class Base
 {
     const MISSING_ID = 'id missing in request params';
     const MISSING_USER_ID = 'user id missing in request params';
+    const INVALID_CHAIN_ID = 'chain id is invalid in request params';
+    const MISSING_DEVICE_ADDRESS = 'device address missing in request params';
     const PREFIX = '';
     const SUFFIX = '';
 
@@ -106,11 +108,11 @@ abstract class Base
      */
     protected function getChainId(array $params)
     {
-        if (Validate::isPresent($params['chain_id'])) {
-            return urlencode($params['chain_id']);
-        }
+      if (!Validate::isPresent($params['chain_id'])) {
+        throw new InvalidArgumentException(static::INVALID_CHAIN_ID);
+      }
 
-        throw new InvalidArgumentException(static::MISSING_ID);
+      return urlencode($params['chain_id']);
     }
 
     /**
@@ -128,7 +130,7 @@ abstract class Base
             return urlencode($params['device_address']);
         }
 
-        throw new InvalidArgumentException(static::MISSING_ID);
+        throw new InvalidArgumentException(static::MISSING_DEVICE_ADDRESS);
     }
 
 }
