@@ -50,7 +50,7 @@ class Devices extends Base
    * @return object
    *
    */
-  public function getDevice(array $params = array())
+  public function get(array $params = array())
   {
     return $this->requestObj->get($this->getPrefix() . '/' . $this->getUserId($params) . $this->getSuffix() . '/' . $this->getDeviceAddress($params) . '/', $params);
   }

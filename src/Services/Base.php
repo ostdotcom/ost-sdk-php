@@ -19,6 +19,7 @@ abstract class Base
     const MISSING_USER_ID = 'user id missing in request params';
     const INVALID_CHAIN_ID = 'chain id is invalid in request params';
     const MISSING_DEVICE_ADDRESS = 'device address missing in request params';
+    const MISSING_SESSION_ADDRESS = 'session address missing in request params';
     const PREFIX = '';
     const SUFFIX = '';
 
@@ -131,6 +132,25 @@ abstract class Base
         }
 
         throw new InvalidArgumentException(static::MISSING_DEVICE_ADDRESS);
+    }
+
+
+    /**
+     * getSessionAddress from params array
+     *
+     * @param array $params request object which would fire API calls
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return string
+     */
+    protected function getSessionAddress(array $params)
+    {
+        if (Validate::isPresent($params['session_address'])) {
+            return urlencode($params['session_address']);
+        }
+
+        throw new InvalidArgumentException(static::MISSING_SESSION_ADDRESS);
     }
 
 }

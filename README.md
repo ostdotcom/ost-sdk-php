@@ -55,6 +55,22 @@ $ostObj = new OSTSdk($params);
 
 ```
 
+### Chains Module 
+
+```php
+$chainsService = $ostObj->services->chains;
+```
+
+Get 
+
+```php
+$getParams = array();
+$getParams['chain_id'] = '2000';
+$response = $chainsService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+
 ### Tokens Module 
 
 ```php
@@ -96,6 +112,7 @@ Get User List:
 
 ```php
 $getParams = array();
+//$getParams['ids'] = array('91263ebd-6b2d-4001-b732-4024430ca758', '91263ebd-6b2d-4001-b732-4024430ca758');
 $response = $userService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
@@ -124,9 +141,8 @@ Get User Device(s) List:
 ```php
 $getParams = array();
 $getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
-//$getParams['limit'] = 1;
 //$getParams['pagination_identifier'] = 'eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InVpZCI6eyJTIjoiZDE5NGFhNzUtYWNkNS00ZjQwLWIzZmItZTczYTdjZjdjMGQ5In0sIndhIjp7IlMiOiIweDU4YjQxMDY0NzQ4OWI4ODYzNTliNThmZTIyMjYwZWIxOTYwN2IwZjYifX19';
-//$getParams['address'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
+//$getParams['addresses'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
 $response = $deviceService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
@@ -137,7 +153,7 @@ Get User Device:
 $getParams = array();
 $getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
 $getParams['device_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
-$response = $deviceService->getDevice($getParams)->wait();
+$response = $deviceService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -152,11 +168,20 @@ Get User Session(s) List:
 ```php
 $getParams = array();
 $getParams['user_id'] = 'e50e252c-318f-44a5-b586-9a9ea1c41c15';
-//$getParams['limit'] = 1;
 //$getParams['pagination_identifier'] = 'eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InVpZCI6eyJTIjoiZDE5NGFhNzUtYWNkNS00ZjQwLWIzZmItZTczYTdjZjdjMGQ5In0sIndhIjp7IlMiOiIweDU4YjQxMDY0NzQ4OWI4ODYzNTliNThmZTIyMjYwZWIxOTYwN2IwZjYifX19';
-//$getParams['address'] = '0x5906ae461eb6283cf15b0257d3206e74d83a6bd4,0xab248ef66ee49f80e75266595aa160c8c1abdd5a';
+//$getParams['addresses'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
 $response = $sessionService->getList($getParams)->wait();
 var_dump($response);
+```
+
+Get User Session:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$getParams['session_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
+$response = $sessionService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
 ### Device Manager Module 
@@ -187,19 +212,3 @@ $getParams = array();
 $response = $pricePointsService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
-
-### Chains Module 
-
-```php
-$chainsService = $ostObj->services->chains;
-```
-
-Get 
-
-```php
-$getParams = array();
-$getParams['chain_id'] = '2000';
-$response = $chainsService->get($getParams)->wait();
-echo json_encode($response, JSON_PRETTY_PRINT);
-```
-

@@ -14,7 +14,6 @@ class Users extends Base
 {
 
     const PREFIX = '/users';
-    const SUFFIX = '/activate-user';
 
     /**
      * Create a User

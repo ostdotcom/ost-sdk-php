@@ -70,10 +70,10 @@ class Request
     {
         $argsCopy = $this->copyAndSanitizeArgs($arguments);
 
-        // build Path to hit by appending query params and signature
+        // build Path to hit by appending query params and api_signature
         $urlPath = $endpoint . '?' . $argsCopy;
 
-        $urlPath = $urlPath . '&signature=' . hash_hmac('sha256', $urlPath, $this->apiSecret);
+        $urlPath = $urlPath . '&api_signature=' . hash_hmac('sha256', $urlPath, $this->apiSecret);
 
         /** @var Promise $promise */
         $promise = $this->getRequestClient()->getAsync(substr($urlPath, 1), $this->getCommonRequestParams());
@@ -110,7 +110,7 @@ class Request
 
         // sanitize request params
         $stringToSign = $endpoint . '?' . $argsCopy;
-        $argsCopy = $argsCopy . "&signature=" . hash_hmac('sha256', $stringToSign, $this->apiSecret);
+        $argsCopy = $argsCopy . "&api_signature=" . hash_hmac('sha256', $stringToSign, $this->apiSecret);
 
         $postParams = $this->getCommonRequestParams();
         $postParams['body'] = $argsCopy;
@@ -246,8 +246,8 @@ class Request
 
         // append basic params
         $argsCopy['api_key'] = $this->apiKey;
-        $argsCopy['signature_kind'] = 'OST1-HMAC-SHA256';
-        $argsCopy['request_timestamp'] = time();
+        $argsCopy['api_signature_kind'] = 'OST1-HMAC-SHA256';
+        $argsCopy['api_request_timestamp'] = time();
 
         $argsCopy = $this->build_nested_query($argsCopy, '');
 
@@ -279,7 +279,7 @@ class Request
           return join("&", array_filter($temp_array));
         }
       } else {
-          return $prefix . "=" . $this->escape($array);
+          return $this->escape($prefix) . "=" . $this->escape($array);
       }
     }
 
