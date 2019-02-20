@@ -25,9 +25,6 @@ class Manifest
     /** @var Session object which has methods to fire API's belonging to Session module */
     public $sessions;
 
-    /** @var DeviceManagers object which has methods to fire API's belonging to DeviceManager module */
-    public $deviceManagers;
-
     /** @var Chains object which has methods to fire API's belonging to Chains module */
     public $chains;
 
@@ -58,8 +55,6 @@ class Manifest
     $this->devices = new Devices($requestObj);
 
     $this->sessions = new Sessions($requestObj);
-
-    $this->deviceManagers = new DeviceManagers($requestObj);
 
     $this->pricePoints = new PricePoints($requestObj);
 

@@ -184,21 +184,6 @@ $response = $sessionService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-### Device Manager Module 
-
-```php
-$deviceManagerService = $ostObj->services->deviceManagers;
-```
-
-Get User's Device Manager Details:
-
-```php
-$getParams = array();
-$getParams['user_id'] = '1617ce62-c269-4203-bb1c-76cb778d7093';
-$response = $deviceManagerService->get($getParams)->wait();
-echo json_encode($response, JSON_PRETTY_PRINT);
-```
-
 ### Price Points Module 
 
 ```php
