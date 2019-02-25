@@ -190,6 +190,42 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 $transactionService = $ostObj->services->transactions;
 ```
 
+Execute Transaction:
+
+```php
+$executeParams = array();
+$executeParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
+$executeParams['to'] = '0x0db21951af9afbd7490461d1029e1e0cc1436a7d';
+$rawCallData = array();
+$transferTo = array("0x80655ef8e10632885c85e567d76aedd63d2c5756");
+$transferAmount = array("10");
+$rawCallData['method'] = 'directTransfers';
+$rawCallData['parameters'] = array($transferTo, $transferAmount);
+$executeParams['raw_calldata'] = json_encode($rawCallData);
+
+$response = $transactionService->execute($executeParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Get Transactions:
+
+```php
+$getParams = array();
+$getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
+$getParams['transaction_id'] = '14d11128-55c5-4ef5-b721-9e298cb83fb2';
+$response = $transactionService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Get User Transactions:
+
+```php
+$getParams = array();
+$getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
+$response = $transactionService->getList($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
 ### Balances Module 
 
 ```php
