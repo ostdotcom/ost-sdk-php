@@ -19,11 +19,17 @@ class Manifest
     /** @var Users object which has methods to fire API's belonging to User module */
     public $users;
 
+    /** @var Balances object which has methods to fire API's belonging to Balance module */
+    public $balances;
+
     /** @var Devices object which has methods to fire API's belonging to Device module */
     public $devices;
 
     /** @var Session object which has methods to fire API's belonging to Session module */
     public $sessions;
+
+    /** @var Transaction object which has methods to fire API's belonging to Transaction module */
+    public $transactions;
 
     /** @var Chains object which has methods to fire API's belonging to Chains module */
     public $chains;
@@ -52,9 +58,13 @@ class Manifest
 
     $this->users = new Users($requestObj);
 
+    $this->balances = new Balances($requestObj);
+
     $this->devices = new Devices($requestObj);
 
     $this->sessions = new Sessions($requestObj);
+
+    $this ->transactions = new Transactions($requestObj);
 
     $this->pricePoints = new PricePoints($requestObj);
 

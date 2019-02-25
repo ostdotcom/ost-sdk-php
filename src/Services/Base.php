@@ -20,6 +20,7 @@ abstract class Base
     const INVALID_CHAIN_ID = 'chain id is invalid in request params';
     const MISSING_DEVICE_ADDRESS = 'device address missing in request params';
     const MISSING_SESSION_ADDRESS = 'session address missing in request params';
+    const MISSING_TRANSACTION_ID = 'transaction id missing in request params';
     const PREFIX = '';
     const SUFFIX = '';
 
@@ -151,6 +152,24 @@ abstract class Base
         }
 
         throw new InvalidArgumentException(static::MISSING_SESSION_ADDRESS);
+    }
+
+    /**
+     * getTransactionId from params array
+     *
+     * @param array $params request object which would fire API calls
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return string
+     */
+    protected function getTransactionId(array $params)
+    {
+      if (Validate::isPresent($params['transaction_id'])) {
+        return urlencode($params['transaction_id']);
+      }
+
+      throw new InvalidArgumentException(static::MISSING_TRANSACTION_ID);
     }
 
 }

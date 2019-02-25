@@ -127,9 +127,9 @@ Create a device for User:
 
 ```php
 $createParams = array();
-$createParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
-$createParams['address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
-$createParams['api_signer_address'] = '0x5F860598383868e8E8Ee0ffC5ADD92369Db37455';
+$createParams['user_id'] = '90aee630-2e7c-4fff-91cc-229bc9007ffc';
+$createParams['address'] = '0xbE8b3Fa4133E77e72277aF6b3Ea7BB3750511B88';
+$createParams['api_signer_address'] = '0xA9C90F80F96D9b896ae5aC3248b64348984aa7bC';
 $createParams['device_uuid'] = '593a967f-87bd-49a6-976c-52edf46c4df4';
 $createParams['device_name'] = 'Iphone S';
 $response = $deviceService->create($createParams)->wait();
@@ -181,6 +181,27 @@ $getParams = array();
 $getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
 $getParams['session_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
 $response = $sessionService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+### Transactions Module 
+
+```php
+$transactionService = $ostObj->services->transactions;
+```
+
+### Balances Module 
+
+```php
+$balanceService = $ostObj->services->balances;
+```
+
+Get Balance
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$response = $balanceService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
