@@ -190,16 +190,32 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 $transactionService = $ostObj->services->transactions;
 ```
 
-Execute Transaction:
+Execute Transaction DIRECT-TRANSFERS:
 
 ```php
 $executeParams = array();
-$executeParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
-$executeParams['to'] = '0x0db21951af9afbd7490461d1029e1e0cc1436a7d';
+$executeParams['user_id'] = '6e4bfe87-f32f-4eae-8d5b-fde08c33a955';
+$executeParams['to'] = '0xea2dffffdddec5a6ecf208be4dc9f50cbba4a678';
 $rawCallData = array();
-$transferTo = array("0x80655ef8e10632885c85e567d76aedd63d2c5756");
-$transferAmount = array("10");
+$transferTo = array("0x121eff5d65d6861c3865c655616f53bd8957643e", "0x121eff5d65d6861c3865c655616f53bd8957643e");
+$transferAmount = array("5", "5");
 $rawCallData['method'] = 'directTransfers';
+$rawCallData['parameters'] = array($transferTo, $transferAmount);
+$executeParams['raw_calldata'] = json_encode($rawCallData);
+$response = $transactionService->execute($executeParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Execute Transaction PAY:
+
+```php
+$executeParams = array();
+$executeParams['user_id'] = '6e4bfe87-f32f-4eae-8d5b-fde08c33a955';
+$executeParams['to'] = '0xfcaab39f8d14cfa332d4b875444ce0547c90792d';
+$rawCallData = array();
+$transferTo = array("0x121eff5d65d6861c3865c655616f53bd8957643e", "0x121eff5d65d6861c3865c655616f53bd8957643e");
+$transferAmount = array("150000000000000000", "100000000000000000");
+$rawCallData['method'] = 'pay';
 $rawCallData['parameters'] = array($transferTo, $transferAmount);
 $executeParams['raw_calldata'] = json_encode($rawCallData);
 
