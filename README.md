@@ -103,7 +103,7 @@ Get User Detail:
 
 ```php
 $getParams = array();
-$getParams['id'] = '91263ebd-6b2d-4001-b732-4024430ca758';
+$getParams['user_id'] = '6e4bfe87-f32f-4eae-8d5b-fde08c33a955';
 $response = $userService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
