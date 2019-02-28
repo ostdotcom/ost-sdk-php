@@ -12,7 +12,8 @@ use OST\Base;
  */
 class PricePoints extends Base
 {
-    const PREFIX = '/price-points';
+    const PREFIX = '/chains';
+    const SUFFIX = '/price-points';
 
     /**
      * Get token details
@@ -24,6 +25,6 @@ class PricePoints extends Base
      */
     public function get(array $params = array())
     {
-        return $this->requestObj->get($this->getPrefix() . '/', $params);
+        return $this->requestObj->get($this->getPrefix() . '/' . $this->getChainId($params) . $this->getSuffix(). '/', $params);
     }
 }
