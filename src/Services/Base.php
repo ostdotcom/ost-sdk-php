@@ -172,4 +172,22 @@ abstract class Base
       throw new InvalidArgumentException(static::MISSING_TRANSACTION_ID);
     }
 
+    /**
+     * getRecoveryOwnerAddress from params array
+     *
+     * @param array $params request object which would fire API calls
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return string
+     */
+    protected function getRecoveryOwnerAddress(array $params)
+    {
+      if (Validate::isPresent($params['recovery_owner_address'])) {
+        return urlencode($params['recovery_owner_address']);
+      }
+
+      throw new InvalidArgumentException(static::MISSING_USER_ID);
+    }
+
 }
