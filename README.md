@@ -267,6 +267,7 @@ Get
 
 ```php
 $getParams = array();
+$getParams['chain_id'] = '2000';
 $response = $pricePointsService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
