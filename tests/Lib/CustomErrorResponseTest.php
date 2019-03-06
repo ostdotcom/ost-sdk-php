@@ -7,11 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class CustomErrorResponseTest extends TestCase
 {
-  protected function setUp()
-  {
-    parent::setUp();
-  }
-
   /**
    * @dataProvider dataProviderCustomErrorResponse
    * @param $statusCode

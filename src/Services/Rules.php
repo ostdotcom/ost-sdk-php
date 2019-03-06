@@ -22,7 +22,7 @@ class Rules extends Base
      * @return object
      *
      */
-    public function get_list(array $params = array())
+    public function getList(array $params = array())
     {
         return $this->requestObj->get($this->getPrefix() . '/', $params);
     }

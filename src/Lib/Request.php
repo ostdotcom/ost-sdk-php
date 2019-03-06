@@ -71,9 +71,9 @@ class Request
         $argsCopy = $this->copyAndSanitizeArgs($arguments);
 
         // build Path to hit by appending query params and api_signature
-        $urlPath = $endpoint . '?' . $argsCopy;
+        $stringToSign = $endpoint . '?' . $argsCopy;
 
-        $urlPath = $urlPath . '&api_signature=' . hash_hmac('sha256', $urlPath, $this->apiSecret);
+        $urlPath = $stringToSign . '&api_signature=' . $this->getSignature($stringToSign);
 
         /** @var Promise $promise */
         $promise = $this->getRequestClient()->getAsync(substr($urlPath, 1), $this->getCommonRequestParams());
@@ -110,7 +110,7 @@ class Request
 
         // sanitize request params
         $stringToSign = $endpoint . '?' . $argsCopy;
-        $argsCopy = $argsCopy . "&api_signature=" . hash_hmac('sha256', $stringToSign, $this->apiSecret);
+        $argsCopy = $argsCopy . "&api_signature=" . $this->getSignature($stringToSign);
 
         $postParams = $this->getCommonRequestParams();
         $postParams['body'] = $argsCopy;
@@ -132,6 +132,19 @@ class Request
               }
             }
         );
+    }
+
+  /**
+   * Get Signature
+   *
+   * @param string $stringToSign
+   *
+   * @return String
+   *
+   */
+    public function getSignature($stringToSign)
+    {
+      return hash_hmac('sha256', $stringToSign, $this->apiSecret);
     }
 
 
@@ -261,7 +274,7 @@ class Request
      * @return string
      *
      */
-    private function build_nested_query($array, $prefix = '')
+    public function build_nested_query($array, $prefix = '')
     {
       if (is_array($array) || is_object($array)) {
         if ($this->check_for_int_key($array)) {
@@ -291,7 +304,8 @@ class Request
      */
     private function escape($string)
     {
-      return urlencode($string);
+      $escapedString = urlencode($string);
+      return str_replace("%7E", "~", $escapedString);
     }
 
     /**

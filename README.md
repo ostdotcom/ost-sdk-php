@@ -70,6 +70,19 @@ $response = $chainsService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
+### Price Points Module 
+
+```php
+$pricePointsService = $ostObj->services->pricePoints;
+```
+
+Get 
+
+```php
+$getParams = array();
+$response = $pricePointsService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
 
 ### Tokens Module 
 
@@ -82,6 +95,20 @@ Get Token Detail:
 ```php
 $getParams = array();
 $response = $tokenService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+### Rules Module 
+
+```php
+$rulesService = $ostObj->services->rules;
+```
+
+List all Rules:
+
+```php
+$getParams = array();
+$response = $rulesService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -113,6 +140,7 @@ Get User List:
 ```php
 $getParams = array();
 //$getParams['ids'] = array('91263ebd-6b2d-4001-b732-4024430ca758', '91263ebd-6b2d-4001-b732-4024430ca758');
+//$getParams['limit'] = 10;
 $response = $userService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
@@ -143,6 +171,7 @@ $getParams = array();
 $getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
 //$getParams['pagination_identifier'] = 'eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InVpZCI6eyJTIjoiZDE5NGFhNzUtYWNkNS00ZjQwLWIzZmItZTczYTdjZjdjMGQ5In0sIndhIjp7IlMiOiIweDU4YjQxMDY0NzQ4OWI4ODYzNTliNThmZTIyMjYwZWIxOTYwN2IwZjYifX19';
 //$getParams['addresses'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
+//$getParams['limit'] = 10;
 $response = $deviceService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
@@ -157,6 +186,22 @@ $response = $deviceService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
+### DeviceManagers Module
+
+```php
+$deviceManagersService = $ostObj->services->deviceManagers;
+```
+
+Get Token Detail:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$response = $deviceManagersService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+
 ### Session Module
 
 ```php
@@ -170,6 +215,7 @@ $getParams = array();
 $getParams['user_id'] = 'e50e252c-318f-44a5-b586-9a9ea1c41c15';
 //$getParams['pagination_identifier'] = 'eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InVpZCI6eyJTIjoiZDE5NGFhNzUtYWNkNS00ZjQwLWIzZmItZTczYTdjZjdjMGQ5In0sIndhIjp7IlMiOiIweDU4YjQxMDY0NzQ4OWI4ODYzNTliNThmZTIyMjYwZWIxOTYwN2IwZjYifX19';
 //$getParams['addresses'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
+//$getParams['limit'] = 10;
 $response = $sessionService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
@@ -184,61 +230,19 @@ $response = $sessionService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-### Transactions Module 
+### RecoveryOwners Module
 
 ```php
-$transactionService = $ostObj->services->transactions;
+$recoveryOwnersService = $ostObj->services->recoveryOwners;
 ```
 
-Execute Transaction DIRECT-TRANSFERS:
-
-```php
-$executeParams = array();
-$executeParams['user_id'] = '6e4bfe87-f32f-4eae-8d5b-fde08c33a955';
-$executeParams['to'] = '0xea2dffffdddec5a6ecf208be4dc9f50cbba4a678';
-$rawCallData = array();
-$transferTo = array("0x121eff5d65d6861c3865c655616f53bd8957643e", "0x121eff5d65d6861c3865c655616f53bd8957643e");
-$transferAmount = array("5", "5");
-$rawCallData['method'] = 'directTransfers';
-$rawCallData['parameters'] = array($transferTo, $transferAmount);
-$executeParams['raw_calldata'] = json_encode($rawCallData);
-$response = $transactionService->execute($executeParams)->wait();
-echo json_encode($response, JSON_PRETTY_PRINT);
-```
-
-Execute Transaction PAY:
-
-```php
-$executeParams = array();
-$executeParams['user_id'] = '6e4bfe87-f32f-4eae-8d5b-fde08c33a955';
-$executeParams['to'] = '0xfcaab39f8d14cfa332d4b875444ce0547c90792d';
-$rawCallData = array();
-$transferTo = array("0x121eff5d65d6861c3865c655616f53bd8957643e", "0x121eff5d65d6861c3865c655616f53bd8957643e");
-$transferAmount = array("150000000000000000", "100000000000000000");
-$rawCallData['method'] = 'pay';
-$rawCallData['parameters'] = array($transferTo, $transferAmount);
-$executeParams['raw_calldata'] = json_encode($rawCallData);
-
-$response = $transactionService->execute($executeParams)->wait();
-echo json_encode($response, JSON_PRETTY_PRINT);
-```
-
-Get Transactions:
+Get Token Detail:
 
 ```php
 $getParams = array();
-$getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
-$getParams['transaction_id'] = '14d11128-55c5-4ef5-b721-9e298cb83fb2';
-$response = $transactionService->get($getParams)->wait();
-echo json_encode($response, JSON_PRETTY_PRINT);
-```
-
-Get User Transactions:
-
-```php
-$getParams = array();
-$getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
-$response = $transactionService->getList($getParams)->wait();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$getParams['recovery_owner_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
+$response = $recoveryOwnersService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -257,16 +261,85 @@ $response = $balanceService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-### Price Points Module 
+### Transactions Module 
 
 ```php
-$pricePointsService = $ostObj->services->pricePoints;
+$transactionService = $ostObj->services->transactions;
 ```
 
-Get 
+Execute Transaction DIRECT-TRANSFERS:
+
+```php
+//$metaPropertyParams = array();
+//$metaPropertyParams['name'] = 'transaction_name'; //like, download IMP : Max length 25 characters (numbers alphabets spaces _ - allowed)
+//$metaPropertyParams['type'] = 'user_to_user'; // user_to_user, company_to_user, user_to_company
+//$metaPropertyParams['details'] = ''; // memo field to add additional info about the transaction .  IMP : Max length 120 characters (numbers alphabets spaces _ - allowed)
+
+$executeParams = array();
+$executeParams['user_id'] = '6e4bfe87-f32f-4eae-8d5b-fde08c33a955';
+$executeParams['to'] = '0xea2dffffdddec5a6ecf208be4dc9f50cbba4a678';
+$rawCallData = array();
+$transferTo = array("0x121eff5d65d6861c3865c655616f53bd8957643e", "0x121eff5d65d6861c3865c655616f53bd8957643e");
+$transferAmount = array("5", "5");
+$rawCallData['method'] = 'directTransfers';
+$rawCallData['parameters'] = array($transferTo, $transferAmount);
+$executeParams['raw_calldata'] = json_encode($rawCallData);
+//$executeParams['meta_property', $metaPropertyParams];
+$response = $transactionService->execute($executeParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Execute Transaction PAY:
+
+```php
+//$metaPropertyParams = array();
+//$metaPropertyParams['name'] = 'transaction_name'; //like, download IMP : Max length 25 characters (numbers alphabets spaces _ - allowed)
+//$metaPropertyParams['type'] = 'user_to_user'; // user_to_user, company_to_user, user_to_company
+//$metaPropertyParams['details'] = ''; // memo field to add additional info about the transaction .  IMP : Max length 120 characters (numbers alphabets spaces _ - allowed)
+
+$executeParams = array();
+$executeParams['user_id'] = '6e4bfe87-f32f-4eae-8d5b-fde08c33a955';
+$executeParams['to'] = '0xfcaab39f8d14cfa332d4b875444ce0547c90792d';
+$rawCallData = array();
+$transferTo = array("0x121eff5d65d6861c3865c655616f53bd8957643e", "0x121eff5d65d6861c3865c655616f53bd8957643e");
+$transferAmount = array("150000000000000000", "100000000000000000");
+$rawCallData['method'] = 'pay';
+$rawCallData['parameters'] = array($transferTo, $transferAmount);
+$executeParams['raw_calldata'] = json_encode($rawCallData);
+//$executeParams['meta_property', $metaPropertyParams];
+$response = $transactionService->execute($executeParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Get a transaction info:
 
 ```php
 $getParams = array();
-$response = $pricePointsService->get($getParams)->wait();
+$getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
+$getParams['transaction_id'] = '14d11128-55c5-4ef5-b721-9e298cb83fb2';
+$response = $transactionService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Get all transactions for a user:
+
+```php
+//$metaPropertyArrayParams = array();
+//$metaPropertyArrayParams['name'] = 'transaction_name'; //like, download IMP : Max length 25 characters (numbers alphabets spaces _ - allowed)
+//$metaPropertyArrayParams['type'] = 'user_to_user'; // user_to_user, company_to_user, user_to_company
+//$metaPropertyArrayParams['details'] = ''; // memo field to add additional info about the transaction .  IMP : Max length 120 characters (numbers alphabets spaces _ - allowed)
+//$metaPropertyArray = array($metaPropertyArrayParams);
+//$metaPropertyArrayJsonStr = json_encode($metaPropertyArray);
+
+//$statusArray = array('CREATED', 'SUBMITTED', 'SUCCESS', 'FAILED');
+
+$getParams = array();
+$getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
+
+//$getParams['status'] = $statusArray;
+//$getParams['meta_property'] = $metaPropertyArrayJsonStr;
+//$getParams['limit'] = 10;
+
+$response = $transactionService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```

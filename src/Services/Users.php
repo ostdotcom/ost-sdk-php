@@ -53,6 +53,6 @@ class Users extends Base
      */
     public function get(array $params = array())
     {
-      return $this->requestObj->get($this->getPrefix() . '/' . $this->getUserId($params) . '/', $params);
+      return $this->requestObj->get($this->getPrefix() . '/' . $this->getId($params) . '/', $params);
     }
 }
