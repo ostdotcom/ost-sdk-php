@@ -80,6 +80,7 @@ Get
 
 ```php
 $getParams = array();
+$getParams['chain_id'] = '2000';
 $response = $pricePointsService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
@@ -224,8 +225,8 @@ Get User Session:
 
 ```php
 $getParams = array();
-$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
-$getParams['session_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
+$getParams['user_id'] = 'e66d9210-9f47-4bdf-ab49-34d5ca2edb9b';
+$getParams['session_address'] = '0xa1469a86cc980b43119de1223209f03e66cb3c18';
 $response = $sessionService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
