@@ -305,7 +305,10 @@ $rawCallData = array();
 $transferTo = array("0x121eff5d65d6861c3865c655616f53bd8957643e", "0x121eff5d65d6861c3865c655616f53bd8957643e");
 $transferAmount = array("150000000000000000", "100000000000000000");
 $rawCallData['method'] = 'pay';
-$rawCallData['parameters'] = array($transferTo, $transferAmount);
+$tokenHolderSender = '0xa9632350057c2226c5a10418b1c3bc9acdf7e2ee';
+$payCurrencyCode = 'USD';
+$ostToUsdInWei = '23757000000000000'; // get price-point response
+$rawCallData['parameters'] = array($tokenHolderSender, $transferTo, $transferAmount, $payCurrencyCode, $ostToUsdInWei);
 $executeParams['raw_calldata'] = json_encode($rawCallData);
 //$executeParams['meta_property', $metaPropertyParams];
 $response = $transactionService->execute($executeParams)->wait();
