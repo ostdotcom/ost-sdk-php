@@ -102,14 +102,14 @@ To register users with KIT, you can use the services provided in the Users modul
 Initialize a Users object to perform user-specific actions, like creating users:
 
 ```php
-$userService = $ostObj->services->users;
+$usersService = $ostObj->services->users;
 ```
 
 Create a User with KIT:
 
 ```php
 $createParams = array();
-$response = $userService->create($createParams)->wait();
+$response = $usersService->create($createParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -118,7 +118,7 @@ Get User Detail:
 ```php
 $getParams = array();
 $getParams['user_id'] = '6e4bfe87-f32f-4eae-8d5b-fde08c33a955';
-$response = $userService->get($getParams)->wait();
+$response = $usersService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -128,7 +128,7 @@ Get Users List:
 $getParams = array();
 //$getParams['ids'] = array('91263ebd-6b2d-4001-b732-4024430ca758', '45673ebd-6b2d-4001-b732-4024430ca758');
 //$getParams['limit'] = 10;
-$response = $userService->getList($getParams)->wait();
+$response = $usersService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -144,7 +144,7 @@ Initialize a Devices object to perform device-specific actions,
 like registering devices:
 
 ```php
-$deviceService = $ostObj->services->devices;
+$devicesService = $ostObj->services->devices;
 ```
 
 Create a Device for User:
@@ -156,7 +156,7 @@ $createParams['address'] = '0xbE8b3Fa4133E77e72277aF6b3Ea7BB3750511B88';
 $createParams['api_signer_address'] = '0xA9C90F80F96D9b896ae5aC3248b64348984aa7bC';
 $createParams['device_uuid'] = '593a967f-87bd-49a6-976c-52edf46c4df4';
 $createParams['device_name'] = 'Iphone S';
-$response = $deviceService->create($createParams)->wait();
+$response = $devicesService->create($createParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -168,7 +168,7 @@ $getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
 //$getParams['pagination_identifier'] = 'eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InVpZCI6eyJTIjoiZDE5NGFhNzUtYWNkNS00ZjQwLWIzZmItZTczYTdjZjdjMGQ5In0sIndhIjp7IlMiOiIweDU4YjQxMDY0NzQ4OWI4ODYzNTliNThmZTIyMjYwZWIxOTYwN2IwZjYifX19';
 //$getParams['addresses'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
 //$getParams['limit'] = 10;
-$response = $deviceService->getList($getParams)->wait();
+$response = $devicesService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -178,7 +178,7 @@ Get User Device Detail:
 $getParams = array();
 $getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
 $getParams['device_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
-$response = $deviceService->get($getParams)->wait();
+$response = $devicesService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -226,7 +226,7 @@ contract can have multiple authorized session keys.
 To get information about a user’s session keys, use services provided in the Sessions module.
 
 ```php
-$sessionService = $ostObj->services->sessions;
+$sessionsService = $ostObj->services->sessions;
 ```
 
 Get User Sessions List:
@@ -237,7 +237,7 @@ $getParams['user_id'] = 'e50e252c-318f-44a5-b586-9a9ea1c41c15';
 //$getParams['pagination_identifier'] = 'eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InVpZCI6eyJTIjoiZDE5NGFhNzUtYWNkNS00ZjQwLWIzZmItZTczYTdjZjdjMGQ5In0sIndhIjp7IlMiOiIweDU4YjQxMDY0NzQ4OWI4ODYzNTliNThmZTIyMjYwZWIxOTYwN2IwZjYifX19';
 //$getParams['addresses'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
 //$getParams['limit'] = 10;
-$response = $sessionService->getList($getParams)->wait();
+$response = $sessionsService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -247,7 +247,7 @@ Get User Session Detail:
 $getParams = array();
 $getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
 $getParams['session_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
-$response = $sessionService->get($getParams)->wait();
+$response = $sessionsService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -285,7 +285,7 @@ module, you will know what data is required to execute transfers
 with a token rule using the services provided in the Transaction module.
 
 ```php
-$transactionService = $ostObj->services->transactions;
+$transactionsService = $ostObj->services->transactions;
 ```
 
 Execute Transaction DIRECT-TRANSFERS:
@@ -306,7 +306,7 @@ $rawCallData['method'] = 'directTransfers';
 $rawCallData['parameters'] = array($transferTo, $transferAmount);
 $executeParams['raw_calldata'] = json_encode($rawCallData);
 //$executeParams['meta_property', $metaPropertyParams];
-$response = $transactionService->execute($executeParams)->wait();
+$response = $transactionsService->execute($executeParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -331,7 +331,7 @@ $ostToUsdInWei = '23757000000000000'; // get price-point response
 $rawCallData['parameters'] = array($tokenHolderSender, $transferTo, $transferAmount, $payCurrencyCode, $ostToUsdInWei);
 $executeParams['raw_calldata'] = json_encode($rawCallData);
 //$executeParams['meta_property', $metaPropertyParams];
-$response = $transactionService->execute($executeParams)->wait();
+$response = $transactionsService->execute($executeParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -341,7 +341,7 @@ Get Transaction Detail:
 $getParams = array();
 $getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
 $getParams['transaction_id'] = '14d11128-55c5-4ef5-b721-9e298cb83fb2';
-$response = $transactionService->get($getParams)->wait();
+$response = $transactionsService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -364,7 +364,7 @@ $getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
 //$getParams['meta_property'] = $metaPropertyArrayJsonStr;
 //$getParams['limit'] = 10;
 
-$response = $transactionService->getList($getParams)->wait();
+$response = $transactionsService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -373,7 +373,7 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 Balance services offer the functionality to view a user’s balances.
 
 ```php
-$balanceService = $ostObj->services->balances;
+$balancesService = $ostObj->services->balances;
 ```
 
 Get Balance:
@@ -381,7 +381,7 @@ Get Balance:
 ```php
 $getParams = array();
 $getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
-$response = $balanceService->get($getParams)->wait();
+$response = $balancesService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -393,8 +393,9 @@ Manager (which is a multi-signature contract) is programmed to allow replacement
 key by the recovery owner key for the user, via the DelayedRecoveryModule, which is deployed
 at the time of the creation of the user's initial wallet.
 
-To fetch the recoveryOwner address for a particular user, services provided in the Recovery 
-Owners Module are used.
+To fetch the recovery owner address for a particular user, use services provided 
+in the Users module. To fetch that recovery owner's information, then services 
+provided in the Recovery Owners Module are used.
 
 ```php
 $recoveryOwnersService = $ostObj->services->recoveryOwners;
@@ -417,14 +418,14 @@ by the Tokens module. You can use this service to obtain the chain ID of the aux
 chain on which the token economy is running, in addition to other information.
 
 ```php
-$tokenService = $ostObj->services->tokens;
+$tokensService = $ostObj->services->tokens;
 ```
 
 Get Token Detail:
 
 ```php
 $getParams = array();
-$response = $tokenService->get($getParams)->wait();
+$response = $tokensService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
