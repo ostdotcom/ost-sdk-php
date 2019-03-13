@@ -22,7 +22,7 @@ final class UsersTest extends ServiceTestBase
   {
     $usersService = $this->ostObj->services->users;
     $params = array();
-    $params['id'] =  $this->environmentVariables['userId'];
+    $params['user_id'] =  $this->environmentVariables['userId'];
     $response = $usersService->get($params)->wait();
     $this->isSuccessResponse($response);
   }
