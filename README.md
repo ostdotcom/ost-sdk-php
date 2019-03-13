@@ -6,37 +6,37 @@ The official [OST PHP SDK](https://dev.ost.com/).
 ## Introduction
 
 OST is a complete technology solution enabling mainstream businesses 
-to easily launch blockchain-based economies at low risk and without 
+to easily launch blockchain-based economies without 
 requiring blockchain development.
 
 At the core of OST is the concept of OST-powered Brand Tokens (BTs). 
 BTs are white-label cryptocurrency tokens running on highly scalable 
-Ethereum-based side blockchains, backed by staking OST Tokens into smart 
+Ethereum-based side blockchains, backed by staking OST tokens into smart 
 contracts on Ethereum mainnet. BTs can only be transferred to whitelisted 
 user addresses within a business’s community. This ensures that they stay 
 within a specific BT community.
 
 The OST technology stack is designed to give businesses everything they need 
-to integrate, test, and deploy BTs.Within the OST suite of products developers 
-can use OST KIT to create, test and launch Branded Tokens backed by OST. 
+to integrate, test, and deploy BTs. Within the OST suite of products, developers 
+can use OST KIT to create, test, and launch Brand Tokens backed by OST. 
 
-OST APIs and Server Side SDKs make it simple and easy for developers to 
+OST APIs and server-side SDKs make it simple and easy for developers to 
 integrate blockchain tokens into their apps.
 
 ## Advantages
 
-Using the OST SDKs provides a number of advantages
-* Simplicity: The SDKs reduce the complexity of integration by handling multiple authentication scenarios automatically. This means that the appropriate method call will be to minimize the end-user interactions.
-* Performance: Caching, key management and nonce management ensure that end-users overall experience is improved.
-* Security: Separating the Server Side API interactions from the client ensures that user's private keys are generated and stored securely on the user's device and not shared across the network.
+Using the OST SDKs provides a number of advantages.
+* Simplicity: The SDKs reduce the complexity of integration by handling multiple authentication scenarios automatically, minimizing interactions required by users of your application.
+* Performance: Caching, key management, and nonce management ensure that users' overall experience is improved.
+* Security: Separating the server-side API interactions from the client ensures that a user's private keys are generated and stored securely on the user's device and not shared across the network.
 
 
 ## Requirements
 
-Integrating OST SDK into your application can begin as soon as you create an account, 
-with OST KIT requiring only three steps:
+Integrating an OST SDK into your application can begin as soon as you create an account 
+with OST KIT, requiring only three steps:
 1. Sign-up on [https://kit.ost.com](https://kit.ost.com).
-2. Create your branded token in OST KIT.
+2. Create your Brand Token in OST KIT.
 3. Obtain an API Key and API Secret from [https://kit.ost.com/mainnet/developer](https://kit.ost.com/mainnet/developer).
 
 ## Documentation
@@ -57,7 +57,7 @@ Install the latest stable version of the SDK:
 > php composer.phar require ostdotcom/ost-sdk-php
 ```
 
-## Example Usage
+## Getting Started
 
 Require the Composer autoloader:
 
@@ -65,10 +65,9 @@ Require the Composer autoloader:
 require 'vendor/autoload.php';
 ```
 
-Set the following variables for convenience :
+Set the following variables for convenience:
 
 ```php
-
 $params = array();
 $params['apiKey']='';
 $params['apiSecret']='';
@@ -84,28 +83,30 @@ $ostObj = new OSTSdk($params);
 
 ```
 
-### Users Module 
+## SDK Modules
 
-Given that Brand Tokens are valuable to users,  if their private 
+Given that Brand Tokens are valuable to users, if their private 
 keys are compromised it could result in the user being unable to 
-access their tokens. To tackle this OST promotes a mobile-first 
-approach and provides mobile(client) and server SDKs. 
+access their tokens. To tackle this, OST promotes a mobile-first 
+approach and provides mobile (client) and server SDKs. 
 
 
-* The server SDKs enable you to register users with KIT server.
-* The client SDKs provides the additional support required for 
-the ownership and management of Brand Tokens by end users so 
+* The server SDKs enable you to register users with KIT.
+* The client SDKs provide the additional support required for 
+the ownership and management of Brand Tokens by users so 
 that they can create keys and control their tokens. 
 
-To register user with KIT you can use the services provided in user module. 
+### Users Module 
 
-Initialize a Users object to perform user specific actions, like creating users:
+To register users with KIT, you can use the services provided in the Users module. 
+
+Initialize a Users object to perform user-specific actions, like creating users:
 
 ```php
 $userService = $ostObj->services->users;
 ```
 
-Creating a user with KIT:
+Create a User with KIT:
 
 ```php
 $createParams = array();
@@ -122,7 +123,7 @@ $response = $userService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Get User List:
+Get Users List:
 
 ```php
 $getParams = array();
@@ -134,20 +135,20 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 
 ### Devices Module 
 
-Once a user is created via API, partner company should register 
-user’s device with KIT.  Post which they can activate user’s 
-wallet on their device. Partner company can register multiple 
-devices per user. 
+Once a user is created via the API, you can register the 
+user’s device with KIT. Next, activate the user’s 
+wallet on the user's device. Multiple devices can be 
+registered per user. 
 
 
-Initialize a Device object to perform device specific actions, 
+Initialize a Devices object to perform device-specific actions, 
 like registering devices:
 
 ```php
 $deviceService = $ostObj->services->devices;
 ```
 
-Create a device for User:
+Create a Device for User:
 
 ```php
 $createParams = array();
@@ -160,7 +161,7 @@ $response = $deviceService->create($createParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Get User Device(s) List:
+Get User Devices List:
 
 ```php
 $getParams = array();
@@ -172,7 +173,7 @@ $response = $deviceService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Get User Device:
+Get User Device Detail:
 
 ```php
 $getParams = array();
@@ -184,25 +185,26 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 
 ### Device Managers Module
 
-After  user is created and their device is registered via API,  
-a wallet can be activated. Activating a wallet involves the deployment of :
+After a user is created and their device is registered via the API, 
+their wallet can be activated. Activating a wallet involves the deployment of the following contracts:
 
-* TokenHolder contract - each user in the economy is be represented by this smart contract on blockchain.  It holde the user's balances.
-* Device Manager (Multisig contract) - This contract is configured to control the user's TokenHolder contract.
-* DelayedRecoveryModule contract - that supports recovery via a 6 digit PIN. 
+* TokenHolder - each user in the economy is represented by a TokenHolder that holds the user's token balance.
+* Device Manager (multi-signature) - this contract is configured to control the user's TokenHolder contract.
+* DelayedRecoveryModule - this contract enables recovery in the event a key is lost.
 
-In order to enable user to access their tokens i.e their TokenHolder contract 
-from multiple devices without having to share private keys across devices we 
-came up with a multi-signature contract. We refer to this entity as device 
-manager in OST APIs.
+In order to enable a user to access their tokens, i.e., interact 
+with their TokenHolder contract, from multiple devices without 
+having to share private keys across devices, a multi-signature 
+contract is employed. We refer to this entity as the Device 
+Manager in OST APIs.
 
-To get information about user’s device manager use services provided in device manager module.
+To get information about a user’s Device Manager, use services provided in the Device Managers module.
 
 ```php
 $deviceManagersService = $ostObj->services->deviceManagers;
 ```
 
-Get Token Detail:
+Get Device Manager Detail:
 
 ```php
 $getParams = array();
@@ -211,26 +213,24 @@ $response = $deviceManagersService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-### Session Module
+### Sessions Module
 
-In order to create a seamless user experience so that users don't have to 
-sign a new transaction at every move in the application we came up with 
-the concept of sessionKeys. These keys are used to sign messages on user's 
-behalf for a predetermined amount of time and with a defined maximum spending 
-limit per-transaction.
+In order to create a more seamless user experience, so that users don't have to 
+sign a new transaction at every move in the application, we use session keys. 
+These keys are authorized to sign transactions on the user's behalf 
+for a predetermined amount of time and with a defined maximum spending 
+limit per transaction.
 
-These keys are created on the mobile device from where the end user participates 
-in the economy. Each key has a corresponding public key, which in-turn has a 
-corresponding public address. User’s TokenHolder contract can have multiple 
-sessionKeys for signing messages on user’s behalf.
+These session keys are created in a user's wallet. A user’s TokenHolder 
+contract can have multiple authorized session keys.
 
-To get information about user’s session keys use services provided in session module.
+To get information about a user’s session keys, use services provided in the Sessions module.
 
 ```php
 $sessionService = $ostObj->services->sessions;
 ```
 
-Get User Session(s) List:
+Get User Sessions List:
 
 ```php
 $getParams = array();
@@ -242,7 +242,7 @@ $response = $sessionService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Get User Session:
+Get User Session Detail:
 
 ```php
 $getParams = array();
@@ -252,28 +252,26 @@ $response = $sessionService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-## For executing transactions we need to understand 3 modules listed below :
-To enable partner companies to design Rules that align with their economy goals 
-and define the behavior of the token transfer, they have the flexibility to 
-write their custom rules contract. OST has written one rule contract the 
-[PricerRule Contract](https://github.com/OpenSTFoundation/openst-contracts/blob/develop/contracts/rules/PricerRule.sol) 
-for partner companies to use.
+### Executing Transactions
 
-For executing a token transfer, end-user's TokenHolder contract interacts with Rules Contract.
+For executing transactions, you need to understand the 3 modules described below.
 
-### Rules Module
+#### Rules Module
 
-So for executing a token transfer, partner company need to start with fetching details of 
-deployed rules contract and understand the methods written within them and the corresponding 
-parameters passed in those methods.
+When executing a token transfer, a user's TokenHolder contract 
+interacts with a token rule contract. A token economy can have 
+multiple token rule contracts. To enable a user to execute a 
+token transfer, you need to start with fetching details of 
+registered rule contracts and understanding their methods and the 
+corresponding parameters passed in those methods.
 
-To get information about rules contracts deployed use services provided in rule module.
+To get information about deployed rule contracts, use services provided in the Rules module.
 
 ```php
 $rulesService = $ostObj->services->rules;
 ```
 
-List all Rules:
+List Rules:
 
 ```php
 $getParams = array();
@@ -281,11 +279,11 @@ $response = $rulesService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-### Transactions Module
+#### Transactions Module
 
-Once you’ve fetched the rule method and rule parameters to be passed using services 
-in rule module you can start with executing the transfer using the services provided 
-in transaction module.
+After reviewing the rules information received using services in the Rules 
+module, you will know what data is required to execute transfers 
+with a token rule using the services provided in the Transaction module.
 
 ```php
 $transactionService = $ostObj->services->transactions;
@@ -338,7 +336,7 @@ $response = $transactionService->execute($executeParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Get a transaction info:
+Get Transaction Detail:
 
 ```php
 $getParams = array();
@@ -348,7 +346,7 @@ $response = $transactionService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Get all transactions for a user:
+Get User Transactions:
 
 ```php
 //$metaPropertyArrayParams = array();
@@ -371,15 +369,15 @@ $response = $transactionService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-### Balances Module
+#### Balances Module
 
-Balance services offer the functionality to view user’s balances.
+Balance services offer the functionality to view a user’s balances.
 
 ```php
 $balanceService = $ostObj->services->balances;
 ```
 
-Get Balance
+Get Balance:
 
 ```php
 $getParams = array();
@@ -389,7 +387,7 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
 ### Recovery Owners Module
-End user’s brand tokens are held by a token holder contract that is controlled ("owned") 
+A user’s brand tokens are held by a token holder contract that is controlled ("owned") 
 by device manager; the device manager  is controlled ("owned") by device keys created 
 and held by the user in their wallets; and if those keys are compromised, the device 
 manager (which is a multi-signature contract) is programmed to allow replacement of a 
@@ -397,27 +395,27 @@ key by a recovery key.
 
 The DelayedRecoveryModule is deployed at the time of the creation of the wallet. The 
 recoveryOwner public-private key pair is created using inputs from the Partner, OST 
-and the user. The public addresse of the recoveryOwner is stored on this DelayedRecoveryModule 
+and the user. The public address of the recoveryOwner is stored on this DelayedRecoveryModule 
 contract.
 
 Recovering access to tokens after the owner key becomes compromised
 
-User requests recovery from partner company application by entering their 6-digit 
+User requests recovery from the application by entering their 6-digit 
 recovery PIN. Once the request has been raised user waits for defined delay which 
 is 12 hours currently.
 
 OST wallet SDK Create the recoveryOwner private key using the inputs from the Partner, 
-OST and the user.  This should exactly match the recoveryOwner that was made when the 
+OST and the user. This should exactly match the recoveryOwner that was made when the 
 wallet was initially created. 
 
-To fetch the recoveryOwner address for a particular user services provided in Recovery 
-Owner Module are used.
+To fetch the recoveryOwner address for a particular user, services provided in the Recovery 
+Owners Module are used.
 
 ```php
 $recoveryOwnersService = $ostObj->services->recoveryOwners;
 ```
 
-Get Token Detail:
+Get Recovery Owner Detail:
 
 ```php
 $getParams = array();
@@ -429,9 +427,9 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 
 ### Tokens Module
 
-To get information about the token created on the OST KIT interface use services provided 
-by token module. Partner company can use this service to know the chain id , the auxiliary 
-chain on which their economy is running apart from other information.
+To get information about the Brand Token created on the OST KIT interface, use services provided 
+by the Tokens module. You can use this service to obtain the chain ID of the auxiliary 
+chain on which the token economy is running, in addition to other information.
 
 ```php
 $tokenService = $ostObj->services->tokens;
@@ -447,14 +445,14 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 
 ### Chains Module 
 
-To get information about the auxiliary chain on which the token economy is running use services 
-provided by chain module.
+To get information about the auxiliary chain on which the token economy is running, use services 
+provided by the Chains module.
 
 ```php
 $chainsService = $ostObj->services->chains;
 ```
 
-Get 
+Get Chain Detail:
 
 ```php
 $getParams = array();
@@ -465,14 +463,14 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 
 ### Price Points Module
 
-To know the OST price point in USD and the last timestamp when it was updateds 
-use services provided by Price Point module.
+To know the OST price point in USD and when it was last updated, 
+use services provided by the Price Points module.
 
 ```php
 $pricePointsService = $ostObj->services->pricePoints;
 ```
 
-Get 
+Get Price Points Detail:
 
 ```php
 $getParams = array();
