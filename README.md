@@ -1,7 +1,7 @@
 # OST PHP SDK
 [![Build Status](https://travis-ci.org/OpenSTFoundation/ost-sdk-php.svg?branch=master)](https://travis-ci.org/OpenSTFoundation/ost-sdk-php)
 
-The official [OST PHP SDK](https://dev.ost.com/).
+The official [OST](https://dev.ost.com/) PHP SDK.
 
 ## Introduction
 
@@ -10,11 +10,11 @@ to easily launch blockchain-based economies without
 requiring blockchain development.
 
 At the core of OST is the concept of OST-powered Brand Tokens (BTs). 
-BTs are white-label cryptocurrency tokens running on highly scalable 
-Ethereum-based side blockchains, backed by staking OST tokens into smart 
-contracts on Ethereum mainnet. BTs can only be transferred to whitelisted 
-user addresses within a business’s community. This ensures that they stay 
-within a specific BT community.
+BTs are white-label cryptocurrency tokens with utility representations 
+running on highly-scalable Ethereum-based side blockchains, 
+backed by OST tokens staked on Ethereum mainnet. Within a business’s 
+token economy, BTs can only be transferred to whitelisted user addresses. 
+This ensures that they stay within the token economy.
 
 The OST technology stack is designed to give businesses everything they need 
 to integrate, test, and deploy BTs. Within the OST suite of products, developers 
@@ -85,10 +85,9 @@ $ostObj = new OSTSdk($params);
 
 ## SDK Modules
 
-Given that Brand Tokens are valuable to users, if their private 
-keys are compromised it could result in the user being unable to 
-access their tokens. To tackle this, OST promotes a mobile-first 
-approach and provides mobile (client) and server SDKs. 
+If a user's private key is lost, they could lose access 
+to their tokens. To tackle this risk, OST promotes a 
+mobile-first approach and provides mobile (client) and server SDKs. 
 
 
 * The server SDKs enable you to register users with KIT.
@@ -387,26 +386,12 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
 ### Recovery Owners Module
-A user’s brand tokens are held by a token holder contract that is controlled ("owned") 
-by device manager; the device manager  is controlled ("owned") by device keys created 
-and held by the user in their wallets; and if those keys are compromised, the device 
-manager (which is a multi-signature contract) is programmed to allow replacement of a 
-key by a recovery key.
-
-The DelayedRecoveryModule is deployed at the time of the creation of the wallet. The 
-recoveryOwner public-private key pair is created using inputs from the Partner, OST 
-and the user. The public address of the recoveryOwner is stored on this DelayedRecoveryModule 
-contract.
-
-Recovering access to tokens after the owner key becomes compromised
-
-User requests recovery from the application by entering their 6-digit 
-recovery PIN. Once the request has been raised user waits for defined delay which 
-is 12 hours currently.
-
-OST wallet SDK Create the recoveryOwner private key using the inputs from the Partner, 
-OST and the user. This should exactly match the recoveryOwner that was made when the 
-wallet was initially created. 
+A user’s Brand Tokens are held by a TokenHolder contract that is controlled ("owned") 
+by a Device Manager; the device manager is controlled ("owned") by device keys created 
+and held by the user in their wallets; and if any of those keys is lost, the Device 
+Manager (which is a multi-signature contract) is programmed to allow replacement of a 
+key by the recovery owner key for the user, via the DelayedRecoveryModule, which is deployed
+at the time of the creation of the user's initial wallet.
 
 To fetch the recoveryOwner address for a particular user, services provided in the Recovery 
 Owners Module are used.
