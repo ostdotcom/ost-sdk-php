@@ -1,5 +1,5 @@
 # OST PHP SDK
-[![Build Status](https://travis-ci.org/OpenSTFoundation/ost-sdk-php.svg?branch=master)](https://travis-ci.org/OpenSTFoundation/ost-sdk-php)
+[![Build Status](https://travis-ci.org/ostdotcom/ost-sdk-php.svg?branch=master)](https://travis-ci.org/ostdotcom/ost-sdk-php)
 
 The official [OST](https://dev.ost.com/) PHP SDK.
 
@@ -22,14 +22,6 @@ can use OST KIT to create, test, and launch Brand Tokens backed by OST.
 
 OST APIs and server-side SDKs make it simple and easy for developers to 
 integrate blockchain tokens into their apps.
-
-## Advantages
-
-Using the OST SDKs provides a number of advantages.
-* Simplicity: The SDKs reduce the complexity of integration by handling multiple authentication scenarios automatically, minimizing interactions required by users of your application.
-* Performance: Caching, key management, and nonce management ensure that users' overall experience is improved.
-* Security: Separating the server-side API interactions from the client ensures that a user's private keys are generated and stored securely on the user's device and not shared across the network.
-
 
 ## Requirements
 
