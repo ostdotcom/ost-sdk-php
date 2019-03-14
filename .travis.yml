@@ -5,6 +5,7 @@ branches:
   only:
   - master
   - develop
+  - /^release-.*/
 notifications:
   email:
     recipients:
@@ -24,5 +25,5 @@ install:
 before_script:
   - composer update
 script:
-  - phpunit --bootstrap vendor/autoload.php tests/OSTSdkTest.php
+  - phpunit --bootstrap vendor/autoload.php tests
 after_script:

@@ -1,12 +1,43 @@
 # OST PHP SDK
-The official [OST PHP SDK](https://dev.ost.com/).
+[![Build Status](https://travis-ci.org/OpenSTFoundation/ost-sdk-php.svg?branch=master)](https://travis-ci.org/OpenSTFoundation/ost-sdk-php)
+
+The official [OST](https://dev.ost.com/) PHP SDK.
+
+## Introduction
+
+OST is a complete technology solution enabling mainstream businesses 
+to easily launch blockchain-based economies without 
+requiring blockchain development.
+
+At the core of OST is the concept of OST-powered Brand Tokens (BTs). 
+BTs are white-label cryptocurrency tokens with utility representations 
+running on highly-scalable Ethereum-based side blockchains, 
+backed by OST tokens staked on Ethereum mainnet. Within a business’s 
+token economy, BTs can only be transferred to whitelisted user addresses. 
+This ensures that they stay within the token economy.
+
+The OST technology stack is designed to give businesses everything they need 
+to integrate, test, and deploy BTs. Within the OST suite of products, developers 
+can use OST KIT to create, test, and launch Brand Tokens backed by OST. 
+
+OST APIs and server-side SDKs make it simple and easy for developers to 
+integrate blockchain tokens into their apps.
+
+## Advantages
+
+Using the OST SDKs provides a number of advantages.
+* Simplicity: The SDKs reduce the complexity of integration by handling multiple authentication scenarios automatically, minimizing interactions required by users of your application.
+* Performance: Caching, key management, and nonce management ensure that users' overall experience is improved.
+* Security: Separating the server-side API interactions from the client ensures that a user's private keys are generated and stored securely on the user's device and not shared across the network.
+
 
 ## Requirements
 
-To use this SDK, developers will need to:
+Integrating an OST SDK into your application can begin as soon as you create an account 
+with OST KIT, requiring only three steps:
 1. Sign-up on [https://kit.ost.com](https://kit.ost.com).
-2. Launch a branded token economy with the OST KIT Economy Planner.
-3. Obtain an API Key and API Secret from [https://kit.ost.com/developer-api-console](https://kit.ost.com/developer-api-console).
+2. Create your Brand Token in OST KIT.
+3. Obtain an API Key and API Secret from [https://kit.ost.com/mainnet/developer](https://kit.ost.com/mainnet/developer).
 
 ## Documentation
 
@@ -26,7 +57,7 @@ Install the latest stable version of the SDK:
 > php composer.phar require ostdotcom/ost-sdk-php
 ```
 
-## Example Usage
+## Getting Started
 
 Require the Composer autoloader:
 
@@ -34,264 +65,402 @@ Require the Composer autoloader:
 require 'vendor/autoload.php';
 ```
 
-Initialize the SDK object:
+Set the following variables for convenience:
 
 ```php
-
 $params = array();
-$params['apiKey']=API_KEY;
-$params['apiSecret']=API_SECRET;
-$params['apiBaseUrl']='https://sandboxapi.ost.com/v1.1/';
+$params['apiKey']='';
+$params['apiSecret']='';
+$params['apiBaseUrl']='';
+
+// The config field is optional
+$configParams = array();
+// This is the timeout in seconds for which the socket connection will remain open
+$configParams["timeout"] = 15;
+$params["config"] = $configParams;
 
 $ostObj = new OSTSdk($params);
 
 ```
 
+## SDK Modules
+
+If a user's private key is lost, they could lose access 
+to their tokens. To tackle this risk, OST promotes a 
+mobile-first approach and provides mobile (client) and server SDKs. 
+
+
+* The server SDKs enable you to register users with KIT.
+* The client SDKs provide the additional support required for 
+the ownership and management of Brand Tokens by users so 
+that they can create keys and control their tokens. 
+
 ### Users Module 
 
-```php
-$userService = $ostObj->services->users;
-```
+To register users with KIT, you can use the services provided in the Users module. 
 
-Create a new user:
+Initialize a Users object to perform user-specific actions, like creating users:
 
 ```php
-$createUserParams = array();
-$createUserParams['name'] = 'Test';
-$response = $userService->create($createUserParams)->wait();
-var_dump($response);
+$usersService = $ostObj->services->users;
 ```
 
-Edit an existing user:
-
-```php
-$editUserParams = array();
-$editUserParams['name'] = 'Bob';
-$editUserParams['id'] = '867a5ea0-d8c1-4137-9be1-39c4549969ed';
-$response = $userService->edit($editUserParams)->wait();
-var_dump($response);
-```
-
-Get a user:
-
-```php
-$getUserParams = array();
-$getUserParams['id'] = '7ac1da33-b1d2-4f03-b39c-fbac0f1e2b92';
-$response = $userService->get($getUserParams)->wait();
-var_dump($response);
-```
-
-Get a list of users and other data:
-
-```php
-$listUserParams = array();
-$listUserParams['page_no'] = '1';
-$listUserParams['limit'] = '5';
-$listUserParams['id'] = 'a3b87254-21b7-4eaf-a2be-c368fd65c7b6,fb8e284d-e9c4-4432-a78e-74766e206d73';
-$response = $userService->getList($listUserParams)->wait();
-var_dump($response);
-```
-
-### Airdrops Module 
-
-```php
-$airdropService = $ostObj->services->airdrops;
-```
-
-Airdrop branded tokens to users:
-
-```php
-$airdropParams = array();
-$airdropParams['airdropped'] = 'false';
-$airdropParams['amount'] = '1';
-$airdropParams['user_ids'] = 'f87346e4-61f6-4d55-8cb8-234c65437b01';
-$response = $airdropService->execute($airdropParams)->wait();
-var_dump($response);
-```
-
-Get Airdrop Status:
-
-```php
-$getairdropStatusParams = array();
-$getairdropStatusParams['id'] = '7ac1da33-b1d2-4f03-b39c-fbac0f1e2b92';
-$response = $airdropService->get($getairdropStatusParams)->wait();
-var_dump($response);
-```
-
-List Airdrop:
-
-```php
-$listAirdropParams = array();
-$listAirdropParams['page_no'] = '1';
-$listAirdropParams['limit'] = '11';
-$listAirdropParams['current_status'] = 'processing,complete';
-$response = $airdropService->getList($listAirdropParams)->wait();
-var_dump($response);
-```
-
-### Actions Module 
-
-```php
-$actionService = $ostObj->services->actions;
-```
-
-Create an action:
+Create a User with KIT:
 
 ```php
 $createParams = array();
-$createParams['name'] = 'Like';
-$createParams['kind'] = 'user_to_user';
-$createParams['currency'] = 'USD';
-$createParams['arbitrary_amount'] = 'false';
-$createParams['amount'] = '1';
-$createParams['commission_percent'] = '1.1';
-$response = $actionService->create($createParams)->wait();
-var_dump($response);
+$response = $usersService->create($createParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Edit an existing action:
+Get User Detail:
 
 ```php
-$editParams = array();
-$editParams['name'] = 'Temp';
-$editParams['id'] = '22880';
-$response = $actionService->edit($editParams)->wait();
-var_dump($response);
+$getParams = array();
+$getParams['user_id'] = '6e4bfe87-f32f-4eae-8d5b-fde08c33a955';
+$response = $usersService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Get a list of existing actions and other data:
+Get Users List:
 
 ```php
-$listParams = array();
-$listParams['page_no'] = '1';
-$listParams['limit'] = '11';
-$listParams['id'] = '22880';
-$response = $actionService->getList($listParams)->wait();
-var_dump($response);
+$getParams = array();
+//$getParams['ids'] = array('91263ebd-6b2d-4001-b732-4024430ca758', '45673ebd-6b2d-4001-b732-4024430ca758');
+//$getParams['limit'] = 10;
+$response = $usersService->getList($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Get Action Detail:
+### Devices Module 
+
+Once a user is created via the API, you can register the 
+user’s device with KIT. Next, activate the user’s 
+wallet on the user's device. Multiple devices can be 
+registered per user. 
+
+
+Initialize a Devices object to perform device-specific actions, 
+like registering devices:
 
 ```php
-$getActionParams = array();
-$getActionParams['id'] = '22880';
-$response = $actionService->get($getActionParams)->wait();
-var_dump($response);
+$devicesService = $ostObj->services->devices;
 ```
 
-
-### Transactions Module 
+Create a Device for User:
 
 ```php
-$transactionService = $ostObj->services->transactions;
+$createParams = array();
+$createParams['user_id'] = '90aee630-2e7c-4fff-91cc-229bc9007ffc';
+$createParams['address'] = '0xbE8b3Fa4133E77e72277aF6b3Ea7BB3750511B88';
+$createParams['api_signer_address'] = '0xA9C90F80F96D9b896ae5aC3248b64348984aa7bC';
+$createParams['device_uuid'] = '593a967f-87bd-49a6-976c-52edf46c4df4';
+$createParams['device_name'] = 'Iphone S';
+$response = $devicesService->create($createParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Get User Devices List:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+//$getParams['pagination_identifier'] = 'eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InVpZCI6eyJTIjoiZDE5NGFhNzUtYWNkNS00ZjQwLWIzZmItZTczYTdjZjdjMGQ5In0sIndhIjp7IlMiOiIweDU4YjQxMDY0NzQ4OWI4ODYzNTliNThmZTIyMjYwZWIxOTYwN2IwZjYifX19';
+//$getParams['addresses'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
+//$getParams['limit'] = 10;
+$response = $devicesService->getList($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Get User Device Detail:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$getParams['device_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
+$response = $devicesService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+### Device Managers Module
+
+After a user is created and their device is registered via the API, 
+their wallet can be activated. Activating a wallet involves the deployment of the following contracts:
+
+* TokenHolder - each user in the economy is represented by a TokenHolder that holds the user's token balance.
+* Device Manager (multi-signature) - this contract is configured to control the user's TokenHolder contract.
+* DelayedRecoveryModule - this contract enables recovery in the event a key is lost.
+
+In order to enable a user to access their tokens, i.e., interact 
+with their TokenHolder contract, from multiple devices without 
+having to share private keys across devices, a multi-signature 
+contract is employed. We refer to this entity as the Device 
+Manager in OST APIs.
+
+To get information about a user’s Device Manager, use services provided in the Device Managers module.
+
+```php
+$deviceManagersService = $ostObj->services->deviceManagers;
+```
+
+Get Device Manager Detail:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$response = $deviceManagersService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+### Sessions Module
+
+In order to create a more seamless user experience, so that users don't have to 
+sign a new transaction at every move in the application, we use session keys. 
+These keys are authorized to sign transactions on the user's behalf 
+for a predetermined amount of time and with a defined maximum spending 
+limit per transaction.
+
+These session keys are created in a user's wallet. A user’s TokenHolder 
+contract can have multiple authorized session keys.
+
+To get information about a user’s session keys, use services provided in the Sessions module.
+
+```php
+$sessionsService = $ostObj->services->sessions;
+```
+
+Get User Sessions List:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'e50e252c-318f-44a5-b586-9a9ea1c41c15';
+//$getParams['pagination_identifier'] = 'eyJsYXN0RXZhbHVhdGVkS2V5Ijp7InVpZCI6eyJTIjoiZDE5NGFhNzUtYWNkNS00ZjQwLWIzZmItZTczYTdjZjdjMGQ5In0sIndhIjp7IlMiOiIweDU4YjQxMDY0NzQ4OWI4ODYzNTliNThmZTIyMjYwZWIxOTYwN2IwZjYifX19';
+//$getParams['addresses'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
+//$getParams['limit'] = 10;
+$response = $sessionsService->getList($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Get User Session Detail:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$getParams['session_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
+$response = $sessionsService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+### Executing Transactions
+
+For executing transactions, you need to understand the 3 modules described below.
+
+#### Rules Module
+
+When executing a token transfer, a user's TokenHolder contract 
+interacts with a token rule contract. A token economy can have 
+multiple token rule contracts. To enable a user to execute a 
+token transfer, you need to start with fetching details of 
+registered rule contracts and understanding their methods and the 
+corresponding parameters passed in those methods.
+
+To get information about deployed rule contracts, use services provided in the Rules module.
+
+```php
+$rulesService = $ostObj->services->rules;
+```
+
+List Rules:
+
+```php
+$getParams = array();
+$response = $rulesService->getList($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+#### Transactions Module
+
+After reviewing the rules information received using services in the Rules 
+module, you will know what data is required to execute transfers 
+with a token rule using the services provided in the Transaction module.
+
+```php
+$transactionsService = $ostObj->services->transactions;
+```
+
+Execute Transaction DIRECT-TRANSFERS:
+
+```php
+//$metaPropertyParams = array();
+//$metaPropertyParams['name'] = 'transaction_name'; //like, download IMP : Max length 25 characters (numbers alphabets spaces _ - allowed)
+//$metaPropertyParams['type'] = 'user_to_user'; // user_to_user, company_to_user, user_to_company
+//$metaPropertyParams['details'] = ''; // memo field to add additional info about the transaction .  IMP : Max length 120 characters (numbers alphabets spaces _ - allowed)
+
+$executeParams = array();
+$executeParams['user_id'] = '6e4bfe87-f32f-4eae-8d5b-fde08c33a955';
+$executeParams['to'] = '0xea2dffffdddec5a6ecf208be4dc9f50cbba4a678';
+$rawCallData = array();
+$transferTo = array("0x121eff5d65d6861c3865c655616f53bd8957643e", "0x121eff5d65d6861c3865c655616f53bd8957643e");
+$transferAmount = array("5", "5");
+$rawCallData['method'] = 'directTransfers';
+$rawCallData['parameters'] = array($transferTo, $transferAmount);
+$executeParams['raw_calldata'] = json_encode($rawCallData);
+//$executeParams['meta_property', $metaPropertyParams];
+$response = $transactionsService->execute($executeParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Execute Transaction PAY:
+
+```php
+//$metaPropertyParams = array();
+//$metaPropertyParams['name'] = 'transaction_name'; //like, download IMP : Max length 25 characters (numbers alphabets spaces _ - allowed)
+//$metaPropertyParams['type'] = 'user_to_user'; // user_to_user, company_to_user, user_to_company
+//$metaPropertyParams['details'] = ''; // memo field to add additional info about the transaction .  IMP : Max length 120 characters (numbers alphabets spaces _ - allowed)
+
+$executeParams = array();
+$executeParams['user_id'] = '6e4bfe87-f32f-4eae-8d5b-fde08c33a955';
+$executeParams['to'] = '0xfcaab39f8d14cfa332d4b875444ce0547c90792d';
+$rawCallData = array();
+$transferTo = array("0x121eff5d65d6861c3865c655616f53bd8957643e", "0x121eff5d65d6861c3865c655616f53bd8957643e");
+$transferAmount = array("150000000000000000", "100000000000000000");
+$rawCallData['method'] = 'pay';
+$tokenHolderSender = '0xa9632350057c2226c5a10418b1c3bc9acdf7e2ee';
+$payCurrencyCode = 'USD';
+$ostToUsdInWei = '23757000000000000'; // get price-point response
+$rawCallData['parameters'] = array($tokenHolderSender, $transferTo, $transferAmount, $payCurrencyCode, $ostToUsdInWei);
+$executeParams['raw_calldata'] = json_encode($rawCallData);
+//$executeParams['meta_property', $metaPropertyParams];
+$response = $transactionsService->execute($executeParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
 Get Transaction Detail:
 
 ```php
 $getParams = array();
-$getParams['id'] = 'ee50f777-1d39-4196-adf8-3021ecc9d852';
-$response = $transactionService->get($getParams)->wait();
-var_dump($response);
+$getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
+$getParams['transaction_id'] = '14d11128-55c5-4ef5-b721-9e298cb83fb2';
+$response = $transactionsService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Get Transaction List:
+Get User Transactions:
 
 ```php
-$listParams = array();
-$listParams['page_no'] = '1';
-$listParams['limit'] = '11';
-$listParams['id'] = 'ee50f777-1d39-4196-adf8-3021ecc9d852';
-$response = $transactionService->getList($listParams)->wait();
-var_dump($response);
+//$metaPropertyArrayParams = array();
+//$metaPropertyArrayParams['name'] = 'transaction_name'; //like, download IMP : Max length 25 characters (numbers alphabets spaces _ - allowed)
+//$metaPropertyArrayParams['type'] = 'user_to_user'; // user_to_user, company_to_user, user_to_company
+//$metaPropertyArrayParams['details'] = 'test'; // memo field to add additional info about the transaction .  IMP : Max length 120 characters (numbers alphabets spaces _ - allowed)
+//$metaPropertyArray = array($metaPropertyArrayParams);
+//$metaPropertyArrayJsonStr = json_encode($metaPropertyArray);
+
+//$statusArray = array('CREATED', 'SUBMITTED', 'SUCCESS', 'FAILED');
+
+$getParams = array();
+$getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
+
+//$getParams['status'] = $statusArray;
+//$getParams['meta_property'] = $metaPropertyArrayJsonStr;
+//$getParams['limit'] = 10;
+
+$response = $transactionsService->getList($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Execute a Transaction:
+#### Balances Module
+
+Balance services offer the functionality to view a user’s balances.
 
 ```php
-$executeParams = array();
-$executeParams['from_user_id'] = 'f87346e4-61f6-4d55-8cb8-234c65437b01';
-$executeParams['to_user_id'] = 'c07bd853-e893-4400-b7e8-c358cfa05d85';
-$executeParams['action_id'] = '20145';
-$response = $transactionService->execute($executeParams)->wait();
-var_dump($response);
+$balancesService = $ostObj->services->balances;
 ```
 
-### Token Module 
+Get Balance:
 
 ```php
-$tokenService = $ostObj->services->token;
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$response = $balancesService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+### Recovery Owners Module
+A user’s Brand Tokens are held by a TokenHolder contract that is controlled ("owned") 
+by a Device Manager; the device manager is controlled ("owned") by device keys created 
+and held by the user in their wallets; and if any of those keys is lost, the Device 
+Manager (which is a multi-signature contract) is programmed to allow replacement of a 
+key by the recovery owner key for the user, via the DelayedRecoveryModule, which is deployed
+at the time of the creation of the user's initial wallet.
+
+To fetch the recovery owner address for a particular user, use services provided 
+in the Users module. To fetch that recovery owner's information, then services 
+provided in the Recovery Owners Module are used.
+
+```php
+$recoveryOwnersService = $ostObj->services->recoveryOwners;
+```
+
+Get Recovery Owner Detail:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$getParams['recovery_owner_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
+$response = $recoveryOwnersService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+### Tokens Module
+
+To get information about the Brand Token created on the OST KIT interface, use services provided 
+by the Tokens module. You can use this service to obtain the chain ID of the auxiliary 
+chain on which the token economy is running, in addition to other information.
+
+```php
+$tokensService = $ostObj->services->tokens;
 ```
 
 Get Token Detail:
 
 ```php
 $getParams = array();
-$response = $tokenService->get($getParams)->wait();
-var_dump($response);
+$response = $tokensService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-### Transfers Module 
+### Chains Module 
+
+To get information about the auxiliary chain on which the token economy is running, use services 
+provided by the Chains module.
 
 ```php
-$transferService = $ostObj->services->transfers;
+$chainsService = $ostObj->services->chains;
 ```
 
-Get Transfer Detail:
-
-```php
-$getParams = array();
-$getParams['id'] = 'ad03a99e-e7c4-4f5a-9fab-ef9a3e422621';
-$response = $transferService->get($getParams)->wait();
-var_dump($response);
-```
-
-Get Transfer List:
-
-```php
-$listParams = array();
-$listParams['page_no'] = '1';
-$listParams['limit'] = '11';
-$response = $transferService->getList($listParams)->wait();
-var_dump($response);
-```
-
-Execute a Transfer:
-
-```php
-$executeParams = array();
-$executeParams['to_address'] = '0xF65E3C06b973a226f9e9B2960d7acdB8fdF9a331';
-$executeParams['amount'] = '1';
-$response = $transferService->execute($executeParams)->wait();
-var_dump($response);
-```
-
-### Balance Module 
-
-```php
-$balanceService = $ostObj->services->balances;
-```
-Get User balance:
+Get Chain Detail:
 
 ```php
 $getParams = array();
-$getParams['id'] = 'ad03a99e-e7c4-4f5a-9fab-ef9a3e422621';
-$response = $balanceService->get($getParams)->wait();
-var_dump($response);
+$getParams['chain_id'] = '2000';
+$response = $chainsService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-### Ledger Module
+### Price Points Module
+
+To know the OST price point in USD and when it was last updated, 
+use services provided by the Price Points module.
 
 ```php
-$ledgerService = $ostObj->services->ledger;
+$pricePointsService = $ostObj->services->pricePoints;
 ```
 
-Get User Ledger:
+Get Price Points Detail:
 
 ```php
 $getParams = array();
-$getParams['id'] = 'ad03a99e-e7c4-4f5a-9fab-ef9a3e422621';
-$response = $ledgerService->get($getParams)->wait();
-var_dump($response);
+$getParams['chain_id'] = '2000';
+$response = $pricePointsService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
 ```
-
