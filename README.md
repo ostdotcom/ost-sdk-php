@@ -1,5 +1,5 @@
 # OST PHP SDK
-[![Build Status](https://travis-ci.org/OpenSTFoundation/ost-sdk-php.svg?branch=master)](https://travis-ci.org/OpenSTFoundation/ost-sdk-php)
+[![Build Status](https://travis-ci.org/ostdotcom/ost-sdk-php.svg?branch=master)](https://travis-ci.org/ostdotcom/ost-sdk-php)
 
 The official [OST](https://dev.ost.com/) PHP SDK.
 

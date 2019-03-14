@@ -7,7 +7,7 @@
   "license": "MIT",
   "support": {
     "forum": "https://help.ost.com/",
-    "issues": "https://github.com/OpenSTFoundation/ost-sdk-php/issues"
+    "issues": "https://github.com/ostdotcom/ost-sdk-php/issues"
   },
   "require": {
     "php": ">=5.5.0",
