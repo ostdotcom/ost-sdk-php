@@ -152,6 +152,16 @@ $response = $devicesService->create($createParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
+Get User Device Detail:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$getParams['device_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
+$response = $devicesService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
 Get User Devices List:
 
 ```php
@@ -161,16 +171,6 @@ $getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
 //$getParams['addresses'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
 //$getParams['limit'] = 10;
 $response = $devicesService->getList($getParams)->wait();
-echo json_encode($response, JSON_PRETTY_PRINT);
-```
-
-Get User Device Detail:
-
-```php
-$getParams = array();
-$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
-$getParams['device_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
-$response = $devicesService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -221,6 +221,16 @@ To get information about a user’s session keys, use services provided in the S
 $sessionsService = $ostObj->services->sessions;
 ```
 
+Get User Session Detail:
+
+```php
+$getParams = array();
+$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
+$getParams['session_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
+$response = $sessionsService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
 Get User Sessions List:
 
 ```php
@@ -230,16 +240,6 @@ $getParams['user_id'] = 'e50e252c-318f-44a5-b586-9a9ea1c41c15';
 //$getParams['addresses'] = array("0x5906ae461eb6283cf15b0257d3206e74d83a6bd4","0xab248ef66ee49f80e75266595aa160c8c1abdd5a");
 //$getParams['limit'] = 10;
 $response = $sessionsService->getList($getParams)->wait();
-echo json_encode($response, JSON_PRETTY_PRINT);
-```
-
-Get User Session Detail:
-
-```php
-$getParams = array();
-$getParams['user_id'] = 'd194aa75-acd5-4f40-b3fb-e73a7cf7c0d9';
-$getParams['session_address'] = '0x1Ea365269A3e6c8fa492eca9A531BFaC8bA1649E';
-$response = $sessionsService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
@@ -297,7 +297,7 @@ $transferAmount = array("5", "5");
 $rawCallData['method'] = 'directTransfers';
 $rawCallData['parameters'] = array($transferTo, $transferAmount);
 $executeParams['raw_calldata'] = json_encode($rawCallData);
-//$executeParams['meta_property', $metaPropertyParams];
+//$executeParams['meta_property'] = $metaPropertyParams;
 $response = $transactionsService->execute($executeParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
@@ -322,7 +322,7 @@ $payCurrencyCode = 'USD';
 $ostToUsdInWei = '23757000000000000'; // get price-point response
 $rawCallData['parameters'] = array($tokenHolderSender, $transferTo, $transferAmount, $payCurrencyCode, $ostToUsdInWei);
 $executeParams['raw_calldata'] = json_encode($rawCallData);
-//$executeParams['meta_property', $metaPropertyParams];
+//$executeParams['meta_property'] = $metaPropertyParams;
 $response = $transactionsService->execute($executeParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
@@ -344,16 +344,16 @@ Get User Transactions:
 //$metaPropertyArrayParams['name'] = 'transaction_name'; //like, download IMP : Max length 25 characters (numbers alphabets spaces _ - allowed)
 //$metaPropertyArrayParams['type'] = 'user_to_user'; // user_to_user, company_to_user, user_to_company
 //$metaPropertyArrayParams['details'] = 'test'; // memo field to add additional info about the transaction .  IMP : Max length 120 characters (numbers alphabets spaces _ - allowed)
-//$metaPropertyArray = array($metaPropertyArrayParams);
-//$metaPropertyArrayJsonStr = json_encode($metaPropertyArray);
+//$metaPropertiesArray = array($metaPropertyArrayParams);
+//$metaPropertiesArrayJsonStr = json_encode($metaPropertiesArray);
 
-//$statusArray = array('CREATED', 'SUBMITTED', 'SUCCESS', 'FAILED');
+//$statusesArray = array('CREATED', 'SUBMITTED', 'SUCCESS', 'FAILED');
 
 $getParams = array();
 $getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
 
-//$getParams['status'] = $statusArray;
-//$getParams['meta_property'] = $metaPropertyArrayJsonStr;
+//$getParams['statuses'] = $statusesArray;
+//$getParams['meta_properties'] = $metaPropertiesArrayJsonStr;
 //$getParams['limit'] = 10;
 
 $response = $transactionsService->getList($getParams)->wait();
@@ -368,7 +368,7 @@ Balance services offer the functionality to view a user’s balances.
 $balancesService = $ostObj->services->balances;
 ```
 
-Get Balance:
+Get User Balance:
 
 ```php
 $getParams = array();
