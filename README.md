@@ -297,7 +297,7 @@ $transferAmount = array("5", "5");
 $rawCallData['method'] = 'directTransfers';
 $rawCallData['parameters'] = array($transferTo, $transferAmount);
 $executeParams['raw_calldata'] = json_encode($rawCallData);
-//$executeParams['meta_property', $metaPropertyParams];
+//$executeParams['meta_property'] = $metaPropertyParams;
 $response = $transactionsService->execute($executeParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
@@ -322,7 +322,7 @@ $payCurrencyCode = 'USD';
 $ostToUsdInWei = '23757000000000000'; // get price-point response
 $rawCallData['parameters'] = array($tokenHolderSender, $transferTo, $transferAmount, $payCurrencyCode, $ostToUsdInWei);
 $executeParams['raw_calldata'] = json_encode($rawCallData);
-//$executeParams['meta_property', $metaPropertyParams];
+//$executeParams['meta_property'] = $metaPropertyParams;
 $response = $transactionsService->execute($executeParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
@@ -344,16 +344,16 @@ Get User Transactions:
 //$metaPropertyArrayParams['name'] = 'transaction_name'; //like, download IMP : Max length 25 characters (numbers alphabets spaces _ - allowed)
 //$metaPropertyArrayParams['type'] = 'user_to_user'; // user_to_user, company_to_user, user_to_company
 //$metaPropertyArrayParams['details'] = 'test'; // memo field to add additional info about the transaction .  IMP : Max length 120 characters (numbers alphabets spaces _ - allowed)
-//$metaPropertyArray = array($metaPropertyArrayParams);
-//$metaPropertyArrayJsonStr = json_encode($metaPropertyArray);
+//$metaPropertiesArray = array($metaPropertyArrayParams);
+//$metaPropertiesArrayJsonStr = json_encode($metaPropertiesArray);
 
-//$statusArray = array('CREATED', 'SUBMITTED', 'SUCCESS', 'FAILED');
+//$statusesArray = array('CREATED', 'SUBMITTED', 'SUCCESS', 'FAILED');
 
 $getParams = array();
 $getParams['user_id'] = '0ed0ee05-d647-4c11-93ca-4a08702c00af';
 
-//$getParams['status'] = $statusArray;
-//$getParams['meta_property'] = $metaPropertyArrayJsonStr;
+//$getParams['statuses'] = $statusesArray;
+//$getParams['meta_properties'] = $metaPropertiesArrayJsonStr;
 //$getParams['limit'] = 10;
 
 $response = $transactionsService->getList($getParams)->wait();
