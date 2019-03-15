@@ -245,7 +245,7 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 
 ### Executing Transactions
 
-For executing transactions, you need to understand the 3 modules described below.
+For executing transactions, you need to understand the 4 modules described below.
 
 #### Rules Module
 
@@ -269,6 +269,25 @@ $getParams = array();
 $response = $rulesService->getList($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
+
+#### Price Points Module
+
+To know the OST price point in USD and when it was last updated, 
+use services provided by the Price Points module.
+
+```php
+$pricePointsService = $ostObj->services->pricePoints;
+```
+
+Get Price Points Detail:
+
+```php
+$getParams = array();
+$getParams['chain_id'] = '2000';
+$response = $pricePointsService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
 
 #### Transactions Module
 
@@ -436,23 +455,5 @@ Get Chain Detail:
 $getParams = array();
 $getParams['chain_id'] = '2000';
 $response = $chainsService->get($getParams)->wait();
-echo json_encode($response, JSON_PRETTY_PRINT);
-```
-
-### Price Points Module
-
-To know the OST price point in USD and when it was last updated, 
-use services provided by the Price Points module.
-
-```php
-$pricePointsService = $ostObj->services->pricePoints;
-```
-
-Get Price Points Detail:
-
-```php
-$getParams = array();
-$getParams['chain_id'] = '2000';
-$response = $pricePointsService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
