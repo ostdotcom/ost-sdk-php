@@ -61,8 +61,6 @@ final class DevicesTest extends ServiceTestBase
     $params['user_id'] =  $this->environmentVariables['userId'];
     $params['address'] =  $this->generateRandomAddress();
     $params['api_signer_address'] =  $this->generateRandomAddress();
-    $params['device_uuid'] =  "29f57b59-60af-4579-9d6c-2ebcb36a9142";
-    $params['device_name'] =  "Iphone S";
     $response = $devicesService->create($params)->wait();
     $this->isSuccessResponse($response);
   }
