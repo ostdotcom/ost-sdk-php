@@ -146,8 +146,6 @@ $createParams = array();
 $createParams['user_id'] = '90aee630-2e7c-4fff-91cc-229bc9007ffc';
 $createParams['address'] = '0xbE8b3Fa4133E77e72277aF6b3Ea7BB3750511B88';
 $createParams['api_signer_address'] = '0xA9C90F80F96D9b896ae5aC3248b64348984aa7bC';
-$createParams['device_uuid'] = '593a967f-87bd-49a6-976c-52edf46c4df4';
-$createParams['device_name'] = 'Iphone S';
 $response = $devicesService->create($createParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
