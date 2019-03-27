@@ -4,3 +4,4 @@ composer.lock
 .idea
 .env
 .env.example
+composer.phar

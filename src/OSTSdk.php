@@ -18,33 +18,67 @@ class OSTSdk
    * @param array $params Array containing the necessary params {
    * @type string $apiKey API Key.
    * @type string $apiSecret API Secret.
-   * @type string $baseUrl Base API URL.
+   * @type string $apiBaseUrl Base API URL.
    * }
    *
    * @throws \Exception
    */
   public function __construct(array $params)
   {
-    if (isset($params) && isset($params['apiBaseUrl'])) {
-      // Extract API version
-      $explodedParams = explode('/', $params['apiBaseUrl']);
-      $apiEndpointVersion = count($explodedParams) > 3 ? $explodedParams[3] : '';
 
-      # Provide access to version specific API endpoints
-      if (null === $apiEndpointVersion || $apiEndpointVersion === '') {
-        $this->services = new \OST\V0\Manifest($params);
-      } elseif (strtolower($apiEndpointVersion) === 'v1') {
-        $this->services = new \OST\V1\Manifest($params);
-      } elseif (strtolower($apiEndpointVersion) === 'v1.1') {
-        $this->services = new \OST\V1_1\Manifest($params);
-      } else {
-        throw new \Exception('Api endpoint is invalid');
-      }
+    if (!isset($params)) {
+      $message = 'Params missing. Did you forget to set params?';
+      $this->throwException($message);
+    } elseif (!isset($params['apiKey'])) {
+      $message = 'Params missing. Did you forget to set apiKey in params?';
+      $this->throwException($message);
+    } elseif (!isset($params['apiBaseUrl'])) {
+      $message = 'Params missing. Did you forget to set apiBaseUrl in params?';
+      $this->throwException($message);
+    } elseif (!isset($params['apiSecret'])) {
+      $message = 'Params missing. Did you forget to set apiSecret in params?';
+      $this->throwException($message);
+    } elseif (!$this->validateApiBaseUrl($params['apiBaseUrl'])) {
+      $message = 'Invalid Api Base Url. It should match regex: ' . $this->apiBaseUrlRegex();
+      $this->throwException($message);
     } else {
-        throw new \Exception('API base URL is missing. Did you forget to include it in the OSTSdk params?');
+      $this->services = new \OST\Manifest($params);
     }
 
   }
 
+  /**
+   * Throw exception
+   *
+   * @param string $message
+   *
+   * @throws \Exception
+   */
+  private function throwException($message) {
+    throw new Exception($message);
+  }
+
+  /**
+   * Validate API Base URL
+   *
+   * @param string $apiBaseUrl
+   *
+   * @return boolean
+   */
+  private function validateApiBaseUrl($apiBaseUrl) {
+    $matchResponse = preg_match($this->apiBaseUrlRegex(), $apiBaseUrl);
+    return $matchResponse == 1;
+  }
+
+  /**
+   * Validate API Base URL
+   *
+   * @param string $apiBaseUrl
+   *
+   * @return string
+   */
+  private function apiBaseUrlRegex() {
+    return "/^.*(testnet|mainnet)\/v2\/?$/";
+  }
 
 }

@@ -1,18 +1,18 @@
 <?php
 /**
- * Token class
+ * Tokens class
  */
 
-namespace OST\V1;
+namespace OST;
 
 use OST\Base;
 
 /**
- * Class encapsulating methods to interact with V1 API's for Token module
+ * Class encapsulating methods to interact with API's for Tokens module
  */
-class Token extends Base
+class Tokens extends Base
 {
-    const PREFIX = '/token';
+    const PREFIX = '/tokens';
 
     /**
      * Get token details
@@ -24,6 +24,6 @@ class Token extends Base
      */
     public function get(array $params = array())
     {
-        return $this->requestObj->get($this->getPrefix() . '/', $params);
+        return $this->requestObj->get($this->getPrefix() . '', $params);
     }
 }

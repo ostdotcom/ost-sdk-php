@@ -5,9 +5,15 @@
   "keywords": ["ost","simpletoken","sdk","php"],
   "type": "library",
   "license": "MIT",
+  "authors": [
+    {
+      "name": "OST.COM LTD."
+    }
+  ],
   "support": {
+    "wiki": "https://dev.ost.com/",
     "forum": "https://help.ost.com/",
-    "issues": "https://github.com/OpenSTFoundation/ost-sdk-php/issues"
+    "issues": "https://github.com/ostdotcom/ost-sdk-php/issues"
   },
   "require": {
     "php": ">=5.5.0",

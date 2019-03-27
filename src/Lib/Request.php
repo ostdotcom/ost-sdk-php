@@ -27,6 +27,7 @@ class Request
      * @type string $apiKey API Key.
      * @type string $apiSecret API Secret.
      * @type string $baseUrl Base API URL.
+     * @type int $timeout Timeout For Socket Connection.
      * }
      *
      * @throws \Exception
@@ -46,6 +47,13 @@ class Request
         $this->apiSecret = $params['apiSecret'];
 
         $this->baseUrl = $this->sanitizeApiBaseUrl($params['apiBaseUrl']);
+        $this->timeout = 10;
+        if (array_key_exists("config", $params)) {
+          $config = $params["config"];
+          if (array_key_exists("timeout", $config) && is_array($config)) {
+            $this->timeout = $config["timeout"];
+          }
+        }
 
     }
 
@@ -62,9 +70,10 @@ class Request
     {
         $argsCopy = $this->copyAndSanitizeArgs($arguments);
 
-        // build Path to hit by appending query params and signature
-        $urlPath = $endpoint . '?' . http_build_query($argsCopy, '', '&');
-        $urlPath = $urlPath . '&signature=' . hash_hmac('sha256', $urlPath, $this->apiSecret);
+        // build Path to hit by appending query params and api_signature
+        $stringToSign = $endpoint . '?' . $argsCopy;
+
+        $urlPath = $stringToSign . '&api_signature=' . $this->getSignature($stringToSign);
 
         /** @var Promise $promise */
         $promise = $this->getRequestClient()->getAsync(substr($urlPath, 1), $this->getCommonRequestParams());
@@ -72,11 +81,15 @@ class Request
         return $promise->then(
         // $onFulfilled
             function ($response) {
-                return $this->parseResponse($response);
+              return $this->parseResponse($response);
             },
             // $onRejected
             function ($reason) {
+              if (get_class($reason) == "GuzzleHttp\Exception\ConnectException") {
+                return $this->customGenericErrorResponse('connect_exception');
+              } else {
                 return $this->customGenericErrorResponse('g_1');
+              }
             }
         );
 
@@ -96,13 +109,11 @@ class Request
         $argsCopy = $this->copyAndSanitizeArgs($arguments);
 
         // sanitize request params
-        $query = $endpoint . '?' . http_build_query($argsCopy, '', '&');
-        $query = str_replace('%5B0%5D', '[]', $query);
-
-        $argsCopy['signature'] = hash_hmac('sha256', $query, $this->apiSecret);
+        $stringToSign = $endpoint . '?' . $argsCopy;
+        $argsCopy = $argsCopy . "&api_signature=" . $this->getSignature($stringToSign);
 
         $postParams = $this->getCommonRequestParams();
-        $postParams['body'] = http_build_query($argsCopy, '', '&');
+        $postParams['body'] = $argsCopy;
 
         /** @var Promise $promise */
         $promise = $this->getRequestClient()->postAsync(substr($endpoint, 1), $postParams);
@@ -114,9 +125,26 @@ class Request
             },
             // $onRejected
             function ($reason) {
-                return $this->customGenericErrorResponse('p_1');
+              if (get_class($reason) == "GuzzleHttp\Exception\ConnectException") {
+                return $this->customGenericErrorResponse('connect_exception');
+              } else {
+                return $this->customGenericErrorResponse('g_1');
+              }
             }
         );
+    }
+
+  /**
+   * Get Signature
+   *
+   * @param string $stringToSign
+   *
+   * @return String
+   *
+   */
+    public function getSignature($stringToSign)
+    {
+      return hash_hmac('sha256', $stringToSign, $this->apiSecret);
     }
 
 
@@ -132,7 +160,7 @@ class Request
     {
 
       // append a trailing / to apiEndpoint (if required)
-      // NOTE: As Guzzle remove "v1" from base url if ending slash is not present
+      // NOTE: As Guzzle remove "v2" from base url if ending slash is not present
       if ($apiBaseUrl[strlen($apiBaseUrl) - 1] !== '/') {
         $apiBaseUrl .= '/';
       }
@@ -231,13 +259,73 @@ class Request
 
         // append basic params
         $argsCopy['api_key'] = $this->apiKey;
-        $argsCopy['request_timestamp'] = time();
+        $argsCopy['api_signature_kind'] = 'OST1-HMAC-SHA256';
+        $argsCopy['api_request_timestamp'] = time();
 
-        // sort by key name
-        ksort($argsCopy);
+        $argsCopy = $this->build_nested_query($argsCopy, '');
 
         return $argsCopy;
 
+    }
+
+    /**
+     * gives nested query string
+     *
+     * @return string
+     *
+     */
+    public function build_nested_query($array, $prefix = '')
+    {
+      if (is_array($array) || is_object($array)) {
+        if ($this->check_for_int_key($array)) {
+          $temp_array = array();
+          foreach ($array as $k => $v) {
+            array_push($temp_array, $this->build_nested_query($v, $prefix . "[]"));
+          }
+          return join("&", array_filter($temp_array));
+        } else {
+          $temp_array = array();
+          ksort($array);
+          foreach ($array as $k => $v) {
+            array_push($temp_array, $this->build_nested_query($v, $prefix ? $prefix . "[" . $k . "]" : $k));
+          }
+          return join("&", array_filter($temp_array));
+        }
+      } else {
+          return $this->escape($prefix) . "=" . $this->escape($array);
+      }
+    }
+
+    /**
+     * encodes a string to be used in a query part of a URL
+     *
+     * @return string
+     *
+     */
+    private function escape($string)
+    {
+      $escapedString = urlencode($string);
+      return str_replace("%7E", "~", $escapedString);
+    }
+
+    /**
+     * differentiate given input between array or hash
+     * (if first index of $array is integer then it is array else it is to be sent as a hash)
+     *
+     * @return string
+     *
+     */
+    private function check_for_int_key($array)
+    {
+      if (!empty($array) && (is_array($array) || is_object($array))) {
+        reset($array);
+        $first_key = key($array);
+        if (is_int($first_key)) {
+          return true;
+        } else {
+          return false;
+        }
+      }
     }
 
     /**
@@ -249,7 +337,8 @@ class Request
     private function getRequestClient()
     {
         return new Client([
-            'base_uri' => $this->baseUrl
+            'base_uri' => $this->baseUrl,
+            'timeout' => $this->timeout
         ]);
 
     }
