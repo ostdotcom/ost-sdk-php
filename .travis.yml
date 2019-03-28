@@ -3,7 +3,6 @@ language: php
 sudo: required
 branches:
   only:
-  - master
   - develop
   - /^release-.*/
 notifications:

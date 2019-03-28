@@ -68,7 +68,7 @@ $params['apiBaseUrl']='';
 // The config field is optional
 $configParams = array();
 // This is the timeout in seconds for which the socket connection will remain open
-$configParams["timeout"] = 15;
+$configParams["timeout"] = 60;
 $params["config"] = $configParams;
 
 $ostObj = new OSTSdk($params);
@@ -336,8 +336,8 @@ $transferAmount = array("150000000000000000", "100000000000000000");
 $rawCallData['method'] = 'pay';
 $tokenHolderSender = '0xa9632350057c2226c5a10418b1c3bc9acdf7e2ee';
 $payCurrencyCode = 'USD';
-$ostToUsdInWei = '23757000000000000'; // get price-point response
-$rawCallData['parameters'] = array($tokenHolderSender, $transferTo, $transferAmount, $payCurrencyCode, $ostToUsdInWei);
+$ostToUsd = '23757000000000000'; // get price-point response
+$rawCallData['parameters'] = array($tokenHolderSender, $transferTo, $transferAmount, $payCurrencyCode, $ostToUsd);
 $executeParams['raw_calldata'] = json_encode($rawCallData);
 //$executeParams['meta_property'] = $metaPropertyParams;
 $response = $transactionsService->execute($executeParams)->wait();
