@@ -47,7 +47,7 @@ class Request
         $this->apiSecret = $params['apiSecret'];
 
         $this->baseUrl = $this->sanitizeApiBaseUrl($params['apiBaseUrl']);
-        $this->timeout = 10;
+        $this->timeout = 60;
         if (array_key_exists("config", $params)) {
           $config = $params["config"];
           if (array_key_exists("timeout", $config) && is_array($config)) {
@@ -357,8 +357,8 @@ class Request
                 'Content-Type' => 'application/x-www-form-urlencoded'
             ],
             'http_errors' => false,
-            'connect_timeout' => 10,
-            'open_timeout' => 10
+            'connect_timeout' => 60,
+            'open_timeout' => 60
         ];
 
     }
