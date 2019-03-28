@@ -1,13 +1,13 @@
 {
   "name": "ostdotcom/ost-sdk-php",
-  "homepage": "https://kit.ost.com/",
-  "description": "The official OST PHP SDK",
-  "keywords": ["ost","simpletoken","sdk","php"],
+  "homepage": "https://platform.ost.com/",
+  "description": "OST Platform SDK for PHP",
+  "keywords": ["OST","Simple Token","SDK","PHP"],
   "type": "library",
   "license": "MIT",
   "authors": [
     {
-      "name": "OST.COM LTD."
+      "name": "OST.com Inc."
     }
   ],
   "support": {

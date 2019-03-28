@@ -1,7 +1,7 @@
 # OST PHP SDK
 [![Build Status](https://travis-ci.org/ostdotcom/ost-sdk-php.svg?branch=develop)](https://travis-ci.org/ostdotcom/ost-sdk-php)
 
-The official [OST](https://dev.ost.com/) PHP SDK.
+[OST](https://dev.ost.com/) Platform SDK for PHP.
 
 ## Introduction
 
