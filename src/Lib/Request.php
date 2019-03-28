@@ -357,8 +357,8 @@ class Request
                 'Content-Type' => 'application/x-www-form-urlencoded'
             ],
             'http_errors' => false,
-            'connect_timeout' => 60,
-            'open_timeout' => 60
+            'connect_timeout' => $this->timeout,
+            'open_timeout' => $this->timeout
         ];
 
     }
