@@ -1,7 +1,8 @@
 [OST PHP SDK v2.0.0](https://github.com/ostdotcom/ost-sdk-php/tree/v2.0.0) 
 ---
-* Released OST V2 API's
-* Cleaned up code for the deprecated V1 & V1.1 API's
+* OST API V2 interaction layer implementation.
+* Removed API V0 and V1 support.
+* [README.md](README.md) has API V2 usage instructions
 
 [OST PHP SDK v1.1.1](https://github.com/ostdotcom/ost-sdk-php/tree/v1.1.1)
 ---
