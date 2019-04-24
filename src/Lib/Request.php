@@ -226,8 +226,8 @@ class Request
     private function parseJsonString($strResponse)
     {
         $jsonObject = json_decode($strResponse, true);
-        var_dump("Error in JsonParse : ",$strResponse);
         if ($jsonObject === null && json_last_error() !== JSON_ERROR_NONE) {
+            var_dump("Error in JsonParse : ",$strResponse);
             $jsonObject = $this->customGenericErrorResponse('pjs_1');
         }
         return $jsonObject;
