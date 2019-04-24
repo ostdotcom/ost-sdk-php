@@ -85,6 +85,7 @@ class Request
             },
             // $onRejected
             function ($reason) {
+              var_dump("Exception in Get Request", $reason);
               if (get_class($reason) == "GuzzleHttp\Exception\ConnectException") {
                 return $this->customGenericErrorResponse('connect_exception');
               } else {
@@ -125,10 +126,11 @@ class Request
             },
             // $onRejected
             function ($reason) {
+              var_dump("Exception in Post Request", $reason);
               if (get_class($reason) == "GuzzleHttp\Exception\ConnectException") {
                 return $this->customGenericErrorResponse('connect_exception');
               } else {
-                return $this->customGenericErrorResponse('g_1');
+                return $this->customGenericErrorResponse('p_1');
               }
             }
         );
@@ -224,6 +226,7 @@ class Request
     private function parseJsonString($strResponse)
     {
         $jsonObject = json_decode($strResponse, true);
+        var_dump("Error in JsonParse : ",$strResponse);
         if ($jsonObject === null && json_last_error() !== JSON_ERROR_NONE) {
             $jsonObject = $this->customGenericErrorResponse('pjs_1');
         }
