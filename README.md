@@ -455,3 +455,21 @@ $getParams['chain_id'] = '2000';
 $response = $chainsService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
+
+### Base Tokens Module
+
+To get information about the base tokens available on the OST Platform interface, use services 
+provided by the Base Tokens module. You can use this service to obtain the base token details 
+on OST Platform interface.
+
+```php
+$baseTokensService = $ostObj->services->baseTokens;
+```
+
+Get Base Tokens Detail:
+
+```php
+$getParams = array();
+$response = $baseTokensService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
