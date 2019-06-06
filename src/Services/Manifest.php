@@ -47,6 +47,9 @@ class Manifest
     /** @var Users object which has methods to fire API's belonging to User module */
     public $users;
 
+    /** @var Webhooks object which has methods to fire API's belonging to Webhook module */
+    public $webhooks;
+
 
   /**
    * Constructor
@@ -86,6 +89,8 @@ class Manifest
     $this ->transactions = new Transactions($requestObj);
 
     $this->users = new Users($requestObj);
+
+    $this->webhooks = new Webhooks($requestObj);
 
   }
 

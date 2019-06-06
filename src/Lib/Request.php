@@ -58,7 +58,7 @@ class Request
     }
 
     /**
-     * Send a GET request
+     * Send a GET request.
      *
      * @param string $endpoint endpoint to the GET request
      * @param array $arguments optional object containing params which are to be sent across in the GET request
@@ -96,10 +96,10 @@ class Request
     }
 
     /**
-     * Send a POST request
+     * Send a POST request.
      *
-     * @param string $endpoint endpoint to the GET request
-     * @param array $arguments optional object containing params which are to be sent across in the GET request
+     * @param string $endpoint endpoint to the POST request
+     * @param array $arguments optional object containing params which are to be sent across in the POST request
      *
      * @return object
      *
@@ -117,6 +117,45 @@ class Request
 
         /** @var Promise $promise */
         $promise = $this->getRequestClient()->postAsync(substr($endpoint, 1), $postParams);
+
+        return $promise->then(
+        // $onFulfilled
+            function ($response) {
+                return $this->parseResponse($response);
+            },
+            // $onRejected
+            function ($reason) {
+              if (get_class($reason) == "GuzzleHttp\Exception\ConnectException") {
+                return $this->customGenericErrorResponse('connect_exception');
+              } else {
+                return $this->customGenericErrorResponse('g_1');
+              }
+            }
+        );
+    }
+
+    /**
+     * Send a DELETE request.
+     *
+     * @param string $endpoint endpoint to the DELETE request
+     * @param array $arguments optional object containing params which are to be sent across in the DELETE request
+     *
+     * @return object
+     *
+     */
+    public function delete($endpoint, array $arguments = array())
+    {
+        $argsCopy = $this->copyAndSanitizeArgs($arguments);
+
+        // sanitize request params
+        $stringToSign = $endpoint . '?' . $argsCopy;
+        $argsCopy = $argsCopy . "&api_signature=" . $this->getSignature($stringToSign);
+
+        $deleteParams = $this->getCommonRequestParams();
+        $deleteParams['body'] = $argsCopy;
+
+        /** @var Promise $promise */
+        $promise = $this->getRequestClient()->deleteAsync(substr($endpoint, 1), $deleteParams);
 
         return $promise->then(
         // $onFulfilled
@@ -170,7 +209,7 @@ class Request
     }
 
     /**
-     * Parse response of GET / POST requests
+     * Parse response of GET / POST / DELETE requests.
      *
      * @param object $response response obj of HTTP request
      *
@@ -279,8 +318,12 @@ class Request
       if (is_array($array) || is_object($array)) {
         if ($this->check_for_int_key($array)) {
           $temp_array = array();
-          foreach ($array as $k => $v) {
-            array_push($temp_array, $this->build_nested_query($v, $prefix . "[]"));
+          if (empty($array) && is_array($array)) {
+            array_push($temp_array, $this->build_nested_query("", $prefix . "[]"));
+          } else {
+            foreach ($array as $k => $v) {
+              array_push($temp_array, $this->build_nested_query($v, $prefix . "[]"));
+            }
           }
           return join("&", array_filter($temp_array));
         } else {
@@ -325,6 +368,10 @@ class Request
         } else {
           return false;
         }
+      } else if (empty($array) && is_array($array)) {
+        return true;
+      } else {
+        return false;
       }
     }
 
@@ -344,7 +391,7 @@ class Request
     }
 
     /**
-     * returns common params for GET & POST requests
+     * returns common params for GET, POST & DELETE requests
      *
      * @return array
      *

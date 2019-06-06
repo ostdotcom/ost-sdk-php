@@ -455,3 +455,62 @@ $getParams['chain_id'] = '2000';
 $response = $chainsService->get($getParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
+
+### Webhooks Module 
+
+To manage webhooks on the OST Platform Interface, use services provided by the Chains module. You can
+use this service to create new webhooks and manage existing webhooks.
+
+```php
+$webhooksService = $ostObj->services->webhooks;
+```
+
+Create new webhook:
+
+```php
+$createParams = array();
+$createParams['topics'] =  array("transactions/create", "transactions/success");
+$createParams['url'] =  "https://testingWebhooks.com";
+// $createParams['status'] =  "inactive";
+$response = $webhooksService->create($createParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+List all webhooks:
+
+```php
+$getParams = array();
+// $getParams['limit'] = 1;
+// $getParams['pagination_identifier'] = "eyJwYWdlIjoyLCJsaW1pdCI6MX0=";
+$response = $webhooksService->getList($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Get a webhook:
+
+```php
+$getParams = array();
+$getParams['webhook_id'] = "04ebb6be-8673-4999-8878-95ad047ddd73";
+$response = $webhooksService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Update a webhook:
+
+```php
+$updateParams = array();
+$updateParams['webhook_id'] = "04ebb6be-8673-4999-8878-95ad047ddd73";
+//$updateParams['topics'] =  array("transactions/create", "transactions/success", "transactions/failure");
+$updateParams['status'] =  "inactive";
+$response = $webhooksService->update($updateParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Delete a webhook:
+
+```php
+$deleteParams = array();
+$deleteParams['webhook_id'] = "415510fa-d57c-4c66-8c90-fd29ab7468b9";
+$response = $webhooksService->delete($deleteParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
