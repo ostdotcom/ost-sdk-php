@@ -500,7 +500,7 @@ Update a webhook:
 ```php
 $updateParams = array();
 $updateParams['webhook_id'] = "04ebb6be-8673-4999-8878-95ad047ddd73";
-//$updateParams['topics'] =  array("transactions/create", "transactions/success", "transactions/failure");
+$updateParams['topics'] =  array("transactions/create", "transactions/success", "transactions/failure");
 $updateParams['status'] =  "inactive";
 $response = $webhooksService->update($updateParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
