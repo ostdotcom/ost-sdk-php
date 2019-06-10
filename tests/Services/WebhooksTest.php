@@ -22,11 +22,11 @@ final class WebhooksTest extends ServiceTestBase
   {
     $webhooksService = $this->ostObj->services->webhooks;
     $params = array();
-    $params['topics'] =  array("transactions/create", "transactions/success");
+    $params['topics'] =  array("transactions/initiate", "transactions/success");
     $params['url'] =  "https://testingWebhooks.com";
     $response = $webhooksService->create($params)->wait();
     $this->isSuccessResponse($response);
-    putenv("WEBHOOK_ID=$response['data']['webhook']['id']")
+    putenv('WEBHOOK_ID='.$response['data']['webhook']['id']);
   }
 
   /**
@@ -75,7 +75,7 @@ final class WebhooksTest extends ServiceTestBase
       $webhooksService = $this->ostObj->services->webhooks;
       $params = array();
       $params['webhook_id'] = getenv('WEBHOOK_ID');
-      $params['topics'] =  array("transactions/create", "transactions/success", "transactions/failure");
+      $params['topics'] =  array("transactions/initiate", "transactions/success", "transactions/failure");
       $response = $webhooksService->update($params)->wait();
       $this->isSuccessResponse($response);
     }
