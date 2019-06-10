@@ -307,7 +307,7 @@ class Request
 
     }
 
-    /**
+/**
      * gives nested query string
      *
      * @return string
@@ -318,12 +318,8 @@ class Request
       if (is_array($array) || is_object($array)) {
         if ($this->check_for_int_key($array)) {
           $temp_array = array();
-          if (empty($array) && is_array($array)) {
-            array_push($temp_array, $this->build_nested_query("", $prefix . "[]"));
-          } else {
-            foreach ($array as $k => $v) {
-              array_push($temp_array, $this->build_nested_query($v, $prefix . "[]"));
-            }
+          foreach ($array as $k => $v) {
+            array_push($temp_array, $this->build_nested_query($v, $prefix . "[]"));
           }
           return join("&", array_filter($temp_array));
         } else {
@@ -368,10 +364,6 @@ class Request
         } else {
           return false;
         }
-      } else if (empty($array) && is_array($array)) {
-        return true;
-      } else {
-        return false;
       }
     }
 
