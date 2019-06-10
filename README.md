@@ -514,3 +514,18 @@ $deleteParams['webhook_id'] = "415510fa-d57c-4c66-8c90-fd29ab7468b9";
 $response = $webhooksService->delete($deleteParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
+
+Verify webhook request signature:
+
+```php
+$params = array();
+$params["version"] = "2";
+$params["webhook_secret"] = "mySecret";
+$try = array();
+$try["hello"] = "hello";
+$params["stringified_data"] = json_encode($try);
+$params["request_timestamp"] = "1559902637";
+$params["signature"] = "2c56c143550c603a6ff47054803f03ee4755c9c707986ae27f7ca1dd1c92a824";
+$response = $webhooksService->verifySignature($params);
+echo json_encode($response, JSON_PRETTY_PRINT);
+```

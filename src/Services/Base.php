@@ -159,7 +159,7 @@ abstract class Base
    * Get Value for Given Key
    *
    * @param array $params request object which would fire API calls
-   *x
+   *
    * @throws InvalidArgumentException, BadMethodCallException
    *
    * @return string

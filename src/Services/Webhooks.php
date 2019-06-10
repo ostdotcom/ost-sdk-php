@@ -80,4 +80,41 @@ class Webhooks extends Base
   {
     return $this->requestObj->delete($this->getPrefix() . '/' . $this->getWebhookId($params) . '/', $params);
   }
+  
+  /**
+   * Verify webhook request signature.
+   *
+   * @param array $params params for verifying a webhook signature.
+   *
+   * @return object
+   *
+   */
+  public function verifySignature(array $params = array())
+  {
+    $version = $params["version"];
+    $webhookSecret = $params["webhook_secret"];
+    $stringifiedData = $params["stringified_data"];
+    $requestTimestamp = $params["request_timestamp"];
+    $signature = $params["signature"];
+
+    $signatureParams = $requestTimestamp.".".$version.".".$stringifiedData;
+    $signatureToBeVerified = hash_hmac('sha256', $signatureParams, $webhookSecret);
+
+    echo json_encode($signatureToBeVerified, JSON_PRETTY_PRINT);
+
+    if(strcmp($signatureToBeVerified, $signature) == 0)
+    {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
+
+
+
+
+
+
+
+

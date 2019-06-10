@@ -97,4 +97,27 @@ final class WebhooksTest extends ServiceTestBase
       $this->isSuccessResponse($response);
     }
 
+   /**
+    *
+    * Verify webhook request signature.
+    *
+    * @test
+    *
+    * @throws Exception
+    */
+    public function verifySignature()
+    {
+      $webhooksService = $this->ostObj->services->webhooks;
+      $params = array();
+      $params["version"] = "2";
+      $params["webhook_secret"] = "mySecret";
+      $try = array();
+      $try["hello"] = "hello";
+      $params["stringified_data"] = json_encode($try);
+      $params["request_timestamp"] = "1559902637";
+      $params["signature"] = "2c56c143550c603a6ff47054803f03ee4755c9c707986ae27f7ca1dd1c92a824";
+      $response = $webhooksService->verifySignature($params);
+      $this->assertTrue($response == true);
+    }
+
 }
