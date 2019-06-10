@@ -23,7 +23,8 @@ final class WebhooksTest extends ServiceTestBase
     $webhooksService = $this->ostObj->services->webhooks;
     $params = array();
     $params['topics'] =  array("transactions/initiate", "transactions/success");
-    $params['url'] =  "https://testingWebhooks.com";
+    $currentTime = time();
+    $params['url'] =  "https://testingWebhooks.com"."/".$currentTime;
     $response = $webhooksService->create($params)->wait();
     $this->isSuccessResponse($response);
     putenv('WEBHOOK_ID='.$response['data']['webhook']['id']);
