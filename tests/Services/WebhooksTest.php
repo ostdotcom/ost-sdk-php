@@ -24,7 +24,8 @@ final class WebhooksTest extends ServiceTestBase
     $params = array();
     $params['topics'] =  array("transactions/initiate", "transactions/success");
     $currentTime = time();
-    $params['url'] =  "https://testingWebhooks.com"."/".$currentTime;
+    $version = phpversion();
+    $params['url'] =  "https://testingWebhooks.com"."/".$currentTime."/".$version;
     $response = $webhooksService->create($params)->wait();
     $this->isSuccessResponse($response);
     putenv('WEBHOOK_ID='.$response['data']['webhook']['id']);
