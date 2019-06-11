@@ -147,20 +147,18 @@ class Request
     {
         $argsCopy = $this->copyAndSanitizeArgs($arguments);
 
-        // sanitize request params
+        // build Path to hit by appending query params and api_signature
         $stringToSign = $endpoint . '?' . $argsCopy;
-        $argsCopy = $argsCopy . "&api_signature=" . $this->getSignature($stringToSign);
 
-        $deleteParams = $this->getCommonRequestParams();
-        $deleteParams['body'] = $argsCopy;
+        $urlPath = $stringToSign . '&api_signature=' . $this->getSignature($stringToSign);
 
         /** @var Promise $promise */
-        $promise = $this->getRequestClient()->deleteAsync(substr($endpoint, 1), $deleteParams);
+        $promise = $this->getRequestClient()->deleteAsync(substr($urlPath, 1), $this->getCommonRequestParams());
 
         return $promise->then(
         // $onFulfilled
             function ($response) {
-                return $this->parseResponse($response);
+              return $this->parseResponse($response);
             },
             // $onRejected
             function ($reason) {
