@@ -100,8 +100,6 @@ class Webhooks extends Base
     $signatureParams = $requestTimestamp.".".$version.".".$stringifiedData;
     $signatureToBeVerified = hash_hmac('sha256', $signatureParams, $webhookSecret);
 
-    echo json_encode($signatureToBeVerified, JSON_PRETTY_PRINT);
-
     if(strcmp($signatureToBeVerified, $signature) == 0)
     {
       return true;
