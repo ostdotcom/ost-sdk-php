@@ -482,7 +482,7 @@ use this service to create new webhooks and manage existing webhooks.
 $webhooksService = $ostObj->services->webhooks;
 ```
 
-Create new webhook:
+Create Webhook:
 
 ```php
 $createParams = array();
@@ -493,26 +493,7 @@ $response = $webhooksService->create($createParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-List all webhooks:
-
-```php
-$getParams = array();
-// $getParams['limit'] = 1;
-// $getParams['pagination_identifier'] = "eyJwYWdlIjoyLCJsaW1pdCI6MX0=";
-$response = $webhooksService->getList($getParams)->wait();
-echo json_encode($response, JSON_PRETTY_PRINT);
-```
-
-Get a webhook:
-
-```php
-$getParams = array();
-$getParams['webhook_id'] = "04ebb6be-8673-4999-8878-95ad047ddd73";
-$response = $webhooksService->get($getParams)->wait();
-echo json_encode($response, JSON_PRETTY_PRINT);
-```
-
-Update a webhook:
+Update webhook:
 
 ```php
 $updateParams = array();
@@ -523,7 +504,26 @@ $response = $webhooksService->update($updateParams)->wait();
 echo json_encode($response, JSON_PRETTY_PRINT);
 ```
 
-Delete a webhook:
+Get webhook:
+
+```php
+$getParams = array();
+$getParams['webhook_id'] = "04ebb6be-8673-4999-8878-95ad047ddd73";
+$response = $webhooksService->get($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Get webhook List:
+
+```php
+$getParams = array();
+// $getParams['limit'] = 1;
+// $getParams['pagination_identifier'] = "eyJwYWdlIjoyLCJsaW1pdCI6MX0=";
+$response = $webhooksService->getList($getParams)->wait();
+echo json_encode($response, JSON_PRETTY_PRINT);
+```
+
+Delete webhook:
 
 ```php
 $deleteParams = array();
@@ -536,12 +536,15 @@ Verify webhook request signature:
 
 ```php
 $params = array();
-$params["version"] = "2";
+// Get webhoook version from webhook events data.
+$params["version"] = "v2";
 $params["webhook_secret"] = "mySecret";
 $data = array();
 $data["hello"] = "hello";
 $params["stringified_data"] = json_encode($data);
+// Get ost-timestamp from the response received in event.
 $params["request_timestamp"] = "1559902637";
+// Get signature from the response received in event.
 $params["signature"] = "2c56c143550c603a6ff47054803f03ee4755c9c707986ae27f7ca1dd1c92a824";
 $response = $webhooksService->verifySignature($params);
 echo json_encode($response, JSON_PRETTY_PRINT);
