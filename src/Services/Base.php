@@ -144,10 +144,22 @@ abstract class Base
   }
 
   /**
+   * getWebhookId from params array
+   *
+   * @param array $params request object which would fire API calls
+   *
+   * @return string
+   */
+  protected function getWebhookId(array $params)
+  {
+    return $this->getValueForKey($params, "webhook_id");
+  }
+
+  /**
    * Get Value for Given Key
    *
    * @param array $params request object which would fire API calls
-   *x
+   *
    * @throws InvalidArgumentException, BadMethodCallException
    *
    * @return string
