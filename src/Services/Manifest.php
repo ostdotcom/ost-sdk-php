@@ -50,6 +50,9 @@ class Manifest
     /** @var BaseTokens object which has methods to fire API's belonging to Base Tokens module */
     public $baseTokens;
 
+    /** @var Webhooks object which has methods to fire API's belonging to Webhook module */
+    public $webhooks;
+
 
   /**
    * Constructor
@@ -91,6 +94,8 @@ class Manifest
     $this->users = new Users($requestObj);
 
     $this->baseTokens = new BaseTokens($requestObj);
+
+    $this->webhooks = new Webhooks($requestObj);
 
   }
 

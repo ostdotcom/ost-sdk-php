@@ -58,7 +58,7 @@ class Request
     }
 
     /**
-     * Send a GET request
+     * Send a GET request.
      *
      * @param string $endpoint endpoint to the GET request
      * @param array $arguments optional object containing params which are to be sent across in the GET request
@@ -96,10 +96,10 @@ class Request
     }
 
     /**
-     * Send a POST request
+     * Send a POST request.
      *
-     * @param string $endpoint endpoint to the GET request
-     * @param array $arguments optional object containing params which are to be sent across in the GET request
+     * @param string $endpoint endpoint to the POST request
+     * @param array $arguments optional object containing params which are to be sent across in the POST request
      *
      * @return object
      *
@@ -122,6 +122,43 @@ class Request
         // $onFulfilled
             function ($response) {
                 return $this->parseResponse($response);
+            },
+            // $onRejected
+            function ($reason) {
+              if (get_class($reason) == "GuzzleHttp\Exception\ConnectException") {
+                return $this->customGenericErrorResponse('connect_exception');
+              } else {
+                return $this->customGenericErrorResponse('g_1');
+              }
+            }
+        );
+    }
+
+    /**
+     * Send a DELETE request.
+     *
+     * @param string $endpoint endpoint to the DELETE request
+     * @param array $arguments optional object containing params which are to be sent across in the DELETE request
+     *
+     * @return object
+     *
+     */
+    public function delete($endpoint, array $arguments = array())
+    {
+        $argsCopy = $this->copyAndSanitizeArgs($arguments);
+
+        // build Path to hit by appending query params and api_signature
+        $stringToSign = $endpoint . '?' . $argsCopy;
+
+        $urlPath = $stringToSign . '&api_signature=' . $this->getSignature($stringToSign);
+
+        /** @var Promise $promise */
+        $promise = $this->getRequestClient()->deleteAsync(substr($urlPath, 1), $this->getCommonRequestParams());
+
+        return $promise->then(
+        // $onFulfilled
+            function ($response) {
+              return $this->parseResponse($response);
             },
             // $onRejected
             function ($reason) {
@@ -170,7 +207,7 @@ class Request
     }
 
     /**
-     * Parse response of GET / POST requests
+     * Parse response of GET / POST / DELETE requests.
      *
      * @param object $response response obj of HTTP request
      *
@@ -268,7 +305,7 @@ class Request
 
     }
 
-    /**
+/**
      * gives nested query string
      *
      * @return string
@@ -344,7 +381,7 @@ class Request
     }
 
     /**
-     * returns common params for GET & POST requests
+     * returns common params for GET, POST & DELETE requests
      *
      * @return array
      *
