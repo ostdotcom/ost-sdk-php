@@ -18,7 +18,7 @@ final class WebhooksTest extends ServiceTestBase
    *
    * @throws Exception
    */
-  public function create()
+  public function webhookEndpoints()
   {
     $webhooksService = $this->ostObj->services->webhooks;
     $params = array();
@@ -26,9 +26,25 @@ final class WebhooksTest extends ServiceTestBase
     $currentTime = time();
     $version = phpversion();
     $params['url'] =  "https://testingWebhooks.com"."/".$currentTime."/".$version;
-    $response = $webhooksService->create($params)->wait();
-    $this->isSuccessResponse($response);
-    putenv('WEBHOOK_ID='.$response['data']['webhook']['id']);
+    $responseForCreate = $webhooksService->create($params)->wait();
+    $this->isSuccessResponse($responseForCreate);
+    putenv('WEBHOOK_ID='.$responseForCreate['data']['webhook']['id']);
+
+    $paramsForGet = array();
+    $paramsForGet['webhook_id'] = getenv('WEBHOOK_ID');
+    $responseForGet = $webhooksService->get($paramsForGet)->wait();
+    $this->isSuccessResponse($responseForGet);
+
+    $paramsForUpdate = array();
+    $paramsForUpdate['webhook_id'] = getenv('WEBHOOK_ID');
+    $paramsForUpdate['topics'] =  array("transactions/initiate", "transactions/success", "transactions/failure");
+    $responseForUpdate = $webhooksService->update($paramsForUpdate)->wait();
+    $this->isSuccessResponse($responseForUpdate);
+
+    $paramsForDelete = array();
+    $paramsForDelete['webhook_id'] = getenv('WEBHOOK_ID');
+    $responseForDelete = $webhooksService->delete($paramsForDelete)->wait();
+    $this->isSuccessResponse($responseForDelete);
   }
 
   /**
@@ -46,58 +62,6 @@ final class WebhooksTest extends ServiceTestBase
     $response = $webhooksService->getList($params)->wait();
     $this->isSuccessResponse($response);
   }
-
-  /**
-   *
-   * Get a webhook.
-   *
-   * @test
-   *
-   * @throws Exception
-   */
-   public function get()
-   {
-     $webhooksService = $this->ostObj->services->webhooks;
-     $params = array();
-     $params['webhook_id'] = getenv('WEBHOOK_ID');
-     $response = $webhooksService->get($params)->wait();
-     $this->isSuccessResponse($response);
-   }
-
-   /**
-    *
-    * Update a webhook.
-    *
-    * @test
-    *
-    * @throws Exception
-    */
-    public function update()
-    {
-      $webhooksService = $this->ostObj->services->webhooks;
-      $params = array();
-      $params['webhook_id'] = getenv('WEBHOOK_ID');
-      $params['topics'] =  array("transactions/initiate", "transactions/success", "transactions/failure");
-      $response = $webhooksService->update($params)->wait();
-      $this->isSuccessResponse($response);
-    }
-
-   /**
-    *
-    * Delete a webhook.
-    *
-    * @test
-    *
-    * @throws Exception
-    */
-    public function delete()
-    {
-      $webhooksService = $this->ostObj->services->webhooks;
-      $params = array();
-      $params['webhook_id'] = getenv('WEBHOOK_ID');
-      $response = $webhooksService->delete($params)->wait();
-      $this->isSuccessResponse($response);
-    }
 
    /**
     *
