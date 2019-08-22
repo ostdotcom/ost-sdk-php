@@ -434,24 +434,21 @@ For executing transactions, you need to understand the 4 modules described below
     // into tokens. Use get price point detail API of Price Points module to get this value.
     $pricePoint = 0.020606673;
 
-    // Price point needs to be passed in atto. Also, this value should be a string. You might need to increase
-    // precision of PHP depending on your use-case. Example = ini_set('precision', 25);
-    $intendedPricePoint = (string)($pricePoint * 10**18);
+    // Price point needs to be passed in atto. Multiply the price point with 10^18. Also, this value should be a string. 
+    // You might need to increase precision of PHP depending on your use-case. Example = ini_set('precision', 25);
+    $intendedPricePointInAtto = (string)($pricePoint * 10**18);
 
     // Amount of Fiat to be transferred.
     $transferAmountInFiat = 0.1;
 
-    // Decimal places obtained from the get price points API of Price Points module. Possible values: 6 and 18.
-    $decimalPlaces = 18;
-
-    // Transfer amount in wei. Multiply the fiat transfer amount with 10^decimalPlaces. You might need to increase
-    // precision of PHP depending on your use-case. Example = ini_set('precision', 25);
-    $fiatTransferAmountInWei = (string)($transferAmountInFiat * 10**$decimalPlaces);;
+    // Transfer amount in wei needs to be passed in atto. Multiply the fiat transfer amount with 10^18. Also, this value should be a string. 
+    // You might need to increase precision of PHP depending on your use-case. Example = ini_set('precision', 25);
+    $fiatTransferAmountInAtto = (string)($transferAmountInFiat * 10**18);;
 
     // Parameters required for rule execution.
     $rawCallData = array();
     $rawCallData['method'] = 'pay';
-    $rawCallData['parameters'] = array($companyTokenHolderAddress, array($transferToAddress), array($fiatTransferAmountInWei), $payCurrencyCode, $intendedPricePoint);
+    $rawCallData['parameters'] = array($companyTokenHolderAddress, array($transferToAddress), array($fiatTransferAmountInAtto), $payCurrencyCode, $intendedPricePointInAtto);
 
     // Company userId.
     $companyUserId = 'ee8___';
