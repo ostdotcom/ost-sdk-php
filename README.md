@@ -364,7 +364,7 @@ For executing transactions, you need to understand the 4 modules described below
 
 * DIRECT-TRANSFERS execute transaction should be used to transfer BTs to your end-users.
 
-```php
+    ```php
     // Mandatory API parameters
 
     // Token holder address of receiver.
@@ -792,8 +792,7 @@ For executing transactions, you need to understand the 4 modules described below
     $webhookSecret = 'mySecret';
 
     $params = array();
-    $params["version"
-    ] = $version;
+    $params["version"] = $version;
     $params["stringified_data"] = json_encode($webhookEventData);
     $params["request_timestamp"] = $requestTimestamp;
     $params["signature"] = $signature;
