@@ -518,6 +518,10 @@ For executing transactions, you need to understand the 4 modules described below
 
     // Array of status values.
     $statusesArray = array('CREATED', 'SUBMITTED', 'SUCCESS', 'FAILED');
+  
+    // To get transactions between a specific time interval, add start timestamp and end timestamp. 
+    $startTime = 1563260786;
+    $endTime = 1563280786;
 
     // Name of the transaction. Eg. 'like', 'download', etc.
     // NOTE: Max length 25 characters (Allowed characters: [A-Za-z0-9_/s])
@@ -546,6 +550,8 @@ For executing transactions, you need to understand the 4 modules described below
 
     $getParams = array();
     $getParams['user_id'] = $userId;
+    $getParams['start_time'] = $startTime;
+    $getParams['end_time'] = $endTime;
     $getParams['statuses'] = $statusesArray;
     $getParams['meta_properties'] = $metaPropertiesArrayJsonStr;
     $getParams['limit'] = $limit;
