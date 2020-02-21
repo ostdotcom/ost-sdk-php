@@ -132,6 +132,30 @@ abstract class Base
   }
 
   /**
+   * getRedemptionId from params array
+   *
+   * @param array $params request object which would fire API calls
+   *
+   * @return string
+   */
+   protected function getRedemptionId(array $params)
+   {
+     return $this->getValueForKey($params, "redemption_id");
+   }
+
+  /**
+   * getRedeemableSkuId from params array
+   *
+   * @param array $params request object which would fire API calls
+   *
+   * @return string
+   */
+   protected function getRedeemableSkuId(array $params)
+   {
+     return $this->getValueForKey($params, "redeemable_sku_id");
+   }
+
+  /**
    * getRecoveryOwnerAddress from params array
    *
    * @param array $params request object which would fire API calls
