@@ -628,7 +628,7 @@ For executing transactions, you need to understand the 4 modules described below
     $userId = 'ee8___';
 
     // Unique identifier of the redemption to be retrieved.
-    redemptionId = 'f1d___';
+    $redemptionId = 'aa79a057-3afc-4988-b7d3-b5bab0df5730';
 
     $getParams = array();
     $getParams['user_id'] = $userId;
@@ -648,7 +648,7 @@ For executing transactions, you need to understand the 4 modules described below
     // Optional API parameters
 
     // Array of redemption uuid values.
-    $userRedemptionUuids = array('aa79a057-3afc-4988-b7d3-b5bab0df5730');
+    $redemptionIds = array('aa79a057-3afc-4988-b7d3-b5bab0df5730');
   
     // Limit.
     $limit = 10;
@@ -658,7 +658,7 @@ For executing transactions, you need to understand the 4 modules described below
 
     $getParams = array();
     $getParams['user_id'] = $userId;
-    $getParams['user_redemption_uuids'] = $userRedemptionUuids;
+    $getParams['redemption_ids'] = $redemptionIds;
     $getParams['limit'] = $limit;
     $getParams['pagination_identifier'] = $paginationIdentifier;
 
@@ -680,7 +680,7 @@ For executing transactions, you need to understand the 4 modules described below
     // Mandatory API parameters
 
     // Unique identifier of the redemption to be retrieved.
-    redeemableSkuId = 'f1d___';
+    redeemableSkuId = '1';
 
     $getParams = array();
     $getParams['redeemable_sku_id'] = redeemableSkuId;
@@ -701,8 +701,11 @@ For executing transactions, you need to understand the 4 modules described below
     // Pagination identifier from the previous API call response.  Not needed for page one.
     $paginationIdentifier = 'eyJsY___';
 
+    // Array of redeemable sku ids values.
+    $redeemableSkuIds =  array('1');
+ 
     $getParams = array();
-    $getParams['statuses'] = $statusesArray;
+    $getParams['redeemable_sku_ids'] = redeemableSkuIds;
     $getParams['limit'] = $limit;
     $getParams['pagination_identifier'] = $paginationIdentifier;
 
