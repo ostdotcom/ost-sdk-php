@@ -825,7 +825,7 @@ For executing transactions, you need to understand the 4 modules described below
     $userId = 'ee8___';
 
     // RedemptionId of user.
-    $redemptionId = 'aa79a057-3afc-4988-b7d3-b5bab0df5730';
+    $redemptionId = 'aa___';
 
     $getParams = array();
     $getParams['user_id'] = $userId;
@@ -863,7 +863,7 @@ For executing transactions, you need to understand the 4 modules described below
     echo json_encode($response, JSON_PRETTY_PRINT);
     ```
 
-#### RedeemableSkus Module
+### RedeemableSkus Module
 
 * Initialize RedeemableSkus service object to perform redeemable skus specific actions.
 
