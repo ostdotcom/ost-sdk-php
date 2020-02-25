@@ -25,7 +25,7 @@ class RedeemableSkus extends Base
    */
   public function getList(array $params = array())
   {
-    return $this->requestObj->get($this->getPrefix() . '/' . $this->getSuffix() . '/', $params);
+    return $this->requestObj->get($this->getPrefix() . '/', $params);
   }
 
   /**
@@ -38,7 +38,7 @@ class RedeemableSkus extends Base
    */
   public function get(array $params = array())
   {
-    return $this->requestObj->get($this->getPrefix() . '/' . $this->getSuffix() . '/' . $this->getRedeemableSkuId($params) . '/', $params);
+    return $this->requestObj->get($this->getPrefix() . '/' . $this->getRedeemableSkuId($params) . '/', $params);
   }
 
 }

@@ -877,10 +877,10 @@ For executing transactions, you need to understand the 4 modules described below
     // Mandatory API parameters
 
     // RedeemableSkuId of product for whom details needs to be fetched.
-    redeemableSkuId = '1';
+    $redeemableSkuId = '1';
 
     $getParams = array();
-    $getParams['redeemable_sku_id'] = redeemableSkuId;
+    $getParams['redeemable_sku_id'] = $redeemableSkuId;
     $response = $redeemableSkusService->get($getParams)->wait();
     echo json_encode($response, JSON_PRETTY_PRINT);
     ```
@@ -902,7 +902,7 @@ For executing transactions, you need to understand the 4 modules described below
     $redeemableSkuIds =  array('1');
  
     $getParams = array();
-    $getParams['redeemable_sku_ids'] = redeemableSkuIds;
+    $getParams['redeemable_sku_ids'] = $redeemableSkuIds;
     $getParams['limit'] = $limit;
     $getParams['pagination_identifier'] = $paginationIdentifier;
 
