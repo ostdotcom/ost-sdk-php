@@ -899,7 +899,7 @@ For executing transactions, you need to understand the 4 modules described below
     $paginationIdentifier = 'eyJsY___';
 
     // Array of redeemable SKU ids.
-    $redeemableSkuIds =  array('1');
+    $redeemableSkuIds =  array('1', '2');
  
     $getParams = array();
     $getParams['redeemable_sku_ids'] = $redeemableSkuIds;
