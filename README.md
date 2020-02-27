@@ -808,25 +808,78 @@ For executing transactions, you need to understand the 4 modules described below
     echo json_encode($response, JSON_PRETTY_PRINT);
     ```
 
-### Redemptions Module 
+  
+### Redemption Modules
+
+Two modules of redemption, "Redeemable SKUs" and "User Redemptions", are described below.
+
+#### Redeemable SKUs Module
+
+* Initialize Redeemable SKUs service object to perform redeemable skus specific actions.
+
+    ```php
+    $redeemableSkusService = $ostObj->services->redeemableSkus;
+    ```
+  
+* Get Redeemable SKU detail using the redeemable sku id.
+
+    ```php
+    // Mandatory API parameters
+
+    // Fetch details of following redeemable sku.
+    $redeemableSkuId = '1';
+    
+    $getParams = array();
+    $getParams['redeemable_sku_id'] = $redeemableSkuId;
+    $response = $redeemableSkusService->get($getParams)->wait();
+    echo json_encode($response, JSON_PRETTY_PRINT);
+    ```
+
+* Get Redeemable SKUs List. Pagination is supported by this API.
+
+    ```php
+    // Mandatory API parameters
+    // NOTE: No mandatory parameters.
+  
+    // Optional API parameters
+  
+    // Limit.
+    $limit = 10;
+
+    // Array of redeemable SKU ids.
+    $redeemableSkuIds =  array('1', '2');
+
+    // Pagination identifier from the previous API call response.  Not needed for page one.
+    $paginationIdentifier = 'eyJsY___';
+ 
+    $getParams = array();
+    $getParams['redeemable_sku_ids'] = $redeemableSkuIds;
+    $getParams['limit'] = $limit;
+    $getParams['pagination_identifier'] = $paginationIdentifier;
+    
+    $response = $redeemableSkusService->getList($getParams)->wait();
+    echo json_encode($response, JSON_PRETTY_PRINT);
+    ```
+  
+#### User Redemptions Module
 
 * Initialize Redemptions service object to perform user redemption specific actions.
 
     ```php
     $redemptionsService = $ostObj->services->redemptions;
     ```
-    
-* Get User redemption detail using the userId and redemptionId.
+
+* Get User redemption details using the userId and redemptionId.
 
     ```php
     // Mandatory API parameters
-
+  
     // UserId of user for whom redemption details needs to be fetched.
     $userId = 'ee8___';
-
-    // RedemptionId of user.
+  
+    // Unique identifier of the redemption of user.
     $redemptionId = 'aa___';
-
+    
     $getParams = array();
     $getParams['user_id'] = $userId;
     $getParams['redemption_id'] = $redemptionId;
@@ -838,74 +891,25 @@ For executing transactions, you need to understand the 4 modules described below
 
     ```php
     // Mandatory API parameters
-
-    // UserId of user for whom redemption details needs to be fetched.
     $userId = 'ee89___';
-
+    
     // Optional API parameters
-
-    // Array of user redemption uuids.
-    $redemptionIds = array('a743___', 'a743___');
-  
+    
     // Limit.
     $limit = 10;
-
-    // Pagination identifier from the previous API call response. Not needed for page one.
+  
+    // Array of user redemption uuids.
+    $redemptionIds = array('a743___', 'a743___');
+    
+    // Pagination identifier from the previous API call response.  Not needed for page one.
     $paginationIdentifier = 'eyJsY___';
-
+      
     $getParams = array();
     $getParams['user_id'] = $userId;
     $getParams['redemption_ids'] = $redemptionIds;
     $getParams['limit'] = $limit;
     $getParams['pagination_identifier'] = $paginationIdentifier;
-
-    $response = $redemptionsService->getList($getParams)->wait();
-    echo json_encode($response, JSON_PRETTY_PRINT);
-    ```
-
-### RedeemableSkus Module
-
-* Initialize RedeemableSkus service object to perform redeemable skus specific actions.
-
-    ```php
-    $redeemableSkusService = $ostObj->services->redeemableSkus;
-    ```
     
-* Get Redeemable SKU detail using the redeemable SKU id.
-
-    ```php
-    // Mandatory API parameters
-
-    // RedeemableSkuId of product for whom details needs to be fetched.
-    $redeemableSkuId = '1';
-
-    $getParams = array();
-    $getParams['redeemable_sku_id'] = $redeemableSkuId;
-    $response = $redeemableSkusService->get($getParams)->wait();
-    echo json_encode($response, JSON_PRETTY_PRINT);
-    ```
-
-* Get Redeemable SKUs List. Pagination is supported by this API.
-
-    ```php
-    // Mandatory API parameters
-
-    // Optional API parameters
-  
-    // Limit.
-    $limit = 10;
-
-    // Pagination identifier from the previous API call response.  Not needed for page one.
-    $paginationIdentifier = 'eyJsY___';
-
-    // Array of redeemable SKU ids.
-    $redeemableSkuIds =  array('1', '2');
- 
-    $getParams = array();
-    $getParams['redeemable_sku_ids'] = $redeemableSkuIds;
-    $getParams['limit'] = $limit;
-    $getParams['pagination_identifier'] = $paginationIdentifier;
-
-    $response = $redeemableSkusService->getList($getParams)->wait();
+    $response = $redemptionsService->getList($getParams)->wait();
     echo json_encode($response, JSON_PRETTY_PRINT);
     ```
