@@ -55,6 +55,8 @@ class ServiceTestBase extends TestCase
 
     $tempEnvironmentVariables['user2TokenHolderAddress'] = getenv('OST_KIT_USER2_TOKEN_HOLDER_ADDRESS');
     $tempEnvironmentVariables['transactionId'] = getenv('OST_KIT_TRANSACTION_ID');
+    $tempEnvironmentVariables['redemptionId'] = getenv('OST_KIT_REDEMPTION_ID');
+    $tempEnvironmentVariables['redeemableSkuId'] = getenv('OST_KIT_REDEEMABLE_SKU_ID');
     $tempEnvironmentVariables['companyUserId'] = getenv('OST_KIT_COMPANY_USER_ID');
     return $tempEnvironmentVariables;
   }
