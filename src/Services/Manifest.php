@@ -32,6 +32,12 @@ class Manifest
     /** @var RecoveryOwners object which has methods to fire API's belonging to RecoveryOwners module */
     public $recoveryOwners;
 
+    /** @var Redemptions object which has methods to fire API's belonging to Redemptions module */
+    public $redemptions;
+
+    /** @var RedeemableSkus object which has methods to fire API's belonging to RedeemableSkus module */
+    public $redeemableSkus;
+
     /** @var Rules object which has methods to fire API's belonging to Rules module */
     public $rules;
 
@@ -82,6 +88,10 @@ class Manifest
     $this->pricePoints = new PricePoints($requestObj);
 
     $this->recoveryOwners = new RecoveryOwners($requestObj);
+
+    $this->redemptions = new Redemptions($requestObj);
+
+    $this->redeemableSkus = new RedeemableSkus($requestObj);
 
     $this->rules = new Rules($requestObj);
 
