@@ -1,0 +1,38 @@
+== https://github.com/ostdotcom/ost-sdk-php/tree/v2.2.3[OST PHP SDK v2.2.3]
+
+* Added redemptions module to call redemptions management OST APIs.
+* Added redeemable sku module to call redeemable sku management OST APIs.
+
+== https://github.com/ostdotcom/ost-sdk-php/tree/v2.2.2[OST PHP SDK v2.2.2]
+
+* Readme changes for documenting new parameters in transactions module.
+These parameters can help to  get data between specific time interval.
+
+== https://github.com/ostdotcom/ost-sdk-php/tree/v2.2.0[OST PHP SDK v2.2.0]
+
+* Added webhooks module to call webhook management OST APIs.
+* Support for verify webhook signature.
+
+== https://github.com/ostdotcom/ost-sdk-php/tree/v2.1.0[OST PHP SDK v2.1.0]
+
+* Added base tokens module to V2 API's
+
+== https://github.com/ostdotcom/ost-sdk-php/tree/v2.0.0[OST PHP SDK v2.0.0]
+
+* OST API V2 interaction layer implementation.
+* Removed API V0 and V1 support.
+* xref:README.adoc[README.adoc] has API V2 usage instructions
+
+== https://github.com/ostdotcom/ost-sdk-php/tree/v1.1.1[OST PHP SDK v1.1.1]
+
+* Bug fix for V1.1 API
+* Added version file
+
+== https://github.com/ostdotcom/ost-sdk-php/tree/v1.1.0[OST PHP SDK v1.1.0]
+
+* Added user balances module to V1 API's
+* Added transaction ledger module to V1 API's
+
+== https://github.com/ostdotcom/ost-sdk-php/tree/v1.0.0[OST PHP SDK v1.0.0]
+
+Initial release of the official OST PHP SDK + This release has the OST API interaction layer implementation.
